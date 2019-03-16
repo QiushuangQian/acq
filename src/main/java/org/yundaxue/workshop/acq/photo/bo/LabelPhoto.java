@@ -1,16 +1,16 @@
 package org.yundaxue.workshop.acq.photo.bo;
 
 public class LabelPhoto {
-    private int label_photoId;
+    private int labelPhotoId;
     private int labelId;
     private int photoId;
 
-    public int getLabel_photoId() {
-        return label_photoId;
+    public int getLabelPhotoId() {
+        return labelPhotoId;
     }
 
     public void setLabel_photoId(int label_photoId) {
-        this.label_photoId = label_photoId;
+        this.labelPhotoId = label_photoId;
     }
 
     public int getLabelId() {

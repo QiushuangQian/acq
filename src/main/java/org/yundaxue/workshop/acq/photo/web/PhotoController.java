@@ -16,12 +16,12 @@ public class PhotoController {
     @Autowired
     PhotoService photoService;
 
-
+    //
     @RequestMapping(value = "/photo/{photoId}")
     @ResponseBody
     public String photoDetail(@PathVariable int photoId,
                               HttpServletRequest request, HttpServletResponse response) throws Exception{
         Photo photo = photoService.getPhoto(photoId);
-       return photo.getDescription();
+        return photo.getDescription();
     }
 }

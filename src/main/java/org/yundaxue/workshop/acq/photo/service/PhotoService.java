@@ -8,5 +8,7 @@ import java.util.List;
 public interface PhotoService {
     Photo getPhoto(int photoId) throws Exception;
     List<Photo> listPhoto(int userId) throws Exception;
-    void insertPhoto(Photo photo) throws Exception;
+    Photo uploadPhoto(Photo photo) throws Exception;
+    int deletePhoto(int photoId) throws Exception;
+    int banPhoto(int photoId) throws Exception;
 }
