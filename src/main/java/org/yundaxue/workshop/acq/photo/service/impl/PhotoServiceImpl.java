@@ -8,7 +8,7 @@ import org.yundaxue.workshop.acq.photo.service.PhotoService;
 import java.util.List;
 @Service("PhotoService")
 public class PhotoServiceImpl implements PhotoService {
-    
+    @Autowired
     PhotoDao photoDao;
 
     @Override

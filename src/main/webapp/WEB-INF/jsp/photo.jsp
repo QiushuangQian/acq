@@ -12,7 +12,6 @@
 </head>
 <body>
 <div>Photo Id:${p.photoId}</div>
-<div>Photo Name:${p.photoName}</div>
 <div>User Id；${p.userId}</div>
 </body>
 </html>
