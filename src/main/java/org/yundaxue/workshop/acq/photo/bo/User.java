@@ -5,6 +5,7 @@ package org.yundaxue.workshop.acq.photo.bo;
  */
 //用户实体类
 public class User {
+    private int userId;
     private String email;   //用户邮箱
     private String password;//用户密码
     private int spaceCapacity;//空间容量，以B为单位
