@@ -15,7 +15,7 @@ public class Photo {
     private int thumb;
     private String MD5;
     private Date delTime;
-    private int BanState;
+    private int banState;
 
     public int getPhotoId() {
         return photoId;
@@ -114,10 +114,10 @@ public class Photo {
     }
 
     public int getBanState() {
-        return BanState;
+        return banState;
     }
 
     public void setBanState(int banState) {
-        BanState = banState;
+        banState = banState;
     }
 }

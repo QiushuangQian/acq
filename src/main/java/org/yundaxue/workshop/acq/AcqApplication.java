@@ -9,12 +9,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class AcqApplication extends SpringBootServletInitializer {
 
     @Override
-    protected final SpringApplicationBuilder configure(SpringApplicationBuilder application){
+    protected final SpringApplicationBuilder configure(final SpringApplicationBuilder application){
         return application.sources(AcqApplication.class);
     }
 
     public static void main(String[] args) {
         SpringApplication.run(AcqApplication.class, args);
     }
-
 }

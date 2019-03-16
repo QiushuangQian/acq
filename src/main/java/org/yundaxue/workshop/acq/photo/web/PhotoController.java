@@ -19,7 +19,6 @@ public class PhotoController {
 
     //
     @RequestMapping(value = "/photo/{photoId}")
-    @ResponseBody
     public String photoDetail(@PathVariable int photoId, ModelMap model,
                               HttpServletRequest request, HttpServletResponse response) throws Exception{
         Photo photo = photoService.getPhoto(photoId);

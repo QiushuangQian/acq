@@ -11,8 +11,30 @@
     select * from photo where user_id=#{userId}
     </select>
 
-    <insert id="insertPhoto">
+    <insert id="uploadPhoto">
         insert into photo (photo_id,photo_name,user_id)
-        values(#{photoId},#{photoName},#{userId})
+        values(#{photoId},#{type},#{size},#{uploadTime},#{userId},#{photoPath},#{thumbnaiPath},#{delState},#{description},#{thumb},#{MD5},#{delTime},#{banState})
     </insert>
+
+    <update id="updateDelStateDeletePhoto">
+        update photo
+        set delState = 0
+        where photo_id=#{photoId}
+    </update>
+
+    <update id="updateDelStateRestorePhoto">
+        update photo
+        set delState = 1
+        where photo_id=#{photoId}
+    </update>
+
+    <update id="updateBanStateBanPhoto">
+        update photo
+        set banState = 0
+        where photo_id=#{photoId}
+    </update>
+
+    <delete id="deletePhoto">
+
+    </delete>
 </mapper>
