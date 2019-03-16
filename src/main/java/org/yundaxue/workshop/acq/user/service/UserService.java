@@ -1,4 +1,4 @@
-package org.yundaxue.workshop.acq.photo.service;
+package org.yundaxue.workshop.acq.user.service;
 
 /**
  * Created by lenovo on 2019/3/16.

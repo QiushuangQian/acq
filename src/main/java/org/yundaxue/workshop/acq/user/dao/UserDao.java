@@ -1,4 +1,4 @@
-package org.yundaxue.workshop.acq.photo.dao;
+package org.yundaxue.workshop.acq.user.dao;
 
 /**
  * Created by lenovo on 2019/3/16.

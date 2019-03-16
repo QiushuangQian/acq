@@ -1,6 +1,6 @@
-package org.yundaxue.workshop.acq.photo.service;
+package org.yundaxue.workshop.acq.label.service;
 
-import org.yundaxue.workshop.acq.photo.bo.Label;
+import org.yundaxue.workshop.acq.label.bo.Label;
 
 /**
  * Created by lenovo on 2019/3/16.
