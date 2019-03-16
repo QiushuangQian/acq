@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yundaxue.workshop.acq.photo.dao.PhotoDAO">
+    <select id="getPhoto" resultType="org.yundaxue.workshop.acq.photo.bo.Photo" parameterType="int">
+        select * from photo where photo_id=#{photoId}
+    </select>
+
+    <select id="listPhoto" resultType="org.yundaxue.workshop.acq.photo.bo.Photo" parameterType="int">
+    select * from photo where user_id=#{userId}
+    </select>
+
+    <insert id="insertPhoto">
+        insert into photo (photo_id,photo_name,user_id)
+        values(#{photoId},#{photoName},#{userId})
+    </insert>
+</mapper>
