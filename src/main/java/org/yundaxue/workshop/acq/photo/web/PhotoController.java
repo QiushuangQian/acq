@@ -2,9 +2,9 @@ package org.yundaxue.workshop.acq.photo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.yundaxue.workshop.acq.photo.bo.Photo;
 import org.yundaxue.workshop.acq.photo.service.PhotoService;
 
@@ -16,14 +16,12 @@ public class PhotoController {
     @Autowired
     PhotoService photoService;
 
-    //
-    @RequestMapping(value = "/photo/{photoId}")
 
-    public String photoDetail(@PathVariable int photoId,ModelMap model,
+    @RequestMapping(value = "/photo/{photoId}")
+    @ResponseBody
+    public String photoDetail(@PathVariable int photoId,
                               HttpServletRequest request, HttpServletResponse response) throws Exception{
         Photo photo = photoService.getPhoto(photoId);
-        model.put("photo", photo);
-
-        return "photo";
+       return photo.getDescription();
     }
 }

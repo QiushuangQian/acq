@@ -1,16 +1,16 @@
-package org.yundaxue.workshop.acq.photo.bo;
+package org.yundaxue.workshop.acq.album.bo;
 
 public class AlbumPhoto {
-    private int album_photoId;
+    private int albumPhotoId;
     private int photoId;
     private int albumId;
 
-    public int getAlbum_photoId() {
-        return album_photoId;
+    public int getAlbumPhotoId() {
+        return albumPhotoId;
     }
 
-    public void setAlbum_photoId(int album_photoId) {
-        this.album_photoId = album_photoId;
+    public void setAlbumPhotoId(int album_photoId) {
+        this.albumPhotoId = album_photoId;
     }
 
     public int getPhotoId() {

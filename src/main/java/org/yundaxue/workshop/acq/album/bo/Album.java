@@ -1,10 +1,7 @@
-package org.yundaxue.workshop.acq.photo.bo;
+package org.yundaxue.workshop.acq.album.bo;
 
 import java.util.Date;
 
-/**
- * Created by admin on 2019/3/16.
- */
 public class Album {
     private int albumId;
     private String albumName;
