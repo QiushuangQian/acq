@@ -1,4 +1,4 @@
-package org.yundaxue.workshop.acq.photo.web;
+package org.yundaxue.workshop.acq.album.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +10,7 @@ import org.yundaxue.workshop.acq.album.service.AlbumPhotoService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 @Controller
-public class AlbumPhotoServiceController {
+public class AlbumPhotoController {
 
     AlbumPhotoService albumPhotoService;
 

@@ -1,4 +1,4 @@
-package org.yundaxue.workshop.acq.photo.web;
+package org.yundaxue.workshop.acq.album.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
