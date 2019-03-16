@@ -9,5 +9,7 @@ import java.util.List;
 public interface PhotoDao {
     abstract Photo getPhoto(@Param("photoId") int photoId) throws Exception;
     List<Photo> listPhoto(@Param("userId") int userId) throws Exception;
-    void insertPhoto(@Param("photo") Photo photo) throws Exception;
+    Photo uploadPhoto(@Param("photo") Photo photo) throws Exception;
+    int deletePhoto(@Param("photoId") int delState) throws Exception;
+    int banPhoto(@Param("photoId") int banState) throws Exception;
 }
