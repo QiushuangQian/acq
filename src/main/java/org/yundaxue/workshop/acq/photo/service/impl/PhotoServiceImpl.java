@@ -22,7 +22,17 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public void insertPhoto(Photo photo) throws Exception {
+    public Photo uploadPhoto(Photo photo) throws Exception {
+        return photoDao.uploadPhoto(photo);
+    }
 
+    @Override
+    public int deletePhoto(int photoId) throws Exception{
+        return photoDao.deletePhoto(photoId);
+    }
+
+    @Override
+    public int banPhoto(int photoId) throws Exception{
+        return photoDao.banPhoto(photoId);
     }
 }

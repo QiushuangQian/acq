@@ -9,8 +9,8 @@ public class LabelPhoto {
         return labelPhotoId;
     }
 
-    public void setLabelPhotoId(int labelPhotoId) {
-        this.labelPhotoId = labelPhotoId;
+    public void setLabel_photoId(int label_photoId) {
+        this.labelPhotoId = label_photoId;
     }
 
     public int getLabelId() {
