@@ -16,6 +16,7 @@ public class PhotoController {
     @Autowired
     PhotoService photoService;
 
+    //
     @RequestMapping(value = "/photo/{photoId}")
     @ResponseBody
     public String photoDetail(@PathVariable int photoId,
