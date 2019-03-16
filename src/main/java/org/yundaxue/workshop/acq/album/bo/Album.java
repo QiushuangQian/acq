@@ -1,4 +1,4 @@
-package org.yundaxue.workshop.acq.photo.bo;
+package org.yundaxue.workshop.acq.album.bo;
 
 import java.util.Date;
 
