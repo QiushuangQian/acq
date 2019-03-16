@@ -9,7 +9,7 @@ import org.yundaxue.workshop.acq.label.bo.Label;
  */
 @Mapper
 public interface LabelDao {
-    Label insertLabel(@Param("label") Label label) throws Exception;
+    void insertLabel(@Param("label") Label label) throws Exception;
 
     void deleteLabel(@Param("labelId") int labelId) throws Exception;
 

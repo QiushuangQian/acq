@@ -8,10 +8,21 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Photo</title>
+    <title>Label</title>
 </head>
 <body>
-<div>Photo Id:${p.photoId}</div>
-<div>User Id；${p.userId}</div>
+<div>Label Id:${label.labelId}</div>
+<div>Label name:${label.labelName}</div>
+
+
+<%--<div>--%>
+    <%--<input id="labelName" type="text" style="width: 100px;height:50px">--%>
+    <%--<input type="button" onclick="insertLabel(${labelName}.text)">--%>
+    <%--<script type="text/javascript">--%>
+        <%--function insertLabel() {--%>
+
+        <%--}--%>
+    <%--</script>--%>
+<%--</div>--%>
 </body>
 </html>

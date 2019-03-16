@@ -2,9 +2,9 @@ package org.yundaxue.workshop.acq.label.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.yundaxue.workshop.acq.label.bo.Label;
 import org.yundaxue.workshop.acq.label.service.LabelService;
 
@@ -20,10 +20,10 @@ public class LabelController {
     LabelService labelService;
 
     @RequestMapping(value = "/label/{labelId}")
-    @ResponseBody
-    public Label labelDetail(@PathVariable int labelId,
+    public String labelDetail(@PathVariable int labelId,ModelMap model,
                              HttpServletRequest request, HttpServletResponse response) throws Exception{
         Label label = labelService.getLabel(labelId);
-        return label;
+        model.put("label",label);
+        return "label";
     }
 }

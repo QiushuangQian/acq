@@ -11,7 +11,8 @@
     <title>Photo</title>
 </head>
 <body>
-<div>Photo Id:${p.photoId}</div>
-<div>User Id；${p.userId}</div>
+<div>Photo Id:${photo.photoId}</div>
+<div>User Id:${photo.userId}</div>
+
 </body>
 </html>

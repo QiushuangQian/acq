@@ -17,21 +17,21 @@ public class LabelServiceImp implements LabelService{
 
     @Override
     public void insertLabel(Label label) throws Exception {
-
+        labelDao.insertLabel(label);
     }
 
     @Override
     public void deleteLabel(int labelId) throws Exception {
-
+        labelDao.deleteLabel(labelId);
     }
 
     @Override
     public Label getLabel(int labelId) throws Exception {
-        return null;
+        return labelDao.getLabel(labelId);
     }
 
     @Override
     public void updateLabel(int labelId, String labelName) throws Exception {
-
+        labelDao.updateLabel(labelId,labelName);
     }
 }
