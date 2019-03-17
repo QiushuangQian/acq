@@ -1,6 +1,6 @@
-package org.yundaxue.workshop.acq.album.bo;
+package org.yundaxue.workshop.acq.dao;
 
-public class AlbumPhoto {
+public class AlbumPhotoDao {
     private int albumPhotoId;
     private int photoId;
     private int albumId;

@@ -1,8 +1,8 @@
-package org.yundaxue.workshop.acq.album.bo;
+package org.yundaxue.workshop.acq.dao;
 
 import java.util.Date;
 
-public class Album {
+public class AlbumDao {
     private int albumId;
     private String albumName;
     private int userId;

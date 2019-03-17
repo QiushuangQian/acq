@@ -1,11 +1,11 @@
-package org.yundaxue.workshop.acq.album.web;
+package org.yundaxue.workshop.acq.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yundaxue.workshop.acq.album.bo.Album;
-import org.yundaxue.workshop.acq.album.service.AlbumService;
+import org.yundaxue.workshop.acq.dao.AlbumDao;
+import org.yundaxue.workshop.acq.service.AlbumService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +18,7 @@ public class AlbumController {
     @ResponseBody
     public String photoDetail(@PathVariable int albumId,
                               HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Album album = albumService.getAlbum(albumId);
-        return album.getAlbumName();
+        AlbumDao albumDao = albumService.getAlbum(albumId);
+        return albumDao.getAlbumName();
     }
 }
