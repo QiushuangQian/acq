@@ -8,10 +8,12 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Label</title>
-    <script src="../../resources/static/js/jquery-3.3.1.js"></script>
+    <title>Login</title>
+    <script src="js/jquery/jquery-3.3.1.js"></script>
+
 </head>
 <body>
+    
 
 
 </body>
