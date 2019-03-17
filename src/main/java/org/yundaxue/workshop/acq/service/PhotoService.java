@@ -4,6 +4,7 @@ import org.yundaxue.workshop.acq.dao.PhotoDao;
 
 import java.util.List;
 
+
 public interface PhotoService {
     PhotoDao getPhoto(int photoId) throws Exception;
     List<PhotoDao> listPhoto(int userId) throws Exception;

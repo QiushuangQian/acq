@@ -7,11 +7,9 @@ import org.yundaxue.workshop.acq.service.AlbumService;
 
 import java.util.List;
 
-@Service("AlbumService")
+@Service
 public class AlbumServiceImpl implements AlbumService{
 
-    @Autowired
-    AlbumDao albumDao;
 
     @Override
     public AlbumDao getAlbum(int albumId) throws Exception {

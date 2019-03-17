@@ -36,5 +36,4 @@ public class PhotoServiceImpl implements PhotoService {
     public int banPhoto(int photoId, int userId) throws Exception {
         return photoMapper.banPhoto(photoId,userId);
     }
-
 }
