@@ -23,17 +23,18 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public PhotoDao uploadPhoto(PhotoDao photoDao) throws Exception {
+    public int uploadPhoto(PhotoDao photoDao) throws Exception {
         return photoMapper.uploadPhoto(photoDao);
     }
 
     @Override
-    public int deletePhoto(int photoId) throws Exception{
-        return photoMapper.deletePhoto(photoId);
+    public int deletePhoto(int photoId, int userId) throws Exception {
+        return photoMapper.deletePhoto(photoId,userId);
     }
 
     @Override
-    public int banPhoto(int photoId) throws Exception{
-        return photoMapper.banPhoto(photoId);
+    public int banPhoto(int photoId, int userId) throws Exception {
+        return photoMapper.banPhoto(photoId,userId);
     }
+
 }
