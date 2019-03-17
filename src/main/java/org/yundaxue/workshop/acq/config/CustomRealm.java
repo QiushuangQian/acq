@@ -5,7 +5,10 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.yundaxue.workshop.acq.dao.Mapper.UserMapper;
+import org.yundaxue.workshop.acq.dao.UserDao;
 
 /**
  * @author 耿志强
@@ -15,6 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomRealm extends AuthorizingRealm{
 
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -32,8 +37,17 @@ public class CustomRealm extends AuthorizingRealm{
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        String username = (String) authenticationToken.getPrincipal();
-
-        return null;
+        String email = (String) authenticationToken.getPrincipal();
+        Mytoken mytoken = (Mytoken)authenticationToken;
+        UserDao user = userMapper.getUserByEmail(email);
+        if (user == null) {
+            return null;
+        }
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+                user, //用户名
+                user.getPassword(), //密码
+                getName()  //realm name
+        );
+        return authenticationInfo;
     }
 }

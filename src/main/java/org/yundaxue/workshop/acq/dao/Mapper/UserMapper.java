@@ -40,4 +40,9 @@ public interface UserMapper {
     @Select("select * from user where user_id = #{userId}")
     public UserDao getUser(int userId);
 
+
+    //根据email查找用户
+    @Select("select * from user where email = #{email}")
+    public UserDao getUserByEmail(String email);
+
 }
