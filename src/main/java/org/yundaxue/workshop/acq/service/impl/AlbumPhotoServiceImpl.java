@@ -20,10 +20,10 @@ public class AlbumPhotoServiceImpl implements AlbumPhotoService {
 
 	@Override
 	public void deleteAlbumPhoto(int albumPhotoId, int photoId, int albumId) throws Exception {
-albumPhotoMapper.deleteAlbum(albumPhotoId, photoId, albumId);
+		albumPhotoMapper.deleteAlbum(albumPhotoId, photoId, albumId);
 	}
 	@Override
 	public AlbumPhoto getAlbumPhoto(int albumPhotoId, int photoId, int albumId) throws Exception {
-		return albumPhotoMapper.getAlbumPhoto(albumPhotoId, photoId, albumId);
+		return null;
 	}
 }

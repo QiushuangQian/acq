@@ -19,24 +19,5 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class FrontController {
-	AlbumService albumService;
-
-	@RequestMapping(value = "/album/{albumId}")
-	@ResponseBody
-	public String photoDetail(@PathVariable int albumId,
-							  HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Album albumDao = albumService.getAlbum(albumId);
-		return albumDao.getAlbumName();
-	}
-	AlbumPhotoService albumPhotoService;
-
-
-	@RequestMapping(value = "/albumPhoto/{albumPhotoId}/{photoId}/{albumId}")
-	@ResponseBody
-	public int photoDetail(@PathVariable int albumPhotoId,@PathVariable int photoId,@PathVariable int albumId
-			, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		AlbumPhoto albumPhotoDao = albumPhotoService.getAlbumPhoto(albumPhotoId,photoId,albumId);
-		return albumPhotoDao.getAlbumPhotoId();
-	}
 
 }

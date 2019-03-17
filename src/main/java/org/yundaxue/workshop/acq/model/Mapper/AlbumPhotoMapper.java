@@ -19,8 +19,5 @@ public interface AlbumPhotoMapper {
 	)
 	public void deleteAlbum(int albumPhotoId, int photoId, int albumId);
 
-	@Select("select * from album_photo where album_photo_id=#{albumPhotoId} and photo_id=#{photoId} and album_id" +
-			"=#{albumId}")
-	public AlbumPhoto getAlbumPhoto(int albumPhotoId, int photoId, int albumId);
 }
 
