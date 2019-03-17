@@ -7,7 +7,7 @@ import java.util.List;
 public interface PhotoService {
     PhotoDao getPhoto(int photoId) throws Exception;
     List<PhotoDao> listPhoto(int userId) throws Exception;
-    PhotoDao uploadPhoto(PhotoDao photoDao) throws Exception;
-    int deletePhoto(int photoId) throws Exception;
-    int banPhoto(int photoId) throws Exception;
+    int uploadPhoto(PhotoDao photoDao) throws Exception;
+    int deletePhoto(int photoId,int userId) throws Exception;
+    int banPhoto(int photoId,int userId) throws Exception;
 }
