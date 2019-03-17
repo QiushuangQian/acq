@@ -1,6 +1,6 @@
 package org.yundaxue.workshop.acq.service;
 
-import org.yundaxue.workshop.acq.dao.LabelDao;
+import org.yundaxue.workshop.acq.model.Label;
 
 /**
  * Created by lenovo on 2019/3/17.
@@ -16,7 +16,7 @@ public interface LabelService {
     void updateLabel(int labelId, String labelName) throws Exception;
 
     //查找标签
-    LabelDao getLabel(int labelId) throws Exception;
+    Label getLabel(int labelId) throws Exception;
 
 
 }

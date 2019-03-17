@@ -2,8 +2,8 @@ package org.yundaxue.workshop.acq.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.yundaxue.workshop.acq.dao.Mapper.UserMapper;
-import org.yundaxue.workshop.acq.dao.UserDao;
+import org.yundaxue.workshop.acq.model.Mapper.UserMapper;
+import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.UserService;
 
 /**
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDao gerUser(int userId) throws Exception {
+    public User gerUser(int userId) throws Exception {
         return userMapper.getUser(userId);
     }
 }

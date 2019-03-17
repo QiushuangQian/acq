@@ -1,15 +1,15 @@
 package org.yundaxue.workshop.acq.service;
 
-import org.yundaxue.workshop.acq.dao.AlbumPhotoDao;
+import org.yundaxue.workshop.acq.model.AlbumPhoto;
 
 import java.util.List;
 
 public interface AlbumPhotoService {
 
-    AlbumPhotoDao getAlbumPhoto(int albumPhotoId) throws Exception;
+    AlbumPhoto getAlbumPhoto(int albumPhotoId) throws Exception;
 
-    List<AlbumPhotoDao> listAlbumPhoto(int photoId) throws Exception;
+    List<AlbumPhoto> listAlbumPhoto(int photoId) throws Exception;
 
-    void insertAlbumPhoto(AlbumPhotoDao albumPhotoDao) throws Exception;
+    void insertAlbumPhoto(AlbumPhoto albumPhoto) throws Exception;
 
 }

@@ -1,7 +1,7 @@
-package org.yundaxue.workshop.acq.dao.Mapper;
+package org.yundaxue.workshop.acq.model.Mapper;
 
 import org.apache.ibatis.annotations.*;
-import org.yundaxue.workshop.acq.dao.LabelDao;
+import org.yundaxue.workshop.acq.model.Label;
 
 /**
  * Created by lenovo on 2019/3/17.
@@ -23,5 +23,5 @@ public interface LabelMapper {
 
     //根据labelId得到标签
     @Select("select * from label where label_id=#{labelId}")
-    public LabelDao getLabel(int labelId);
+    public Label getLabel(int labelId);
 }

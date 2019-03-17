@@ -1,6 +1,6 @@
 package org.yundaxue.workshop.acq.service;
 
-import org.yundaxue.workshop.acq.dao.UserDao;
+import org.yundaxue.workshop.acq.model.User;
 
 /**
  * Created by lenovo on 2019/3/17.
@@ -27,5 +27,5 @@ public interface UserService {
     void updateQq(int userId,String qq)throws Exception;
 
     //查找用户
-    UserDao gerUser(int userId)throws Exception;
+    User gerUser(int userId)throws Exception;
 }
