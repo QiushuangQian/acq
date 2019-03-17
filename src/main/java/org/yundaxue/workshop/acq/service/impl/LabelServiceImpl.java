@@ -2,8 +2,8 @@ package org.yundaxue.workshop.acq.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.yundaxue.workshop.acq.dao.LabelDao;
-import org.yundaxue.workshop.acq.dao.Mapper.LabelMapper;
+import org.yundaxue.workshop.acq.model.Label;
+import org.yundaxue.workshop.acq.model.Mapper.LabelMapper;
 import org.yundaxue.workshop.acq.service.LabelService;
 
 /**
@@ -30,7 +30,7 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public LabelDao getLabel(int labelId) throws Exception {
+    public Label getLabel(int labelId) throws Exception {
         return labelMapper.getLabel(labelId);
     }
 }

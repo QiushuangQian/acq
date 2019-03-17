@@ -2,10 +2,10 @@ package org.yundaxue.workshop.acq.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.yundaxue.workshop.acq.dao.LabelDao;
-import org.yundaxue.workshop.acq.dao.LabelPhotoDao;
-import org.yundaxue.workshop.acq.dao.Mapper.LabelPhotoMapper;
-import org.yundaxue.workshop.acq.dao.PhotoDao;
+import org.yundaxue.workshop.acq.model.Label;
+import org.yundaxue.workshop.acq.model.LabelPhoto;
+import org.yundaxue.workshop.acq.model.Mapper.LabelPhotoMapper;
+import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.service.LabelPhotoService;
 
 @Service("LabelPhotoService")
@@ -14,17 +14,17 @@ public class LabelPhotoServiceImpl implements LabelPhotoService {
     LabelPhotoMapper labelPhotoMapper;
 
     @Override
-    public PhotoDao getPhoto(int labelId) {
+    public Photo getPhoto(int labelId) {
         return labelPhotoMapper.getPhoto(labelId);
     }
 
     @Override
-    public LabelDao getLabel(int photoId) {
+    public Label getLabel(int photoId) {
         return labelPhotoMapper.getLabel(photoId);
     }
 
     @Override
-    public LabelPhotoDao insertLabelPhoto(int labelId, int photoId) {
+    public LabelPhoto insertLabelPhoto(int labelId, int photoId) {
         return labelPhotoMapper.insertLabelPhoto(labelId,photoId);
     }
 

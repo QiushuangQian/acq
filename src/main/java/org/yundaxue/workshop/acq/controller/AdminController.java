@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.yundaxue.workshop.acq.dao.UserDao;
+import org.yundaxue.workshop.acq.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +22,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/login")
-    public String loginPost(HttpServletRequest request, UserDao user, Model model, HttpSession httpSession, final RedirectAttributes redirectAttrs) {
+    public String loginPost(HttpServletRequest request, User user, Model model, HttpSession httpSession, final RedirectAttributes redirectAttrs) {
         return null;
     }
 }
