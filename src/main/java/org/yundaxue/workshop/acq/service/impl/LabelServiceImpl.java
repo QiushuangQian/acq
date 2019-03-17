@@ -9,7 +9,7 @@ import org.yundaxue.workshop.acq.service.LabelService;
 /**
  * Created by lenovo on 2019/3/17.
  */
-@Service("LabelSerive")
+@Service
 public class LabelServiceImpl implements LabelService {
     @Autowired
     LabelMapper labelMapper;

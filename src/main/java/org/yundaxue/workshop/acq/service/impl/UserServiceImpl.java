@@ -9,7 +9,7 @@ import org.yundaxue.workshop.acq.service.UserService;
 /**
  * Created by lenovo on 2019/3/17.
  */
-@Service("UserService")
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;

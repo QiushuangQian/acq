@@ -16,6 +16,7 @@ import java.util.Map;
 
 @Controller
 public class PhotoController {
+
     @Autowired
     PhotoService photoService;
 
