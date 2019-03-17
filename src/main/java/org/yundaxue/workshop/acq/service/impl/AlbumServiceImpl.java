@@ -1,7 +1,10 @@
 package org.yundaxue.workshop.acq.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import org.yundaxue.workshop.acq.model.Album;
+import org.yundaxue.workshop.acq.model.Mapper.AlbumMapper;
 import org.yundaxue.workshop.acq.service.AlbumService;
 
 import java.util.List;
@@ -9,24 +12,32 @@ import java.util.List;
 @Service
 public class AlbumServiceImpl implements AlbumService{
 
+    @Autowired
+    AlbumMapper albumMapper;
+
+    @Override
+    public void insertAlbum(int albumId) throws Exception {
+        albumMapper.insertAlbum(albumId);
+
+    }
+
+    @Override
+    public void deleteAlbum(int albumId) throws Exception {
+        albumMapper.deleteAlbum(albumId);
+    }
+
+    @Override
+    public void updateAlbum(int albumId, String albumName) throws Exception {
+        albumMapper.updateAlbum(albumId,albumName);
+    }
 
     @Override
     public Album getAlbum(int albumId) throws Exception {
-//        return albumDao.getAlbum(albumId);
-        return null;
+        return albumMapper.getAlbum(albumId);
     }
 
     @Override
-    public List<Album> listAlbum(String albumName) throws Exception {
-//        return albumDao.listAlbum(albumName);
-        return null;
+    public void searchAlbum(int userId,String albumName) throws Exception{
+        albumMapper.searchAlbum(userId,albumName);
     }
-
-    @Override
-    public void insertAlbum(Album album) throws Exception {
-
-    }
-
-
-
 }
