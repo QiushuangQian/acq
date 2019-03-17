@@ -14,6 +14,14 @@ public class UserDao {
     private String wechat;  //绑定的微信
     private String qq;  //绑定的QQ
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -52,14 +60,6 @@ public class UserDao {
 
     public void setPhotoNum(int photoNum) {
         this.photoNum = photoNum;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getWechat() {
