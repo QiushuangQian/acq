@@ -49,4 +49,9 @@ public interface UserMapper {
     @Select("select count(user_id) from user")
     public int getUserNum();
 
+
+    //根据email查找用户
+    @Select("select * from user where email = #{email}")
+    public UserDao getUserByEmail(String email);
+
 }
