@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class PhotoController {
+
     @Autowired
     PhotoService photoService;
 

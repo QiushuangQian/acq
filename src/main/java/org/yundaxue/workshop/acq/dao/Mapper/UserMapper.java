@@ -25,8 +25,8 @@ public interface UserMapper {
     @Update("update user set space_capacity = #{spaceCapacity} where user_id = #{userId}")
     public void updateSpaceCapacity(@Param("userId") int userId, @Param("spaceCapacity") int spaceCapacity);
     //修改用户已用空间
-    @Update("update user set user_capacity = #{userCapacity} where user_id = #{userId}")
-    public void updateUserCapacity(@Param("userId") int userId, @Param("userCapacity") int userCapacity);
+    @Update("update user set used_capacity = #{usedCapacity} where user_id = #{userId}")
+    public void updateUsedCapacity(@Param("userId") int userId, @Param("usedCapacity") int usedCapacity);
     //修改照片总数
     @Update("update user set photo_num = #{photoNum} where user_id = #{userId}")
     public void updatePhotoNum(@Param("userId") int userId, @Param("photoNum") int photoNum);

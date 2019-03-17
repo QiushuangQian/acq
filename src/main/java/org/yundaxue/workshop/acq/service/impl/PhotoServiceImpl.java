@@ -1,39 +1,40 @@
 package org.yundaxue.workshop.acq.service.impl;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
-import org.yundaxue.workshop.acq.dao.Mapper.PhotoMapper;
 import org.yundaxue.workshop.acq.dao.PhotoDao;
 import org.yundaxue.workshop.acq.service.PhotoService;
 
+import java.awt.print.Pageable;
 import java.util.List;
-@Service("PhotoService")
-public class PhotoServiceImpl implements PhotoService {
 
-    @Autowired
-    PhotoMapper photoMapper;
+/**
+ * Created by 耿志强 on 2019/3/17.
+ */
+@Service
+public class PhotoServiceImpl implements PhotoService{
 
     @Override
     public PhotoDao getPhoto(int photoId) throws Exception {
-        return photoMapper.getPhoto(photoId);
+        return null;
     }
 
     @Override
     public List<PhotoDao> listPhoto(int userId) throws Exception {
-        return photoMapper.listPhoto(userId);
+        return null;
     }
 
     @Override
     public PhotoDao uploadPhoto(PhotoDao photoDao) throws Exception {
-        return photoMapper.uploadPhoto(photoDao);
+        return null;
     }
 
     @Override
-    public int deletePhoto(int photoId) throws Exception{
-        return photoMapper.deletePhoto(photoId);
+    public int deletePhoto(int photoId) throws Exception {
+        return 0;
     }
 
     @Override
-    public int banPhoto(int photoId) throws Exception{
-        return photoMapper.banPhoto(photoId);
+    public int banPhoto(int photoId) throws Exception {
+        return 0;
     }
 }
