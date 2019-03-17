@@ -6,8 +6,6 @@ import org.yundaxue.workshop.acq.model.Mapper.UserMapper;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.UserService;
 
-import java.util.List;
-
 /**
  * Created by lenovo on 2019/3/17.
  */
@@ -61,13 +59,5 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUser(userId);
     }
 
-    @Override
-    public List<UserDao> getAllUser() throws Exception {
-        return null;
-    }
 
-    @Override
-    public int getUserNum() throws Exception {
-        return 0;
-    }
 }
