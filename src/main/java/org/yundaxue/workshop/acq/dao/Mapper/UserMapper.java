@@ -9,8 +9,7 @@ import org.yundaxue.workshop.acq.dao.UserDao;
 @Mapper
 public interface UserMapper {
     //插入用户 邮箱+密码
-    @Insert("insert into user (email,password) " +
-            "values(#{email},#{password})")
+    @Insert("insert into user (email,password) values(#{email},#{password})")
     public void insertUser(@Param("email") String email,@Param("password") String password);
 
     //根据userId删除用户

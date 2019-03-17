@@ -10,8 +10,7 @@ import org.yundaxue.workshop.acq.dao.LabelDao;
 public interface LabelMapper {
 
     //插入标签
-    @Insert("insert into label (label_name) " +
-            "values(#{labelName})")
+    @Insert("insert into label (label_name) values(#{labelName})")
     public void insertLabel(String labelName);
 
     //根据labelId删除标签
