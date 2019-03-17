@@ -1,4 +1,4 @@
-package org.yundaxue.workshop.acq.dao;
+package org.yundaxue.workshop.acq.model;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
 //用户实体类
 
 @Data
-public class UserDao {
+public class User {
     private int userId;
     private String email;   //用户邮箱
     private String password;//用户密码

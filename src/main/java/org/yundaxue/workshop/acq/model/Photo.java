@@ -1,11 +1,11 @@
-package org.yundaxue.workshop.acq.dao;
+package org.yundaxue.workshop.acq.model;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class PhotoDao {
+public class Photo {
     private int photoId;
     private int type;
     private long size;

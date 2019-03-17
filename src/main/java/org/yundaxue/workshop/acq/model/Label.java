@@ -1,4 +1,4 @@
-package org.yundaxue.workshop.acq.dao;
+package org.yundaxue.workshop.acq.model;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import lombok.Data;
  */
 
 @Data
-public class LabelDao {
+public class Label {
     private int labelId;
     private String labelName;//标签名
 

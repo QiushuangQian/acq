@@ -1,9 +1,7 @@
-package org.yundaxue.workshop.acq.dao.Mapper;
+package org.yundaxue.workshop.acq.model.Mapper;
 
 import org.apache.ibatis.annotations.*;
-import org.yundaxue.workshop.acq.dao.UserDao;
-
-import java.util.List;
+import org.yundaxue.workshop.acq.model.User;
 
 /**
  * Created by lenovo on 2019/3/17.
@@ -40,13 +38,11 @@ public interface UserMapper {
 
     //查找用户
     @Select("select * from user where user_id = #{userId}")
-    public UserDao getUser(int userId);
-    //查找全部用户
-    @Select("select * from user")
-    public List<UserDao> getAllUser();
+    public User getUser(int userId);
 
-    //统计用户数量
-    @Select("select count(user_id) from user")
-    public int getUserNum();
+
+    //根据email查找用户
+    @Select("select * from user where email = #{email}")
+    public User getUserByEmail(String email);
 
 }

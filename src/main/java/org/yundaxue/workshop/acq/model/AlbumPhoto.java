@@ -1,9 +1,9 @@
-package org.yundaxue.workshop.acq.dao;
+package org.yundaxue.workshop.acq.model;
 
 import lombok.Data;
 
 @Data
-public class AlbumPhotoDao {
+public class AlbumPhoto {
     private int albumPhotoId;
     private int photoId;
     private int albumId;
