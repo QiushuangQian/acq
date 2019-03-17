@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.Date;
 
+
 @Data
 public class PhotoDao {
     private int photoId;
@@ -19,5 +20,4 @@ public class PhotoDao {
     private String MD5;
     private Date delTime;
     private int BanState;
-
 }

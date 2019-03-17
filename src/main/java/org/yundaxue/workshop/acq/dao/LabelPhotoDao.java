@@ -7,5 +7,4 @@ public class LabelPhotoDao {
     private int labelPhotoId;
     private int labelId;
     private int photoId;
-
 }
