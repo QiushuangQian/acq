@@ -11,8 +11,8 @@ public class UserDao {
     private int spaceCapacity;//空间容量，以B为单位
     private int usedCapacity;//已用空间
     private int photoNum;  //照片总数
-    private String openId;  //绑定的微信
-    private String qqNum;  //绑定的QQ
+    private String wechat;  //绑定的微信
+    private String qq;  //绑定的QQ
 
     public String getEmail() {
         return email;
@@ -54,19 +54,27 @@ public class UserDao {
         this.photoNum = photoNum;
     }
 
-    public String getOpenId() {
-        return openId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setOpenId(String openId) {
-        this.openId = openId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getQqNum() {
-        return qqNum;
+    public String getWechat() {
+        return wechat;
     }
 
-    public void setQqNum(String qqNum) {
-        this.qqNum = qqNum;
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
     }
 }
