@@ -1,8 +1,8 @@
-package org.yundaxue.workshop.acq.photo.bo;
+package org.yundaxue.workshop.acq.dao;
 
 import java.util.Date;
 
-public class Photo {
+public class PhotoDao {
     private int photoId;
     private int type;
     private long size;

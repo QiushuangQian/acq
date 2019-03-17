@@ -1,6 +1,6 @@
-package org.yundaxue.workshop.acq.photo.bo;
+package org.yundaxue.workshop.acq.dao;
 
-public class LabelPhoto {
+public class LabelPhotoDao {
     private int labelPhotoId;
     private int labelId;
     private int photoId;
