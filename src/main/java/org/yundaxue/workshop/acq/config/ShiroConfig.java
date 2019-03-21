@@ -27,9 +27,12 @@ public class ShiroConfig {
         //拦截器
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/admin/login","anon");
+        filterChainDefinitionMap.put("/front/login","anon");
         filterChainDefinitionMap.put("/css/**","anon");
         filterChainDefinitionMap.put("/js/**","anon");
         filterChainDefinitionMap.put("/picture/**","anon");
+        filterChainDefinitionMap.put("/activeuser/**","anon");
+        filterChainDefinitionMap.put("/registerpost/**","anon");
         filterChainDefinitionMap.put("/**","authc");
         filterChainDefinitionMap.put("/admin/**","roles[admin]");
 
