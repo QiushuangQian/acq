@@ -17,4 +17,9 @@ public class User {
     private int photoNum;  //照片总数
     private String wechat;  //绑定的微信
     private String qq;  //绑定的QQ
+
+    //账户状态  0为封禁 1为正常 2为未激活
+    private Integer state;
+    //验证码
+    private String code;
 }
