@@ -40,7 +40,7 @@ public class AdminController {
      * */
     @PostMapping("/admin/login")
     public String loginPost(HttpServletRequest request, User user, Model model, HttpSession httpSession, final RedirectAttributes redirectAttrs) {
-        Mytoken token = null;//new Mytoken(user.getEmail(), user.getPassword(),"normal");
+        Mytoken token = new Mytoken(user.getEmail(), user.getPassword(),"normal");
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);

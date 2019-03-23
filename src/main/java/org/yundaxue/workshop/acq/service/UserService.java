@@ -7,7 +7,7 @@ import org.yundaxue.workshop.acq.model.User;
  */
 public interface UserService {
     //插入用户
-    void insertUser(String email,String password) throws Exception;
+    int insertUser(User user) throws Exception;
 
     //删除用户
     void deleteUser(int userId) throws Exception;
@@ -30,9 +30,11 @@ public interface UserService {
     User gerUser(int userId)throws Exception;
 
     //激活用户
-    public Boolean activeUser(String code);
+    public Boolean activeUser(String IdCode);
 
     //将注册的用户信息保存在数据库，状态设为未激活
     public Boolean register(User user);
+    //将要修改密码的用户信息更新到数据库，状态设为未激活
+    public Boolean sendMailChangePsw(User user);
 
 }

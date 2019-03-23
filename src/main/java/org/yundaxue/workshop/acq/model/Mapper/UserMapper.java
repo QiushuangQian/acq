@@ -8,21 +8,18 @@ import org.yundaxue.workshop.acq.model.User;
  */
 @Mapper
 public interface UserMapper {
-    //插入用户 邮箱+密码
-    @Insert("insert into user (email,password) values(#{email},#{password})")
-    public void insertUser(@Param("email") String email,@Param("password") String password);
-
     //插入用户
-    @Insert("insert into user (email,password,spaceCapacity,usedCapacity,photoNum,wechat,qq,state,code) values(#{email},#{password},#{spaceCapacity},#{usedCapacity},#{photoNum},#{wechat},#{qq},#{state},#{code})")
-    public int insertUser(User user);
+    @Insert("insert into user (email,password,state,id_code) " +
+            "values(#{user.email},#{user.password},#{user.state},#{user.idCode})")
+    public int insertUser(@Param("user") User user);
 
     //根据激活码查找用户
-    @Select("select * from user where code = #{code}")
-    public User selectUserByCode(String code);
+    @Select("select * from user where id_code = #{idCode}")
+    public User selectUserByIdCode(String idCode);
 
-    //更新用户状态和code
-    @Update("update user set state=#{state},code=#{code} where userId=#{userId}")
-    public int updateUser(User user);
+    //根据用户邮箱更新用户状态和idCode和密码
+    @Update("update user set state=#{user.state},id_code=#{user.idCode},password=#{user.password} where email=#{user.email}")
+    public int updateUser(@Param("user") User user);
 
     //根据userId删除用户
     @Delete("delete from user where user_id = #{userId}")

@@ -24,17 +24,17 @@ public class MailServiceImpl implements MailService{
     /*
       *@Description: 发送邮件
       *@param: to
-      *@param: code
+      *@param: idCode
       *@return: void
       *@Author: GengZhiQiang
       *@date: 2018/11/1
      * */
-    public void sendMail(String to,String code){
+    public void sendMail(String to,String idCode){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom(sender);
         mailMessage.setTo(to);
         mailMessage.setSubject("激活邮件");
-        mailMessage.setText("激活点击以此连接：http://localhost:8080/activeuser?code="+code);
+        mailMessage.setText("验证码:"+idCode);
         javaMailSender.send(mailMessage);
     }
 

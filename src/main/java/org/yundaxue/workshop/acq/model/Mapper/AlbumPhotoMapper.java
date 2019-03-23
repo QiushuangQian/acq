@@ -3,9 +3,6 @@ package org.yundaxue.workshop.acq.model.Mapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-
-import org.yundaxue.workshop.acq.model.AlbumPhoto;
 
 
 @Mapper

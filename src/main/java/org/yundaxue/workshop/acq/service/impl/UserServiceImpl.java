@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     private MailService mailService;
 
     @Override
-    public void insertUser(String email, String password) throws Exception {
-        userMapper.insertUser(email,password);
+    public int insertUser(User user) throws Exception {
+        return userMapper.insertUser(user);
     }
 
     @Override
@@ -73,13 +73,36 @@ public class UserServiceImpl implements UserService {
         //设置状态码
         user.setState(2);
         //设置激活码
-        user.setCode(Util.getUUID());
+        user.setIdCode(Util.getUUID());
 
         //将用户信息存入数据库
         int i= userMapper.insertUser(user);
 
         //发送一封激活邮件
-        mailService.sendMail(user.getEmail(),user.getCode());
+        mailService.sendMail(user.getEmail(),user.getIdCode());
+
+        if (i == 1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean sendMailChangePsw(User user) {
+        if (userMapper.getUserByEmail(user.getEmail()) == null ){
+            return false;
+        }
+
+        //设置状态码
+        user.setState(2);
+        //设置激活码
+        user.setIdCode(Util.getUUID());
+
+        //将用户信息更新到数据库
+        int i= userMapper.updateUser(user);
+
+        //发送一封激活邮件
+        mailService.sendMail(user.getEmail(),user.getIdCode());
 
         if (i == 1){
             return true;
@@ -89,11 +112,11 @@ public class UserServiceImpl implements UserService {
 
 
     //激活用户
-    public Boolean activeUser(String code){
-        User user = userMapper.selectUserByCode(code);
+    public Boolean activeUser(String idCode){
+        User user = userMapper.selectUserByIdCode(idCode);
         if(user != null){
             user.setState(1);
-            user.setCode(null);
+            user.setIdCode(null);
             userMapper.updateUser(user);
             return true;
         }else {
