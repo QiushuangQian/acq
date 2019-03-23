@@ -14,7 +14,7 @@ public interface UserMapper {
 
     //插入用户
     @Insert("insert into user (email,password,spaceCapacity,usedCapacity,photoNum,wechat,qq,state,code) values(#{email},#{password},#{spaceCapacity},#{usedCapacity},#{photoNum},#{wechat},#{qq},#{state},#{code})")
-    public int insertUser(User user);
+    public int insertUser2(User user);
 
     //根据激活码查找用户
     @Select("select * from user where code = #{code}")

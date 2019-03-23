@@ -22,15 +22,19 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
-        shiroFilterFactoryBean.setLoginUrl("/admin/login");
+        shiroFilterFactoryBean.setLoginUrl("/user/login");
 
         //拦截器
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/admin/login","anon");
         filterChainDefinitionMap.put("/front/login","anon");
+        filterChainDefinitionMap.put("/user/login","anon");
+        filterChainDefinitionMap.put("/user/doLogin","anon");
         filterChainDefinitionMap.put("/css/**","anon");
         filterChainDefinitionMap.put("/js/**","anon");
+        filterChainDefinitionMap.put("/photo/**","anon");
         filterChainDefinitionMap.put("/picture/**","anon");
+
         filterChainDefinitionMap.put("/activeuser/**","anon");
         filterChainDefinitionMap.put("/registerpost/**","anon");
         filterChainDefinitionMap.put("/**","authc");

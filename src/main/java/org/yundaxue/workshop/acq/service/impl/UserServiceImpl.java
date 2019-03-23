@@ -2,6 +2,7 @@ package org.yundaxue.workshop.acq.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.yundaxue.workshop.acq.exception.CatException;
 import org.yundaxue.workshop.acq.model.Mapper.UserMapper;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.MailService;
@@ -60,9 +61,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User gerUser(int userId) throws Exception {
-        return userMapper.getUser(userId);
+    public User getUser(int userId) throws Exception {
+        return null;
     }
+
 
     //将注册的用户信息保存在数据库，状态设为未激活
     public Boolean register(User user){
@@ -76,7 +78,7 @@ public class UserServiceImpl implements UserService {
         user.setCode(Util.getUUID());
 
         //将用户信息存入数据库
-        int i= userMapper.insertUser(user);
+        int i= userMapper.insertUser2(user);
 
         //发送一封激活邮件
         mailService.sendMail(user.getEmail(),user.getCode());
@@ -99,5 +101,22 @@ public class UserServiceImpl implements UserService {
         }else {
             return false;
         }
+    }
+
+    public boolean login(User user) throws CatException {
+        if (user.getUserId()==0) {
+            throw new CatException(CatException.USER_EMPTY, "用户为空");
+        }
+        User u1= userMapper.getUser(user.getUserId());
+
+        if (u1 == null)  {
+            throw new CatException(CatException.USER_NOT_EXISTS, "用户不存在");
+        }
+
+        if (! u1.getPassword().equals(user.getPassword())) {
+            throw new CatException(CatException.PASSWORD_ERROR, "用户或密码不匹配");
+        }
+
+        return true;
     }
 }
