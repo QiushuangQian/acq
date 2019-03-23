@@ -50,7 +50,7 @@ public class DataController {
     public String photoDetail(@PathVariable int albumId,
                               HttpServletRequest request, HttpServletResponse response) throws Exception {
         Album albumDao = albumService.getAlbum(albumId);
-        return albumDao.getAlbumName();
+        return null;//albumDao.getAlbumName();
     }
     AlbumPhotoService albumPhotoService;
 
@@ -60,7 +60,7 @@ public class DataController {
     public int photoDetail(@PathVariable int albumPhotoId,@PathVariable int photoId,@PathVariable int albumId
             , HttpServletRequest request, HttpServletResponse response) throws Exception {
         AlbumPhoto albumPhotoDao = albumPhotoService.getAlbumPhoto(albumPhotoId,photoId,albumId);
-        return albumPhotoDao.getAlbumPhotoId();
+        return 0;//albumPhotoDao.getAlbumPhotoId();
     }
 
 }
