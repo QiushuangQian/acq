@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yundaxue.workshop.acq.model.Mapper.UserMapper;
 import org.yundaxue.workshop.acq.model.User;
+import org.yundaxue.workshop.acq.service.MailService;
 import org.yundaxue.workshop.acq.service.UserService;
+import org.yundaxue.workshop.acq.util.Util;
 
 /**
  * Created by lenovo on 2019/3/17.
@@ -12,7 +14,10 @@ import org.yundaxue.workshop.acq.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
+
+    @Autowired
+    private MailService mailService;
 
     @Override
     public void insertUser(String email, String password) throws Exception {
@@ -59,5 +64,40 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUser(userId);
     }
 
+    //将注册的用户信息保存在数据库，状态设为未激活
+    public Boolean register(User user){
+        if (userMapper.getUserByEmail(user.getEmail()) != null ){
+            return false;
+        }
 
+        //设置状态码
+        user.setState(2);
+        //设置激活码
+        user.setCode(Util.getUUID());
+
+        //将用户信息存入数据库
+        int i= userMapper.insertUser(user);
+
+        //发送一封激活邮件
+        mailService.sendMail(user.getEmail(),user.getCode());
+
+        if (i == 1){
+            return true;
+        }
+        return false;
+    }
+
+
+    //激活用户
+    public Boolean activeUser(String code){
+        User user = userMapper.selectUserByCode(code);
+        if(user != null){
+            user.setState(1);
+            user.setCode(null);
+            userMapper.updateUser(user);
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

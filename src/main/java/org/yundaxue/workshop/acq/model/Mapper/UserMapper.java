@@ -12,6 +12,18 @@ public interface UserMapper {
     @Insert("insert into user (email,password) values(#{email},#{password})")
     public void insertUser(@Param("email") String email,@Param("password") String password);
 
+    //插入用户
+    @Insert("insert into user (email,password,spaceCapacity,usedCapacity,photoNum,wechat,qq,state,code) values(#{email},#{password},#{spaceCapacity},#{usedCapacity},#{photoNum},#{wechat},#{qq},#{state},#{code})")
+    public int insertUser(User user);
+
+    //根据激活码查找用户
+    @Select("select * from user where code = #{code}")
+    public User selectUserByCode(String code);
+
+    //更新用户状态和code
+    @Update("update user set state=#{state},code=#{code} where userId=#{userId}")
+    public int updateUser(User user);
+
     //根据userId删除用户
     @Delete("delete from user where user_id = #{userId}")
     public void deleteUser(int userId);

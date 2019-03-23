@@ -28,4 +28,11 @@ public interface UserService {
 
     //查找用户
     User gerUser(int userId)throws Exception;
+
+    //激活用户
+    public Boolean activeUser(String code);
+
+    //将注册的用户信息保存在数据库，状态设为未激活
+    public Boolean register(User user);
+
 }
