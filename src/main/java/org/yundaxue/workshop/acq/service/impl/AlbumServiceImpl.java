@@ -7,6 +7,7 @@ import org.yundaxue.workshop.acq.model.Album;
 import org.yundaxue.workshop.acq.model.Mapper.AlbumMapper;
 import org.yundaxue.workshop.acq.service.AlbumService;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,8 +17,9 @@ public class AlbumServiceImpl implements AlbumService{
     AlbumMapper albumMapper;
 
     @Override
-    public void insertAlbum(int albumId) throws Exception {
-        albumMapper.insertAlbum(albumId);
+    public boolean insertAlbum(Album album) throws Exception {
+        album.setCreateTime(new Date());
+        return albumMapper.insertAlbum(album.getAlbumName(),album.getUserId(),album.getCreateTime());
 
     }
 
