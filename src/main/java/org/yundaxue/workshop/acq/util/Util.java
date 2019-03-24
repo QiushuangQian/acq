@@ -24,6 +24,7 @@ public class Util {
     }
 
     //生成随机字符串
+
     public static String getUUID(){
         return UUID.randomUUID().toString().replace("-","");
     }

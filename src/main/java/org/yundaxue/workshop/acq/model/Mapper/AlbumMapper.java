@@ -4,14 +4,16 @@ package org.yundaxue.workshop.acq.model.Mapper;
 import org.apache.ibatis.annotations.*;
 import org.yundaxue.workshop.acq.model.Album;
 
+import java.util.Date;
+
 /**
  * Created by admin on 2019/3/17.
  */
 @Mapper
 public interface AlbumMapper {
-	@Insert("insert into album (album_id) " +
-			"values(#{albumId})")
-	public void insertAlbum(int albumId);
+	@Insert("insert into album (album_name,user_id,create_time) " +
+			"values(#{albumName},#{userId},#{createTime})")
+	public boolean insertAlbum(@Param("albumName") String albumName, @Param("userId") int userId, @Param("createTime") Date createTime);
 
 
 	@Delete("delete from album where album_id=#{album_id}")

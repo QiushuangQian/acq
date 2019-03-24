@@ -66,10 +66,10 @@
         $("#submit").on("click",function () {
 
             //等待注册返回
-            if($("#submit").hasClass("Submiting")){
+            if($("#submit").hasClass("Submitting")){
                 return;
             }
-            $("#submit").addClass("Submiting");
+            $("#submit").addClass("Submitting");
             $("#submit").val("确认中...");
 
             //验证码
@@ -83,7 +83,7 @@
                     "idCode":idCode
                 },
                 success:function (result) {
-                    $("#submit").removeClass("Submiting");
+                    $("#submit").removeClass("Submitting");
                     $("#submit").val("确定");
                     if(result.idCode==1){
                         window.location.href="/user/login"
@@ -93,7 +93,7 @@
                     }
                 },
                 error:function () {
-                    $("#submit").removeClass("Submiting");
+                    $("#submit").removeClass("Submitting");
                     $("#submit").val("确定");
                 }
             })
