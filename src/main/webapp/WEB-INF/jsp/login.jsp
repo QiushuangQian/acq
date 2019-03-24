@@ -15,7 +15,7 @@
 <div style="background-color: white; height: 380px;text-align: center;margin-left: 74px;margin-right: 74px">
 <div align="center" style="margin-top:1px;">
     <span >登录</span>
-    <span>注册</span>
+    <a href="" <span>注册</span>
 </div>
 <div align="center">
     <input type="text" id="userName"  placeholder="请输入登录邮箱或手机">
@@ -26,7 +26,7 @@
 <div align="center">
     <input type="checkbox" id="autoLogin">
     自动登录
-    <a href="#">忘记密码</a>
+    <a href="/user/login">忘记密码</a>
 </div>
 <div align="center">
     <input type="button"  style= "height:50px;width:120px;background-color: aqua" value="登录" id="btnLogin">
