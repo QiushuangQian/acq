@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.yundaxue.workshop.acq.config.Mytoken;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.UserService;
 
@@ -40,10 +39,10 @@ public class AdminController {
      * */
     @PostMapping("/admin/login")
     public String loginPost(HttpServletRequest request, User user, Model model, HttpSession httpSession, final RedirectAttributes redirectAttrs) {
-        Mytoken token = null;//new Mytoken(user.getEmail(), user.getPassword(),"normal");
+        //Mytoken token = null;//new Mytoken(user.getEmail(), user.getPassword(),"normal");
         Subject subject = SecurityUtils.getSubject();
         try {
-            subject.login(token);
+            //subject.login(token);
         }catch (Exception e){
             model.addAttribute("error", "用户名或密码错误，请重新登录！");
             return "login";
