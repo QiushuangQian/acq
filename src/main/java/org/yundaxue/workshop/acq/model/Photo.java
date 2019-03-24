@@ -4,7 +4,6 @@ import lombok.Data;
 
 import java.util.Date;
 
-
 @Data
 public class Photo {
     private int photoId;
@@ -20,4 +19,5 @@ public class Photo {
     private String MD5;
     private Date delTime;
     private int BanState;
+
 }

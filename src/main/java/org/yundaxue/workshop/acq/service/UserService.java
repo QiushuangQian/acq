@@ -1,5 +1,6 @@
 package org.yundaxue.workshop.acq.service;
 
+import org.yundaxue.workshop.acq.exception.CatException;
 import org.yundaxue.workshop.acq.model.User;
 
 /**
@@ -27,7 +28,7 @@ public interface UserService {
     void updateQq(int userId,String qq)throws Exception;
 
     //查找用户
-    User gerUser(int userId)throws Exception;
+    User getUser(int userId)throws Exception;
 
     //激活用户
     public Boolean activeUser(String IdCode);
