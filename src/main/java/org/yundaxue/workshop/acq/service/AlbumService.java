@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AlbumService {
     //插入相册
-    void insertAlbum(int albumId) throws Exception;
+    boolean insertAlbum(Album album) throws Exception;
 
     //删除相册
     void deleteAlbum(int albumId) throws Exception;
