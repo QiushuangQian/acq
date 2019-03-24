@@ -6,7 +6,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.yundaxue.workshop.acq.model.Mapper.UserMapper;
 import org.yundaxue.workshop.acq.model.User;
 
@@ -15,7 +14,7 @@ import org.yundaxue.workshop.acq.model.User;
  * 2019/1/22
  * 9:05
  */
-@Component
+//@Component
 public class CustomRealm extends AuthorizingRealm{
 
     @Autowired
@@ -51,3 +50,4 @@ public class CustomRealm extends AuthorizingRealm{
         return authenticationInfo;
     }
 }
+

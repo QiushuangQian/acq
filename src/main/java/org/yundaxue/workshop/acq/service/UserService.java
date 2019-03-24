@@ -38,4 +38,5 @@ public interface UserService {
     //将要修改密码的用户信息更新到数据库，状态设为未激活
     public Boolean sendMailChangePsw(User user);
 
+    public boolean login(User user)  throws CatException;
 }

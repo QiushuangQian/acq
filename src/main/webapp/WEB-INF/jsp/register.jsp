@@ -94,7 +94,7 @@
                     $("#register").removeClass("Registering");
                     $("#register").val("注册");
                     if(result.idCode==1){
-                        window.location.href="/login"
+                        window.location.href="/user/login"
                     }
                     else {
                         alert(result.msg);

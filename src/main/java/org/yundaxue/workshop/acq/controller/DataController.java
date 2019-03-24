@@ -1,18 +1,11 @@
 package org.yundaxue.workshop.acq.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.yundaxue.workshop.acq.model.Album;
 import org.yundaxue.workshop.acq.model.AlbumPhoto;
-=======
-import org.springframework.web.bind.annotation.*;
-import org.yundaxue.workshop.acq.model.Album;
-import org.yundaxue.workshop.acq.model.AlbumPhoto;
-import org.yundaxue.workshop.acq.model.User;
->>>>>>> origin/master
 import org.yundaxue.workshop.acq.service.AlbumPhotoService;
 import org.yundaxue.workshop.acq.service.AlbumService;
 import org.yundaxue.workshop.acq.service.UserService;

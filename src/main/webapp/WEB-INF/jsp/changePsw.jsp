@@ -86,7 +86,7 @@
                     $("#submit").removeClass("Submiting");
                     $("#submit").val("确定");
                     if(result.idCode==1){
-                        window.location.href="/login"
+                        window.location.href="/user/login"
                     }
                     else {
                         alert(result.msg);
