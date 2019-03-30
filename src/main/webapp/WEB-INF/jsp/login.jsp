@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Label</title>
+    <title>登录</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
 </head>
 <body style="text-align: center;align-content: center">
@@ -67,7 +67,7 @@
                   $("#btnLogin").removeClass("Saving");
                   $("#btnLogin").val("Save");
                   if(result.code==0){
-                      window.location.href="/register"
+                      window.location.href="/homepage"
                   }
                   else{
                       alert(result.msg);

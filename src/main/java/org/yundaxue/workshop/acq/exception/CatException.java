@@ -8,6 +8,7 @@ public class CatException extends Exception {
 	public static final int USER_EMPTY = 1;
 	public static final int USER_NOT_EXISTS = 2;
 	public static final int PASSWORD_ERROR = 3;
+	public static final int UNKOWN_ERROR = 9;
 
 	private int code;
 	private String msg;

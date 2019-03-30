@@ -2,6 +2,7 @@ package org.yundaxue.workshop.acq.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.yundaxue.workshop.acq.exception.CatException;
 import org.yundaxue.workshop.acq.model.Mapper.UserMapper;
 import org.yundaxue.workshop.acq.model.User;
@@ -125,11 +126,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public boolean login(User user) throws CatException {
-        if (user.getUserId()==0) {
+    public User login(User user) throws CatException {
+        if (StringUtils.isEmpty(user.getEmail())) {
             throw new CatException(CatException.USER_EMPTY, "用户为空");
         }
-        User u1= userMapper.getUser(user.getUserId());
+        User u1= userMapper.getUserByEmail(user.getEmail());
 
         if (u1 == null)  {
             throw new CatException(CatException.USER_NOT_EXISTS, "用户不存在");
@@ -139,6 +140,6 @@ public class UserServiceImpl implements UserService {
             throw new CatException(CatException.PASSWORD_ERROR, "用户或密码不匹配");
         }
 
-        return true;
+        return u1;
     }
 }

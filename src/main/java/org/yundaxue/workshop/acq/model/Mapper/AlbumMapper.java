@@ -27,6 +27,7 @@ public interface AlbumMapper {
 
 	@Select("select * from album where album_id=#{albumId}")
 	public Album getAlbum(int albumId);
+
 	@Select("select * from album where user_id=#{userId}")
 	public void searchAlbum(@Param("userId") int userId, @Param("albumName") String albumName);
 

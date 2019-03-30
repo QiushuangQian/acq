@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yundaxue.workshop.acq.config.Mytoken;
 import org.yundaxue.workshop.acq.exception.CatException;
 import org.yundaxue.workshop.acq.model.Album;
 import org.yundaxue.workshop.acq.model.AlbumPhoto;
@@ -31,34 +30,50 @@ import java.util.Map;
 public class FrontController {
 @Autowired
 	UserService userService;
+//打开login页面
 @RequestMapping(value = "/user/login")
-	public String show(ModelMap model,HttpServletResponse request,HttpServletResponse response)throws Exception{
+	public String show(ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
 	return "/login";
+
 }
+//打开homepage页面
+	@RequestMapping(value = "/homepage")
+	public String homePage(ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		return "/homepage";
+	}
+	//打开回收站页面
+	@RequestMapping(value = "/recycleBin")
+	public String recycleBins(ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		return "/recycleBin";
+	}
+	//返回登录信息
 @RequestMapping(value = "/user/doLogin")
 	@ResponseBody
-	public Map<String,Object> doLogin(User user,ModelMap model,HttpServletResponse request,HttpServletResponse response)throws Exception{
-	//int c
+	public Map<String,Object> doLogin(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
+
 	Map<String, Object> result = new HashMap<String, Object>();
 
 	int code =0;
 	String msg = null;
-	boolean success = false;
+	User loginedUser = null;
 
 	try {
-		/*success = userService.login(user);*/
-
-		Mytoken token= new Mytoken(user.getEmail(), user.getPassword(), "user");
-		SecurityUtils.getSubject().login(token);
-		/*if (success) {
-			code  = 0;
+		loginedUser = userService.login(user);
+		if (loginedUser!= null) {
+			code  = CatException.SUCCESS;
 			msg = "登录成功";
-		}*/
-	} /*catch (CatException e) {
+
+			// 增加session存储
+			request.getSession().setAttribute("USER", user);
+		} else {
+			code = CatException.UNKOWN_ERROR;
+			msg = "未知错误";
+		}
+	} catch (CatException e) {
 		code = e.getCode();
 		msg= e.getMsg();
 
-	}*/ catch (Exception e) {
+	} catch (Exception e) {
 		e.printStackTrace();
 	}
 
