@@ -10,11 +10,11 @@
 <html>
 <head>
     <title>DeleteAlbum</title>
-    <script src="/js/jquery/jquery-3.3.1.js"></script>
+    <script src="/js/jquery-3.3.1.js"></script>
 </head>
 <body>
 <div class="selectAlbum">
-    <select id="albumSelect" onchange="changeAlbum()">
+    <select id="albumSelect" onchange="changeAlbum(this.value)">
         <option value="0" selected="selected">请选择相册</option>
         <c:forEach var="album1" items="${albumList}">
         <option value="${album1.albumId}">${album1.albumName}</option>
@@ -23,13 +23,13 @@
     <input type="button" id="delete" value="删除">
 </div>
 
-<script type="javascript">
+<script>
     var selected;
     function changeAlbum() {
         selected = $('#albumSelect option:selected').val();
     }
 
-    $(function () {
+    jQuery(document).ready(function () {
         $("#delete").on("click",function () {
             if($("#delete").hasClass("Deleting")){
                 return;
