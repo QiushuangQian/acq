@@ -12,22 +12,25 @@ import java.util.List;
  */
 @Mapper
 public interface AlbumMapper {
+	//创建相册
 	@Insert("insert into album (album_name,user_id,create_time) " +
 			"values(#{albumName},#{userId},#{createTime})")
 	public boolean insertAlbum(@Param("albumName") String albumName, @Param("userId") int userId, @Param("createTime") Date createTime);
 
-
+	//删除相册
 	@Delete("delete from album where album_id=#{albumId}")
 	public boolean deleteAlbum(@Param("albumId") int albumId);
 
 
+	//修改相册名
 	@Update("update album set album_name = #{albumName} where album_id = #{albumId}")
 	public void updateAlbum(@Param("albumId") int albumId, @Param("albumName") String albumName);
 
-
+	//查找相册
 	@Select("select * from album where album_id=#{albumId}")
 	public Album getAlbum(int albumId);
 
+	//显示用户所有相册
 	@Select("select * from album where user_id=#{userId}")
 	public void searchAlbum(@Param("userId") int userId, @Param("albumName") String albumName);
 

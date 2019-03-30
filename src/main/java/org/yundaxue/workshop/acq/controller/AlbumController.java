@@ -65,8 +65,8 @@ public class AlbumController {
     //删除数据
     @RequestMapping(value = "/album/doDeleteAlbum",method= RequestMethod.POST)
     @ResponseBody
-    //albumId由session获取
     public boolean doDeleteAlbum(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //接收前端选中的相册id
         int selectedId = Integer.parseInt(request.getParameter("selected"));
         return albumService.deleteAlbum(selectedId);
     }

@@ -24,6 +24,7 @@
 </div>
 
 <script>
+    //获取选中要删除的相册ID
     var selected;
     function changeAlbum() {
         selected = $('#albumSelect option:selected').val();
@@ -37,6 +38,7 @@
             $("#delete").addClass("Deleting");
             $("#delete").val("相册删除中...");
 
+            //传递参数到后端
             var params = {"selected":selected};
             $.ajax({
                 type:"post",
