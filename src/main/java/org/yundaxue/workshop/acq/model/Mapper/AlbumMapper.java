@@ -17,8 +17,8 @@ public interface AlbumMapper {
 	public boolean insertAlbum(@Param("albumName") String albumName, @Param("userId") int userId, @Param("createTime") Date createTime);
 
 
-	@Delete("delete from album where album_id=#{album_id}")
-	public boolean deleteAlbum(int album_id);
+	@Delete("delete from album where album_id=#{albumId}")
+	public boolean deleteAlbum(int albumId);
 
 
 	@Update("update album set album_name = #{albumName} where album_id = #{albumId}")
