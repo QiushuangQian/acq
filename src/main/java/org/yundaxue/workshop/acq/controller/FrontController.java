@@ -1,12 +1,21 @@
 package org.yundaxue.workshop.acq.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.yundaxue.workshop.acq.exception.CatException;
+import org.yundaxue.workshop.acq.model.Album;
+import org.yundaxue.workshop.acq.model.AlbumPhoto;
 import org.yundaxue.workshop.acq.model.User;
+import org.yundaxue.workshop.acq.service.AlbumPhotoService;
+import org.yundaxue.workshop.acq.service.AlbumService;
 import org.yundaxue.workshop.acq.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;

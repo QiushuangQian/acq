@@ -18,7 +18,7 @@ public interface AlbumMapper {
 
 
 	@Delete("delete from album where album_id=#{album_id}")
-	public void deleteAlbum(int album_id);
+	public boolean deleteAlbum(int album_id);
 
 
 	@Update("update album set album_name = #{albumName} where album_id = #{albumId}")
