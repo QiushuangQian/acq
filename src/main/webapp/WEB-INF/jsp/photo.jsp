@@ -8,12 +8,12 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Photo</title>
+    <title>PhotoList</title>
 </head>
 <body>
-<div>Photo Id:${p.photoId}</div>
-<div>User Id；${p.userId}</div>
-
+<div><img src="" alt=""></div>
+<div><img src="" alt=""></div>
+<%%>
 
 </body>
 </html>

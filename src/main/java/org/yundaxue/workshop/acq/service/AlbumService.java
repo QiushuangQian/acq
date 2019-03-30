@@ -9,7 +9,7 @@ public interface AlbumService {
     boolean insertAlbum(Album album) throws Exception;
 
     //删除相册
-    void deleteAlbum(int albumId) throws Exception;
+    boolean deleteAlbum(int albumId) throws Exception;
 
     //通过id修改相册名
     void updateAlbum(int albumId, String albumName) throws Exception;

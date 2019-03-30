@@ -24,8 +24,8 @@ public class AlbumServiceImpl implements AlbumService{
     }
 
     @Override
-    public void deleteAlbum(int albumId) throws Exception {
-        albumMapper.deleteAlbum(albumId);
+    public boolean deleteAlbum(int albumId) throws Exception {
+        return albumMapper.deleteAlbum(albumId);
     }
 
     @Override

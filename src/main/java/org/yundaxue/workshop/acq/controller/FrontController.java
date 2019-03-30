@@ -1,6 +1,6 @@
 package org.yundaxue.workshop.acq.controller;
 
-import org.apache.shiro.SecurityUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
