@@ -1,9 +1,6 @@
 package org.yundaxue.workshop.acq.model.Mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.yundaxue.workshop.acq.model.Photo;
 
 import java.util.List;
@@ -18,8 +15,10 @@ public interface PhotoMapper {
     @Select("select * from photo where photo_id=#{photoId}")
     public Photo getPhoto(int photoId);
 
-    @Insert("insert into photo(type,size,upload_time,user_id,photo_path,thumbnail_path,thumb,MD5,description) values(#{type},#{size},#{uploadTime},#{userId},#{photoPath},#{thumbnailPath},#{thumb},#{MD5},#{description})")
-    public int uploadPhoto(Photo photo);
+    //插入照片，返回photoId——峰
+    @Insert("insert into photo(user_id,photo_type,size,upload_time,photo_path,thumbnail_path) values(#{photo.userId},#{photo.type},#{photo.size},#{photo.uploadTime,jdbcType=TIMESTAMP},#{photo.photoPath},#{photo.thumbnailPath})")
+    @Options(useGeneratedKeys=true,keyProperty="photoId")
+    public void insertPhoto(@Param("photo") Photo photo);
 
     @Update("update photo set del_state=0 where photo_id=#{photoId},user_id=#{userId}")
     public int deletePhoto(int photoId,int userId);

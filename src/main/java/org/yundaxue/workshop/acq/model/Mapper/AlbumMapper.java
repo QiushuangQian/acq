@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.yundaxue.workshop.acq.model.Album;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by admin on 2019/3/17.
@@ -26,6 +27,11 @@ public interface AlbumMapper {
 
 	@Select("select * from album where album_id=#{albumId}")
 	public Album getAlbum(int albumId);
-	@Select("selecr * from album where user_id=#{userId}")
+	@Select("select * from album where user_id=#{userId}")
 	public void searchAlbum(@Param("userId") int userId, @Param("albumName") String albumName);
+
+
+	//根据userId查找得到相册列表——峰
+	@Select("select * from album where user_id=#{userId}")
+	public List<Album> albumList(@Param("userId") int userId);
 }

@@ -18,5 +18,8 @@ public interface AlbumService {
     Album getAlbum(int albumId) throws Exception;
     //通过userId查找相册
     void searchAlbum(int userId,String albumName) throws Exception;
+
+    //根据userId得到相册列表——峰
+    List<Album> albumList(int userId) throws Exception;
 }
 

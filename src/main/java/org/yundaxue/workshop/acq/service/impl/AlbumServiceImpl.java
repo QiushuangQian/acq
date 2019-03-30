@@ -42,4 +42,10 @@ public class AlbumServiceImpl implements AlbumService{
     public void searchAlbum(int userId,String albumName) throws Exception{
         albumMapper.searchAlbum(userId,albumName);
     }
+
+    //——峰
+    @Override
+    public List<Album> albumList(int userId) throws Exception {
+        return albumMapper.albumList(userId);
+    }
 }

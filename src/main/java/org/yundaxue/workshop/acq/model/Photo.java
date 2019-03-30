@@ -9,6 +9,7 @@ public class Photo {
     private int photoId;
     private int type;
     private long size;
+//    @Property(jdbcType="TIMESTAMP")
     private Date uploadTime;
     private int userId;
     private String photoPath;

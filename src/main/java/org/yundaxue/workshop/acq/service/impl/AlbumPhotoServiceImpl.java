@@ -12,10 +12,10 @@ public class AlbumPhotoServiceImpl implements AlbumPhotoService {
 	@Autowired
 	AlbumPhotoMapper albumPhotoMapper;
 
-
+	//插入记录——峰
 	@Override
-	public void insertAlbumPhoto( int photoId, int albumId) throws Exception {
-		albumPhotoMapper.insertAlbumPhoto(photoId, albumId);
+	public void insertAlbumPhoto(AlbumPhoto albumPhoto) throws Exception {
+		albumPhotoMapper.insertAlbumPhoto(albumPhoto);
 	}
 
 	@Override

@@ -1,4 +1,5 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.awt.*" %><%--
   Created by IntelliJ IDEA.
   User: lenovo
   Date: 2019/3/24
@@ -14,12 +15,30 @@
     <script src="/js/webuploader.js"></script>
 </head>
 <body>
+    <div>
+        <label>上传到</label>&nbsp;
+        <select id="albumSelect" onchange="changeAlbum(this.value)">
+            <option value="0" selected="selected">请选择相册</option>
+            <c:forEach var="album1" items="${albumList}">
+                <option value="${album1.albumId}">${album1.albumName}</option>
+            </c:forEach>
+        </select>
+    </div><br>
     <div id="uploader-demo">
         <div id="fileList" class="uploader-list"></div>
+    </div><br>
+    <div>
         <div id="filePicker">选择图片</div>
     </div>
     <script type="text/javascript">
+        var selectedId;
+        function changeAlbum(selected) {
+            selectedId= $('#albumSelect option:selected').val();
+        }
+
         $(function () {
+
+
             var $ = jQuery,
                 $list = $('#fileList'),
                 // 优化retina, 在retina下这个值是2
@@ -42,7 +61,7 @@
                 swf:'/js/Uploader.swf',
 
                 // 文件接收服务端。-------------------------------------------
-                server: '/doUpload',
+                server: '/doUpload/',
                 threads:'5',  //同时运行5个线程传输
                 fileSizeLimit: 20 * 1024 * 1024,    //最大20M
 
@@ -61,7 +80,7 @@
             // 当有文件添加进来的时候
             uploader.on( 'fileQueued', function( file ) {
                 var $li = $(
-                        '<div id="' + file.id + '" class="file-item thumbnail">' +
+                        '<div id="' + file.id + '" class="file-item thumbnail" style="float: left;">' +
                         '<img>' +
 //                        '<div class="info">' + file.name + '</div>' +
                         '</div>'
@@ -82,6 +101,11 @@
                 }, thumbnailWidth, thumbnailHeight );
 
             });
+
+            //传递选择的相册Id
+            uploader.on('uploadBeforeSend',function (obj,data,headers) {
+                data.selectedAlbumId=selectedId;
+            })
 
             // 文件上传过程中创建进度条实时显示。    uploadProgress事件：上传过程中触发，携带上传进度
             uploader.on( 'uploadProgress', function( file, percentage ) {
@@ -123,9 +147,6 @@
             uploader.on( 'uploadComplete', function( file ) {
                 $( '#'+file.id ).find('.progress').remove();
             });
-
-
-
         })
     </script>
 </body>
