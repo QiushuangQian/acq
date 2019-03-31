@@ -3,9 +3,7 @@ package org.yundaxue.workshop.acq.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.service.PhotoService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -28,12 +25,12 @@ public class PhotoController {
     public String photoDisplay(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         int userId=1;
         Map<String, File> fileNameMap = new HashMap<>();
-        File[] fileList = new File(photoService.listPhoto(userId)).listFiles();
+        File[] fileList = new File(photoService.showPhoto(userId)).listFiles();
         for (File file : fileList){
             fileNameMap.put(file.getName(),file);
         }
         model.addAttribute("fileNameMap",fileNameMap);
-        return "/photoList";
+        return "/photoDisplay";
     }
 
     @RequestMapping(value = "/photo/download")

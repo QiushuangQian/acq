@@ -24,15 +24,15 @@ public interface AlbumMapper {
 
 	//修改相册名
 	@Update("update album set album_name = #{albumName} where album_id = #{albumId}")
-	public void updateAlbum(@Param("albumId") int albumId, @Param("albumName") String albumName);
+	public boolean updateAlbum(@Param("albumName") String albumName,@Param("albumId") int albumId);
 
 	//查找相册
 	@Select("select * from album where album_id=#{albumId}")
 	public Album getAlbum(int albumId);
 
 	//显示用户所有相册
-	@Select("select * from album where user_id=#{userId}")
-	public void searchAlbum(@Param("userId") int userId, @Param("albumName") String albumName);
+	@Select("select album_name from album where user_id=#{userId}")
+	public String  showAlbum(@Param("userId") int userId);
 
 
 	//根据userId查找得到相册列表——峰

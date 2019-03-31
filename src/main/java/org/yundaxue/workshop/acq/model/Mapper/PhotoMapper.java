@@ -10,7 +10,10 @@ public interface PhotoMapper {
 
     //得到用户所有照片
     @Select("select thumbnail_path from photo where user_id=#{userId}")
-    public String listPhoto(@Param("userId") int userId);
+    public String showPhoto(@Param("userId") int userId);
+
+    @Select("select * from photo where user_id=#{userId}")
+    public List<Photo> listPhoto(@Param("userId") int userId);
 
     //显示照片
     @Select("select photo_path from photo where photo_id=#{photoId}")

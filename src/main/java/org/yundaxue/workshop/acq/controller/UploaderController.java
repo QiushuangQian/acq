@@ -30,7 +30,6 @@ import java.util.List;
 public class UploaderController {
 
     private static Logger logger = Logger.getLogger(UserController.class);
-    private static final String excelPath = "E:\\";
 
     @Autowired
     PhotoService photoService;
@@ -66,13 +65,14 @@ public class UploaderController {
         //图片初始名，例：xxx.jpg
         String originalFilename = file.getOriginalFilename();
         //原图上传到服务器的文件路径
-        String photoFilePath = excelPath + File.separator +"test"+ File.separator +"img"+ File.separator +  originalFilename;
+//        String photoFilePath =File.separator +"upPhoto"+ File.separator +"photo"+ File.separator +  originalFilename;
+        String photoFilePath = request.getSession().getServletContext().getRealPath("photoUpload/");
 
         //得到缩略图的文件路径，例：xxx_small.jpg
         String thumbnailFilename=originalFilename.split("\\.",2)[0]+"_small."
                                                     +originalFilename.split("\\.",2)[1];
         //缩略图上传到服务器的文件路径
-        String thumbnailFilePath= excelPath+File.separator+"test"+ File.separator +"thumbnail"+File.separator +thumbnailFilename;
+        String thumbnailFilePath=File.separator+"upPhoto"+ File.separator +"thumbnail"+File.separator +thumbnailFilename;
 
         //新建原图文件
         File photoFile = new File(photoFilePath);
@@ -121,12 +121,12 @@ public class UploaderController {
             photo.setSize(file.getSize());
 
             //设置图片所有者
-//            photo.setUserId(Integer.valueOf(request.getCookies().toString()));    *******************************
+//            photo.setUserId(Integer.valueOf(request.getCookies("Uid").toString()));    *******************************
             photo.setUserId(1);
 
-            //设置图片原图和缩略图的相对路径
-            photo.setPhotoPath("/photo/"+photoFilePath);
-            photo.setThumbnailPath("/photo/"+thumbnailFilePath);
+            //设置图片原图和缩略图的本地路径   *******************************
+            photo.setPhotoPath(photoFilePath);
+            photo.setThumbnailPath(thumbnailFilePath);
 
             //新建albumPhoto对象
             AlbumPhoto albumPhoto = new AlbumPhoto();

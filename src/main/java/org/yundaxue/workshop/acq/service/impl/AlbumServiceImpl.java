@@ -29,19 +29,20 @@ public class AlbumServiceImpl implements AlbumService{
     }
 
     @Override
-    public void updateAlbum(int albumId, String albumName) throws Exception {
-        albumMapper.updateAlbum(albumId,albumName);
+    public boolean updateAlbum(String albumName,int albumId) throws Exception {
+        return albumMapper.updateAlbum(albumName,albumId);
     }
+
 
     @Override
     public Album getAlbum(int albumId) throws Exception {
         return albumMapper.getAlbum(albumId);
     }
 
-    @Override
-    public void searchAlbum(int userId,String albumName) throws Exception{
-        albumMapper.searchAlbum(userId,albumName);
-    }
+    /*@Override
+    public void showAlbum(int userId,String albumName) throws Exception{
+        albumMapper.showAlbum(userId,albumName);
+    }*/
 
     //——峰
     @Override

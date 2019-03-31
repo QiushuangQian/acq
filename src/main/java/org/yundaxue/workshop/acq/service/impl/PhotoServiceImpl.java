@@ -23,8 +23,8 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public String listPhoto(int userId) throws Exception {
-        return photoMapper.listPhoto(userId);
+    public String showPhoto(int userId) throws Exception {
+        return photoMapper.showPhoto(userId);
     }
 
     @Override
@@ -32,4 +32,9 @@ public class PhotoServiceImpl implements PhotoService {
         return photoMapper.getPhoto(photoId);
     }
 
+
+    @Override
+    public List<Photo> photoList(int albumId) throws Exception {
+        return photoMapper.listPhoto(albumId);
+    }
 }

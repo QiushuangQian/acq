@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 //import org.yundaxue.workshop.acq.config.Mytoken;
 import org.yundaxue.workshop.acq.model.Album;
@@ -57,7 +56,7 @@ public class AlbumController {
         List<Album> AlbumList = albumService.albumList(uid);
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("albumList",AlbumList);
-        return "/deleteAlbum";
+        return "setAlbum";
     }
 
 
@@ -69,5 +68,12 @@ public class AlbumController {
         //接收前端选中的相册id
         int selectedId = Integer.parseInt(request.getParameter("selected"));
         return albumService.deleteAlbum(selectedId);
+    }
+
+    @RequestMapping(value = "/album/changeAlbumName")
+    public boolean changeAlbumName(ModelMap model,HttpServletRequest request,HttpServletResponse response) throws Exception{
+        int selectedId = Integer.parseInt(request.getParameter("selected"));
+        String newName = request.getParameter("newName");
+        return albumService.updateAlbum(newName,selectedId);
     }
 }
