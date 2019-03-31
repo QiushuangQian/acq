@@ -59,13 +59,13 @@ public class UploaderController {
 
         //上传后得到的文件名，前0-13位为创建时间
         String photoFileName = FileUpload.writeUploadFile(file,"photo",uid);
-//        String thumbnailFileName = photoFileName.substring(0,photoFileName.lastIndexOf("."));
+        //得到缩略图的文件名（去除拓展名）
+        String thumbnailFileName = photoFileName.substring(0,photoFileName.lastIndexOf("."));
 
-                //原图上传到服务器的文件路径
+        //原图上传到服务器的文件路径
         String photoFilePath = ConfigClass.ImgsSavePath +"photo\\" +  photoFileName;
-//        //缩略图上传到服务器的文件路径
-//        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\"  +  thumbnailFileName;
-        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\";
+        //缩略图上传到服务器的文件路径
+        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\"  +  thumbnailFileName;
 
         //新建缩略图文件路径
         File thumbnailFile=new File(thumbnailFilePath);
@@ -74,10 +74,7 @@ public class UploaderController {
             thumbnailFile.getParentFile().mkdirs();
         }
 
-
         if (photoFileName!=null && !photoFileName.equals("格式错误！")) {   //创建文件成功
-
-
             //保存缩略图
             Thumbnails.of(photoFilePath)
                     //设置图片大小
@@ -89,9 +86,10 @@ public class UploaderController {
             Photo photo=new Photo();
 
             //设置图片上传时间
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-           // Date createTime = df.parse(photoFileName.substring(13));    //格式化前14位
-            photo.setUploadTime(new Date());
+            DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date createTime = df.parse(photoFileName.substring(13));    //格式化前14位
+//            photo.setUploadTime(new Date());
+            photo.setUploadTime(createTime);
 
             //设置图片类型
             String typeName = photoFileName.substring(photoFileName.lastIndexOf("\\.")+1);
@@ -101,22 +99,23 @@ public class UploaderController {
             else if(typeName.equals("bmp")) type=2;
             else if(typeName.equals("png")) type=3;
             photo.setType(type);
+
             //设置图片大小
             photo.setSize(file.getSize());
 
             //设置图片所有者
             photo.setUserId(uid);
 
-            //设置图片原图和缩略图的路径   *******************************
+            //设置图片原图和缩略图的路径
             photo.setPhotoPath(photoFilePath);
-//            photo.setThumbnailPath(thumbnailFilePath);
+            photo.setThumbnailPath(thumbnailFilePath+".jpg");
 
             //新建albumPhoto对象
             AlbumPhoto albumPhoto = new AlbumPhoto();
             //将图片信息保存到数据库photo表,同时返回photoId
             photoService.uploadPhoto(photo);
             albumPhoto.setPhotoId(photo.getPhotoId());
-            //得到选中的相册的Id    *********************************************************
+            //得到选中的相册的Id
             albumPhoto.setAlbumId(Integer.parseInt(selectedAlbumId));
             //将得到的albumPhoto对象插入到album_photo表中
             albumPhotoService.insertAlbumPhoto(albumPhoto);
