@@ -26,7 +26,7 @@ public interface PhotoMapper {
 
     //删除照片
     @Update("update photo set del_state=0 where photo_id=#{photoId},user_id=#{userId}")
-    public int deletePhoto(@Param("photoId") int photoId,@Param("userId") int userId);
+    public boolean deletePhoto(@Param("photoId") int photoId,@Param("userId") int userId);
 
     //封禁照片
     @Update("update photo set ban_state=0 where photo_id=#{photoId},user_id=#{userId}")
