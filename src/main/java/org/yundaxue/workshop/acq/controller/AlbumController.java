@@ -38,9 +38,9 @@ public class AlbumController {
     @ResponseBody
     public Map<String,Object> doCreateAlbum(Album album, ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception{
         Map<String,Object> r = new HashMap<>();
-        session.setAttribute("userId",album.getUserId());
-        int userId = (int)request.getSession().getAttribute("userId");
-        album.setUserId(userId);//session获取
+        //session.setAttribute("userId",album.getUserId());
+        //int userId = (int)request.getSession().getAttribute("userId");
+        album.setUserId(1);//session获取
         if (albumService.insertAlbum(album))
         {
             r.put(album.getAlbumName(),album);

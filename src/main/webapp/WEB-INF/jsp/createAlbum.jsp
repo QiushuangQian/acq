@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>CreateAlbum</title>
-    <script src="/js/jquery/jquery-3.3.1.js"></script>
+    <script src="/js/jquery-3.3.1.js"></script>
 </head>
 <body>
 <div class = "body">
