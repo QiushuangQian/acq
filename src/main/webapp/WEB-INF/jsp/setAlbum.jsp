@@ -9,12 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>DeleteAlbum</title>
-    <script src="/js/jquery/jquery-3.3.1.js"></script>
+    <title>SetAlbum</title>
+    <script src="/js/jquery-3.3.1.js"></script>
 </head>
 <body>
 <script language="JavaScript">
-    var show= false;
+    var show= true;
 </script>
 <div class="selectAlbum">
     <select id="albumSelect" onchange="changeAlbum(this.value)">
@@ -24,12 +24,12 @@
         </c:forEach>
         </select>
     <input type="button" id="delete" value="删除">
-    <input type="button" id="changeAlbumName" value="修改相册名" onClick="if(!show){document.all('name').style.visibility='hidden';document.all('doChange').style.visibility='hidden';show=false;}
-    else{document.all('name').style.visibility='visible';document.all('doChange').style.visibility='hidden';show=true;}">
+    <input type="button" id="changeAlbumName" value="修改相册名" onClick="if(show){document.all('newName').style.visibility='visible';document.all('doChange').style.visibility='visible';show=false;}
+    else{document.all('newName').style.visibility='hidden';document.all('doChange').style.visibility='hidden';show=true;}">
 </div>
 <div class="setName">
-    <input type="text" name="name" id="newName" placeholder="给你的相册取个新名字">
-    <input type="button" id="doChange" value="修改">
+    <input type="text" id="newName" placeholder="给你的相册取个新名字" style="visibility: hidden">
+    <input type="button" id="doChange" value="修改" style="visibility: hidden">
 </div>
 
 <script>
@@ -40,7 +40,7 @@
     }
 
     jQuery(document).ready(function () {
-        $("#delete").on("click",function () {
+        $("#delete").on("click",function (){
             if($("#delete").hasClass("Deleting")){
                 return;
             }
@@ -68,36 +68,34 @@
 </script>
 
 <script>
-    //获取选中要修改的相册ID和相册的新名字
-    var selected;
-    var newName;
-    function changeAlbum() {
-        selected = $('#albumSelect option:selected').val();
-        newName = $('#newName').val();
-    }
-
     jQuery(document).ready(function () {
-        $("#delete").on("click",function () {
-            if($("#delete").hasClass("Deleting")){
+        $("#doChange").on("click",function () {
+            if($("#doChange").hasClass("Changing")){
                 return;
             }
-            $("#delete").addClass("Deleting");
-            $("#delete").val("相册删除中...");
+            $("#doChange").addClass("Changing");
+            $("#doChange").val("正在修改您的相册名");
+
+            //获取选中要修改的相册ID和相册的新名字
+            var selected = $('#albumSelect option:selected').val();
+            var newAlbumName = $('#newName').val();
 
             //传递参数到后端
-            var params = {"selected":selected};
             $.ajax({
                 type:"post",
-                url:"/album/doDeleteAlbum",
+                url:"/album/changeAlbumName",
                 dataType:"json",
-                data:params,
+                data:{
+                    "selected":selected,
+                    "newAlbumName":newAlbumName
+                },
                 success:function(){
-                    $("#delete").removeClass("Deleting");
-                    $("#delete").val("Deleted");
+                    $("#doChange").removeClass("Changing");
+                    $("#doChange").val("Changed");
                 },
                 error:function() {
-                    $("#delete").removeClass("Deleting");
-                    $("#delete").val("Delete");
+                    $("#doChange").removeClass("Changing");
+                    $("#doChange").val("Change");
                 }
             })
         })

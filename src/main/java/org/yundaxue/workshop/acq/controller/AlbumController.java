@@ -1,6 +1,5 @@
 package org.yundaxue.workshop.acq.controller;
 
-//import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +7,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-//import org.yundaxue.workshop.acq.config.Mytoken;
 import org.yundaxue.workshop.acq.model.Album;
 import org.yundaxue.workshop.acq.service.AlbumService;
 
@@ -48,21 +46,21 @@ public class AlbumController {
     }
 
     //用于打开deleteAlbum界面
-    @RequestMapping(value = "/album/deleteAlbum")
-    public String deleteAlbum(Model model,HttpServletRequest request,HttpServletResponse response) throws Exception {
+    @RequestMapping(value = "/album/setAlbum")
+    public String setAlbum(Model model,HttpServletRequest request,HttpServletResponse response) throws Exception {
         int uid = 1;
 
         //通过userId得到相册列表
         List<Album> AlbumList = albumService.albumList(uid);
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("albumList",AlbumList);
-        return "setAlbum";
+        return "/setAlbum";
     }
 
 
 
     //删除数据
-    @RequestMapping(value = "/album/doDeleteAlbum",method= RequestMethod.POST)
+    @RequestMapping(value = "/album/doDeleteAlbum",method=RequestMethod.POST)
     @ResponseBody
     public boolean doDeleteAlbum(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         //接收前端选中的相册id
@@ -70,10 +68,13 @@ public class AlbumController {
         return albumService.deleteAlbum(selectedId);
     }
 
-    @RequestMapping(value = "/album/changeAlbumName")
+    @RequestMapping(value = "/album/changeAlbumName",method=RequestMethod.POST)
+    @ResponseBody
     public boolean changeAlbumName(ModelMap model,HttpServletRequest request,HttpServletResponse response) throws Exception{
+        //接收前端选中的相册id
         int selectedId = Integer.parseInt(request.getParameter("selected"));
-        String newName = request.getParameter("newName");
+        //接收前端输入的新相册名
+        String newName = request.getParameter("newAlbumName");
         return albumService.updateAlbum(newName,selectedId);
     }
 }
