@@ -20,7 +20,7 @@ public interface PhotoMapper {
     public String getPhoto(@Param("photoId") int photoId);
 
     //插入照片，返回photoId——峰
-    @Insert("insert into photo(user_id,photo_type,size,upload_time,photo_path,thumbnail_path) values(#{photo.userId},#{photo.type},#{photo.size},#{photo.uploadTime,jdbcType=TIMESTAMP},#{photo.photoPath},#{photo.thumbnailPath)")
+    @Insert("insert into photo(user_id,photo_type,size,upload_time,photo_path,thumbnail_path) values(#{photo.userId},#{photo.type},#{photo.size},#{photo.uploadTime,jdbcType=TIMESTAMP},#{photo.photoPath},#{photo.thumbnailPath})")
     @Options(useGeneratedKeys=true,keyProperty="photoId")
     public void insertPhoto(@Param("photo") Photo photo);
 

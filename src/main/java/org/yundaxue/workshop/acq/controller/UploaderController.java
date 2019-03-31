@@ -87,9 +87,9 @@ public class UploaderController {
 
             //设置图片上传时间
             DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-            Date createTime = df.parse(photoFileName.substring(13));    //格式化前14位
-//            photo.setUploadTime(new Date());
-            photo.setUploadTime(createTime);
+//            Date createTime = df.parse(photoFileName.substring(13));    //格式化前14位
+            photo.setUploadTime(new Date());
+//            photo.setUploadTime(createTime);
 
             //设置图片类型
             String typeName = photoFileName.substring(photoFileName.lastIndexOf("\\.")+1);
