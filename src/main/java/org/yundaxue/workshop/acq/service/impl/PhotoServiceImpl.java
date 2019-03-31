@@ -6,6 +6,8 @@ import org.yundaxue.workshop.acq.model.Mapper.PhotoMapper;
 import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.service.PhotoService;
 
+import java.util.List;
+
 /**
  * Created by lenovo on 2019/3/27.
  */
@@ -18,5 +20,10 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public void uploadPhoto(Photo photo) {
         photoMapper.insertPhoto(photo);
+    }
+
+    @Override
+    public List<Photo> photoList(int albumId) throws Exception {
+        return photoMapper.listPhoto(albumId);
     }
 }
