@@ -6,7 +6,6 @@ import org.yundaxue.workshop.acq.ConfigClass;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,7 +29,13 @@ public class FileUpload {
             fileDir.mkdirs();
 
         //扩展名
-        String extname = filename.split("\\.",2)[1];
+        String extname;
+        int index = filename.lastIndexOf("\\.");
+        if(index==-1){
+            extname = "jpg";
+        }else {
+            extname  = filename.substring(index+1);
+        }
         String allowImgFormat = "gif,jpg,jpeg,png，bmp";
         if (!allowImgFormat.contains(extname.toLowerCase())) {
             return "格式错误！";
@@ -41,7 +46,7 @@ public class FileUpload {
         String a = sdf.format(new Date());
 
         //新文件名:创建时间+uid+初始文件名
-        String newFileName = a + uid + filename;
+        String newFileName = a + uid + Math.abs(file.getOriginalFilename().hashCode()) +  "." + extname;
         FileOutputStream fos = null;
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(realpath + newFileName));
@@ -52,6 +57,7 @@ public class FileUpload {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }finally {
         }
         return newFileName;
     }

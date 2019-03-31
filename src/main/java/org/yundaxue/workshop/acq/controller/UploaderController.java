@@ -1,5 +1,6 @@
 package org.yundaxue.workshop.acq.controller;
 
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.yundaxue.workshop.acq.service.PhotoService;
 import org.yundaxue.workshop.acq.util.FileUpload;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -57,39 +59,31 @@ public class UploaderController {
 
         //上传后得到的文件名，前0-13位为创建时间
         String photoFileName = FileUpload.writeUploadFile(file,"photo",uid);
-//        String thumbnailFileName = photoFileName.split("\\.")[0]+"_small."
-//                +photoFileName.split("\\.")[1];
-//        String thumbnailFileName = FileUpload.writeUploadFile(file,"thumbnail",uid);
+//        String thumbnailFileName = photoFileName.substring(0,photoFileName.lastIndexOf("."));
 
                 //原图上传到服务器的文件路径
         String photoFilePath = ConfigClass.ImgsSavePath +"photo\\" +  photoFileName;
 //        //缩略图上传到服务器的文件路径
-//        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\" +photoFileName;
-//
-//        //新建缩略图文件路径
-//        File thumbnailFile=new File(thumbnailFilePath);
-//        if(!thumbnailFile.exists()){
-//            //缩略图文件不存在就创建
-//            thumbnailFile.getParentFile().mkdirs();
-//        }
-//        try {
-//            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(thumbnailFile));
-//            bos.write(file.getBytes());
-//            bos.flush();
-//            bos.close();
-//        }catch (Exception e) {
-//            logger.error("【缩略图上传异常】：",e);
-//        }
+//        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\"  +  thumbnailFileName;
+        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\";
+
+        //新建缩略图文件路径
+        File thumbnailFile=new File(thumbnailFilePath);
+        if(!thumbnailFile.exists()){
+            //缩略图文件不存在就创建
+            thumbnailFile.getParentFile().mkdirs();
+        }
 
 
         if (photoFileName!=null && !photoFileName.equals("格式错误！")) {   //创建文件成功
 
-//            //保存缩略图
-//            Thumbnails.of(photoFilePath)
-//                    //设置图片大小
-//                    .size(300,200)
-//                    //输出到文件
-//                    .toFile(thumbnailFile);
+
+            //保存缩略图
+            Thumbnails.of(photoFilePath)
+                    //设置图片大小
+                    .size(300,200)
+                    //输出到文件
+                    .toFile(thumbnailFilePath);
 
             //定义photo对象
             Photo photo=new Photo();
@@ -100,16 +94,12 @@ public class UploaderController {
             photo.setUploadTime(new Date());
 
             //设置图片类型
-            String typeName = photoFileName.split("\\.",2)[1];
-            int type;
-            switch (typeName){
-                case "gif":type=0;break;
-                case "jpg":
-                case "jpeg":type=1;break;
-                case "bmp":type=2;break;
-                case "png":type=3;break;
-                default:type=-1;break;
-            }
+            String typeName = photoFileName.substring(photoFileName.lastIndexOf("\\.")+1);
+            int type = -1;
+            if(typeName.equals("gif"))  type=0;
+            else if(typeName.equals("jpg") || typeName.equals("jpeg")) type=1;
+            else if(typeName.equals("bmp")) type=2;
+            else if(typeName.equals("png")) type=3;
             photo.setType(type);
             //设置图片大小
             photo.setSize(file.getSize());
@@ -139,8 +129,6 @@ public class UploaderController {
         }
 
     }
-
-//    @RequestMapping(value = "/thumbnail")
 
 
 
