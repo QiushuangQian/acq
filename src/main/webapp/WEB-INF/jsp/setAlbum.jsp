@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>DeleteAlbum</title>
-    <script src="/js/jquery-3.3.1.js"></script>
+    <script src="/js/jquery/jquery-3.3.1.js"></script>
 </head>
 <body>
 <script language="JavaScript">

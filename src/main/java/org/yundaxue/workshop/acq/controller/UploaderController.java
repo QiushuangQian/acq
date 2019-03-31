@@ -1,6 +1,5 @@
 package org.yundaxue.workshop.acq.controller;
 
-import net.coobird.thumbnailator.Thumbnails;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,17 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.model.Album;
 import org.yundaxue.workshop.acq.model.AlbumPhoto;
 import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.service.AlbumPhotoService;
 import org.yundaxue.workshop.acq.service.AlbumService;
 import org.yundaxue.workshop.acq.service.PhotoService;
+import org.yundaxue.workshop.acq.util.FileUpload;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +29,8 @@ import java.util.List;
 @Controller
 public class UploaderController {
 
+    //        int uid = request.getSession().getAttribute("userId");
+    private int uid = 1;
     private static Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
@@ -41,10 +43,6 @@ public class UploaderController {
 
     @RequestMapping(value = "/upload")
     public String upload(Model model, HttpServletRequest request)throws Exception{
-        // 得到userId     *********************************************
-//        int uid = Integer.parseInt(request.getCookies()[0].getValue());
-        int uid = 1;
-
         //通过userId得到相册列表
         List<Album> AblumList = albumService.albumList(uid);
         //将指定用户的相册列表通过model传递给jsp页面
@@ -57,56 +55,52 @@ public class UploaderController {
     @ResponseBody
     public String doUpload(@RequestParam("selectedAlbumId") String selectedAlbumId,@RequestParam("file") MultipartFile file, HttpServletRequest request)throws Exception {
 
+        //上传后得到的文件名，前0-13位为创建时间
+        String photoFileName = FileUpload.writeUploadFile(file,"photo",uid);
+//        String thumbnailFileName = photoFileName.split("\\.")[0]+"_small."
+//                +photoFileName.split("\\.")[1];
+//        String thumbnailFileName = FileUpload.writeUploadFile(file,"thumbnail",uid);
+
+                //原图上传到服务器的文件路径
+        String photoFilePath = ConfigClass.ImgsSavePath +"photo\\" +  photoFileName;
+//        //缩略图上传到服务器的文件路径
+//        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\" +photoFileName;
+//
+//        //新建缩略图文件路径
+//        File thumbnailFile=new File(thumbnailFilePath);
+//        if(!thumbnailFile.exists()){
+//            //缩略图文件不存在就创建
+//            thumbnailFile.getParentFile().mkdirs();
+//        }
+//        try {
+//            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(thumbnailFile));
+//            bos.write(file.getBytes());
+//            bos.flush();
+//            bos.close();
+//        }catch (Exception e) {
+//            logger.error("【缩略图上传异常】：",e);
+//        }
 
 
-        //保存到数据库的路径
-        String photoPath=null;
-        String thumbnailPath=null;
-        //图片初始名，例：xxx.jpg
-        String originalFilename = file.getOriginalFilename();
-        //原图上传到服务器的文件路径
-//        String photoFilePath =File.separator +"upPhoto"+ File.separator +"photo"+ File.separator +  originalFilename;
-        String photoFilePath = request.getSession().getServletContext().getRealPath("photoUpload/");
+        if (photoFileName!=null && !photoFileName.equals("格式错误！")) {   //创建文件成功
 
-        //得到缩略图的文件路径，例：xxx_small.jpg
-        String thumbnailFilename=originalFilename.split("\\.",2)[0]+"_small."
-                                                    +originalFilename.split("\\.",2)[1];
-        //缩略图上传到服务器的文件路径
-        String thumbnailFilePath=File.separator+"upPhoto"+ File.separator +"thumbnail"+File.separator +thumbnailFilename;
-
-        //新建原图文件
-        File photoFile = new File(photoFilePath);
-        //新建缩略图文件
-        File thumbnailFile=new File(thumbnailFilePath);
-        if (!photoFile.exists()) {
-            //原图文件不存在就创建
-            photoFile.getParentFile().mkdirs();
-        }
-        if(!thumbnailFile.exists()){
-            //缩略图文件不存在就创建
-            thumbnailFile.getParentFile().mkdirs();
-        }
-        //创建文件是否成功标志
-        Date createFile = createFile(file,photoFile);
-        if (createFile!=null) {   //创建文件成功
-
-            //保存缩略图
-            Thumbnails.of(photoFilePath)
-                    //设置图片大小
-                    .size(300,200)
-                    //输出到文件
-                    .toFile(thumbnailFile);
+//            //保存缩略图
+//            Thumbnails.of(photoFilePath)
+//                    //设置图片大小
+//                    .size(300,200)
+//                    //输出到文件
+//                    .toFile(thumbnailFile);
 
             //定义photo对象
             Photo photo=new Photo();
 
             //设置图片上传时间
-
-            photo.setUploadTime(createFile);
-
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+           // Date createTime = df.parse(photoFileName.substring(13));    //格式化前14位
+            photo.setUploadTime(new Date());
 
             //设置图片类型
-            String typeName = originalFilename.split("\\.",2)[1];
+            String typeName = photoFileName.split("\\.",2)[1];
             int type;
             switch (typeName){
                 case "gif":type=0;break;
@@ -121,12 +115,11 @@ public class UploaderController {
             photo.setSize(file.getSize());
 
             //设置图片所有者
-//            photo.setUserId(Integer.valueOf(request.getCookies("Uid").toString()));    *******************************
-            photo.setUserId(1);
+            photo.setUserId(uid);
 
-            //设置图片原图和缩略图的本地路径   *******************************
+            //设置图片原图和缩略图的路径   *******************************
             photo.setPhotoPath(photoFilePath);
-            photo.setThumbnailPath(thumbnailFilePath);
+//            photo.setThumbnailPath(thumbnailFilePath);
 
             //新建albumPhoto对象
             AlbumPhoto albumPhoto = new AlbumPhoto();
@@ -139,31 +132,16 @@ public class UploaderController {
             albumPhotoService.insertAlbumPhoto(albumPhoto);
 
             return "上传成功！";
+        }else if(photoFileName.equals("格式错误！")) {
+            return "格式错误！";
         }else {
-            return "上传失败！";
+            return "上传错误！";
         }
 
     }
 
-    //创建文件，写文件
-    private Date createFile(MultipartFile file,File desFile) {
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(desFile));
-            bos.write(file.getBytes());
-            bos.flush();
-            bos.close();
-//            Date date = new Date();
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-//            String a = sdf.format(date);
-//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-//            Date createTime = df.parse(a);
-//            return createTime;
-            return new Date();
-        } catch (Exception e) {
-            logger.error("【文件上传异常】：",e);
-        }
-        return null;
-    }
+//    @RequestMapping(value = "/thumbnail")
+
 
 
 }

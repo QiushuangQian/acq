@@ -11,7 +11,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/css/webuploader.css" >
-    <script src="/js/jquery-3.3.1.js"></script>
+    <script src="/js/jquery/jquery-3.3.1.js"></script>
     <script src="/js/webuploader.js"></script>
 </head>
 <body>

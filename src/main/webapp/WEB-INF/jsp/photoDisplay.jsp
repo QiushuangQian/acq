@@ -10,7 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="/js/jquery/jquery-3.3.1.js"></script>
     <title>PhotoList</title>
     <script type="text/javascript">
         function showFile(name,downURL) {
