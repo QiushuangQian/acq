@@ -9,11 +9,7 @@ import org.yundaxue.workshop.acq.service.PhotoService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class PhotoController {
@@ -22,7 +18,7 @@ public class PhotoController {
     @Autowired
     HttpSession session;
 
-    @RequestMapping(value = "/photo/photoDisplay")
+    @RequestMapping(value = "/photo/photoDisplay" )
     public String photoDisplay(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         int userId=1;
         List<String> paths = photoService.showPhoto(userId);
@@ -32,7 +28,7 @@ public class PhotoController {
             fileNameMap.put(file.getName(),file);
         }*/
         model.addAttribute("pathList",paths);
-        return "/photoDisplay";
+        return "photoDisplay";
     }
 
     /*@RequestMapping(value = "/photo/download")

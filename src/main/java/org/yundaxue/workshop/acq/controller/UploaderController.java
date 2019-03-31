@@ -107,8 +107,8 @@ public class UploaderController {
             photo.setUserId(uid);
 
             //设置图片原图和缩略图的路径
-            photo.setPhotoPath(photoFilePath);
-            photo.setThumbnailPath(thumbnailFilePath+".jpg");
+            photo.setPhotoPath("/images/photo/"+photoFileName);
+            photo.setThumbnailPath("/images/thumbnail/"+thumbnailFileName+".JPEG");
 
             //新建albumPhoto对象
             AlbumPhoto albumPhoto = new AlbumPhoto();
