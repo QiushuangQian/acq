@@ -35,7 +35,7 @@
                     alert("相册名不能为空！");
                     return;
                 }
-
+                //传递参数
                 $.ajax({
                     type:"post",
                     url:"/album/doCreateAlbum",

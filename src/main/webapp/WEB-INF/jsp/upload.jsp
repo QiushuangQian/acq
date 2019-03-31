@@ -32,12 +32,11 @@
     </div>
     <script type="text/javascript">
         var selectedId;
-        function changeAlbum(selected) {
+        function changeAlbum() {
             selectedId= $('#albumSelect option:selected').val();
         }
 
         $(function () {
-
 
             var $ = jQuery,
                 $list = $('#fileList'),
