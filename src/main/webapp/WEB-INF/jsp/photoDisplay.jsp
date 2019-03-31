@@ -12,9 +12,9 @@
 <head>
     <script type="text/javascript" src="/js/jquery/jquery-3.3.1.js"></script>
     <title>PhotoList</title>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         function showFile(name,downURL) {
-            var path = "/images/"+name;
+            var path = "/photo/"+name;
             var html = "<img alt='暂无图片' src="+path+"  width='180px' onclick='showFile(this)'/>";
             var picture = realName(name);
             html+=picture+"<a href="+downURL+">下载</a><br\>";
@@ -33,18 +33,17 @@
             }
             return name;
         }
-    </script>
+    </script>-->
 </head>
 <body>
-<c:forEach var="me" items="${fileNameMap}">
-    <c:url value="/photo/download" var="downURL">
-        <c:param name="path" value="${me.value}"></c:param>
-    </c:url>
+<c:forEach var="paths" items="${pathList}">
+    <img src="${paths}" alt="">
+    <!--
     <script type="text/javascript">
     $(function () {
         showFile('${me.key}','${downURL}')
     })
-</script>
+</script>-->
 </c:forEach>
 </body>
 </html>

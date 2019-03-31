@@ -45,7 +45,7 @@ public class AlbumController {
         return r;
     }
 
-    //用于打开deleteAlbum界面
+    //用于打开setAlbum界面
     @RequestMapping(value = "/album/setAlbum")
     public String setAlbum(Model model,HttpServletRequest request,HttpServletResponse response) throws Exception {
         int uid = 1;

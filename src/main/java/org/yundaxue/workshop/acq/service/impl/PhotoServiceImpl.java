@@ -23,12 +23,12 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public String showPhoto(int userId) throws Exception {
+    public List<String> showPhoto(int userId) throws Exception {
         return photoMapper.showPhoto(userId);
     }
 
     @Override
-    public String getPhoto(int photoId) throws Exception {
+    public List<String> getPhoto(int photoId) throws Exception {
         return photoMapper.getPhoto(photoId);
     }
 

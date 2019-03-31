@@ -21,7 +21,6 @@ public interface AlbumMapper {
 	@Delete("delete from album where album_id=#{albumId}")
 	public boolean deleteAlbum(@Param("albumId") int albumId);
 
-
 	//修改相册名
 	@Update("update album set album_name = #{albumName} where album_id = #{albumId}")
 	public boolean updateAlbum(@Param("albumName") String albumName,@Param("albumId") int albumId);
@@ -33,7 +32,6 @@ public interface AlbumMapper {
 	//显示用户所有相册
 	@Select("select album_name from album where user_id=#{userId}")
 	public String  showAlbum(@Param("userId") int userId);
-
 
 	//根据userId查找得到相册列表——峰
 	@Select("select * from album where user_id=#{userId}")

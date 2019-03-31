@@ -9,10 +9,10 @@ public interface PhotoService {
     public void uploadPhoto(Photo photo) throws Exception;
 
     //显示照片列表
-    public String showPhoto(int userId) throws Exception;
+    public List<String> showPhoto(int userId) throws Exception;
 
     //显示照片
-    public String getPhoto(int photoId) throws Exception;
+    public List<String> getPhoto(int photoId) throws Exception;
 
     //根据相册Id得到照片列表
     public List<Photo> photoList(int albumId) throws Exception;
