@@ -37,4 +37,9 @@ public class PhotoServiceImpl implements PhotoService {
     public List<Photo> photoList(int albumId) throws Exception {
         return photoMapper.listPhoto(albumId);
     }
+
+    @Override
+    public boolean deletePhoto(int photoId, int userId) throws Exception {
+        return photoMapper.deletePhoto(photoId,userId);
+    }
 }
