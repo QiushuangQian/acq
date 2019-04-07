@@ -15,19 +15,30 @@
     </div>
     <div>
  <div style="margin-left: -830px">
-     <input type="button" value="上传照片" style="background-color: aqua">
-     <input type="button" value="创建相册" style="background-color: aqua">
+     <input id="upload" type="button" value="上传照片" style="background-color: aqua">
+     <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
      <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
  </div>
     </div>
 
 </div>
-<script>
+<script  type="text/javascript">
     $(function () {
         $("#recycleBin").on("click",function () {
             window.location.href="/recycleBin"
-            })
+        });
+
+
+        //上传照片——峰
+        $("#upload").on("click",function () {
+            window.location.href="/homepage/upload"
+        });
+
+        //创建相册——峰
+        $("#createAlbum").on("click",function () {
+            window.location.href="/homepage/createAlbum"
         })
+    });
 
 
 </script>

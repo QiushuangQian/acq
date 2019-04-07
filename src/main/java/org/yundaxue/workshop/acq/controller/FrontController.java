@@ -2,20 +2,12 @@ package org.yundaxue.workshop.acq.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.yundaxue.workshop.acq.exception.CatException;
-import org.yundaxue.workshop.acq.model.Album;
-import org.yundaxue.workshop.acq.model.AlbumPhoto;
 import org.yundaxue.workshop.acq.model.User;
-import org.yundaxue.workshop.acq.service.AlbumPhotoService;
-import org.yundaxue.workshop.acq.service.AlbumService;
 import org.yundaxue.workshop.acq.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,15 +20,16 @@ import java.util.Map;
  */
 @Controller
 public class FrontController {
-@Autowired
+	@Autowired
 	UserService userService;
-//打开login页面
-@RequestMapping(value = "/user/login")
+
+
+	//打开login页面
+	@RequestMapping(value = "/user/login")
 	public String show(ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
 	return "/login";
-
-}
-//打开homepage页面
+	}
+	//打开homepage页面
 	@RequestMapping(value = "/homepage")
 	public String homePage(ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
 		return "/homepage";
@@ -46,8 +39,21 @@ public class FrontController {
 	public String recycleBins(ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
 		return "/recycleBin";
 	}
+	//打开上传页面——峰
+	@RequestMapping(value = "/homepage/upload")
+	public String upload(HttpServletRequest request)throws Exception{
+		return "redirect:/upload";
+	}
+	//打开创建相册页面——峰
+	@RequestMapping(value = "/homepage/createAlbum")
+	public String createAlbum(HttpServletRequest request)throws Exception{
+		return "redirect:/album/createAlbum";
+	}
+
+
+
 	//返回登录信息
-@RequestMapping(value = "/user/doLogin")
+	@RequestMapping(value = "/user/doLogin")
 	@ResponseBody
 	public Map<String,Object> doLogin(User user,ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
 

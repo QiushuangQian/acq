@@ -11,8 +11,10 @@
 <head>
     <title>上传</title>
     <link rel="stylesheet" type="text/css" href="/css/webuploader.css" >
-    <script src="/js/jquery/jquery-3.3.1.js"></script>
-    <script src="/js/webuploader.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/bootstarp.css" >
+    <script type="text/javascript" src="/js/jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="/js/webuploader.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div>
@@ -24,11 +26,12 @@
             </c:forEach>
         </select>
     </div><br>
-    <div id="uploader-demo">
+    <div id="uploader-demo" style="overflow: auto; width: 800px;height: 300px;">
         <div id="fileList" class="uploader-list"></div>
     </div><br>
     <div>
         <div id="filePicker">选择图片</div>
+        <button id="ctlBtn" class="btn btn-default">开始上传</button>
     </div>
     <script type="text/javascript">
         var selectedId;
@@ -49,12 +52,13 @@
 
                 // Web Uploader实例
                 uploader;
+            var $btn =$("#ctlBtn");	 //开始上传
 
             // 初始化Web Uploader
             uploader = WebUploader.create({
 
                 // 自动上传。
-                auto: true,
+                auto: false,
 
                 // swf文件路径
                 swf:'/js/Uploader.swf',
@@ -99,12 +103,14 @@
                     $img.attr( 'src', src );
                 }, thumbnailWidth, thumbnailHeight );
 
+                uploader.refresh(); // 重新实例化
+
             });
 
             //传递选择的相册Id
             uploader.on('uploadBeforeSend',function (obj,data,headers) {
                 data.selectedAlbumId=selectedId;
-            })
+            });
 
             // 文件上传过程中创建进度条实时显示。    uploadProgress事件：上传过程中触发，携带上传进度
             uploader.on( 'uploadProgress', function( file, percentage ) {
@@ -149,8 +155,16 @@
                 uploader.refresh(); // 重新实例化
             });
 
+            $btn.on( 'click', function() {
+                console.log("上传...");
+                uploader.upload();
+                console.log("上传成功");
 
-        })
+            });
+
+
+
+        });
     </script>
 </body>
 </html>
