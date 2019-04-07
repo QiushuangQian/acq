@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>上传</title>
     <link rel="stylesheet" type="text/css" href="/css/webuploader.css" >
     <script src="/js/jquery/jquery-3.3.1.js"></script>
     <script src="/js/webuploader.js"></script>

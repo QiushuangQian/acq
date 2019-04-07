@@ -14,14 +14,14 @@
 </head>
 <body>
 <div><img src="/images/loginLogo.png"></div>
-<div>昵称：<input type="text" id="nickName"></div>
-<div>密码：<input type="password" id="password"></div>
-<div>邮箱：<input type="email" id="email"></div>
+<div>昵  称：<input type="text" id="nickName"></div>
+<div>密  码：<input type="password" id="password"></div>
+<div>邮  箱：<input type="email" id="email"></div>
 <div>验证码：<input type="text" id="idCode"><input type="button" id="sendMail" value="发送验证邮件"></div>
 <%--<div><input type="checkbox" value="已阅读并接受" id="agree"><a href="#" id="agreement">猫爪相册注册协议</a> </div>--%>
-<div><input type="button" id="register" value="注册"></div>
-<div>----------------使用第三方注册-----------------</div>
-<div><img src="/images/qqLogo.png" id="qq"><img src="/images/wechatLogo.png" id="wechat"></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="register" value="注册"></div>
+<%--<div>----------------使用第三方注册-----------------</div>--%>
+<%--<div><img src="/images/qqLogo.png" id="qq"><img src="/images/wechatLogo.png" id="wechat"></div>--%>
 <script>
     $(function () {
         //发送验证邮件
