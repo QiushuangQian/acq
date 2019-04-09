@@ -61,11 +61,14 @@ public class UploaderController {
         String photoFileName = FileUpload.writeUploadFile(file,"photo",uid);
         //得到缩略图的文件名（去除拓展名）
         String thumbnailFileName = photoFileName.substring(0,photoFileName.lastIndexOf("."));
+        //得到后缀
+        String exname = photoFileName.substring(photoFileName.lastIndexOf(".")+1);
+
 
         //原图上传到服务器的文件路径
         String photoFilePath = ConfigClass.ImgsSavePath +"photo\\" +  photoFileName;
         //缩略图上传到服务器的文件路径
-        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\"  +  thumbnailFileName;
+        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\"  +  thumbnailFileName + "." + exname;
 
         //新建缩略图文件路径
         File thumbnailFile=new File(thumbnailFilePath);
@@ -78,7 +81,7 @@ public class UploaderController {
             //保存缩略图
             Thumbnails.of(photoFilePath)
                     //设置图片大小
-                    .size(300,200)
+                    .size(1000,200)
                     //输出到文件
                     .toFile(thumbnailFilePath);
 
@@ -92,7 +95,7 @@ public class UploaderController {
 //            photo.setUploadTime(createTime);
 
             //设置图片类型
-            String typeName = photoFileName.substring(photoFileName.lastIndexOf("\\.")+1);
+            String typeName = exname.toLowerCase();
             int type = -1;
             if(typeName.equals("gif"))  type=0;
             else if(typeName.equals("jpg") || typeName.equals("jpeg")) type=1;
@@ -108,7 +111,7 @@ public class UploaderController {
 
             //设置图片原图和缩略图的路径
             photo.setPhotoPath("/images/photo/"+photoFileName);
-            photo.setThumbnailPath("/images/thumbnail/"+thumbnailFileName+".JPEG");
+            photo.setThumbnailPath("/images/thumbnail/"+thumbnailFileName+ "." + exname);
 
             //新建albumPhoto对象
             AlbumPhoto albumPhoto = new AlbumPhoto();

@@ -14,7 +14,8 @@
 </head>
 <body>
 <c:forEach var="paths" items="${pathList}">
-    <img src="<%=request.getContextPath()%>/${paths}" alt="">
+    <img src="<%=request.getContextPath()%>${paths}" alt="">
 </c:forEach>
+<img src="<%=request.getContextPath()%>/images/photo/201904062017261980965492.jpg">
 </body>
 </html>

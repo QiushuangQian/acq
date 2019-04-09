@@ -14,11 +14,11 @@
        <div style="margin-right: -760px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"   placeholder="搜索照片"></div>
     </div>
     <div>
- <div style="margin-left: -830px">
-     <input id="upload" type="button" value="上传照片" style="background-color: aqua">
-     <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
-     <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
- </div>
+         <div style="margin-left: -830px">
+             <input id="upload" type="button" value="上传照片" style="background-color: aqua">
+             <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
+             <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
+         </div>
     </div>
 
 </div>

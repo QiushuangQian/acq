@@ -30,12 +30,13 @@ public class FileUpload {
 
         //扩展名
         String extname;
-        int index = filename.lastIndexOf("\\.");
-        if(index==-1){
-            extname = "jpg";
-        }else {
-            extname  = filename.substring(index+1);
-        }
+        extname=filename.substring(filename.lastIndexOf(".")+1);
+//        int index = filename.lastIndexOf("\\.");
+//        if(index==-1){
+//            extname = "jpg";
+//        }else {
+//            extname  = filename.substring(index+1);
+//        }
         String allowImgFormat = "gif,jpg,jpeg,png，bmp";
         if (!allowImgFormat.contains(extname.toLowerCase())) {
             return "格式错误！";
