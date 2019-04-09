@@ -14,6 +14,10 @@ public interface PhotoMapper {
 
     @Select("select * from photo where user_id=#{userId}")
     public List<Photo> listPhoto(@Param("userId") int userId);
+    //分页得到照片
+//    @Select("select * from photo where user_id=#{userId} limit (#{pagenum}-1)*#{maxnum},#{maxnum}")
+    @Select("select * from photo where user_id=#{userId} limit #{index},#{maxnum}")
+    public List<Photo> photoList(@Param("index") int index, @Param("maxnum") int maxnum,@Param("userId") int userId);
 
     //显示照片
     @Select("select photo_path from photo where photo_id=#{photoId}")

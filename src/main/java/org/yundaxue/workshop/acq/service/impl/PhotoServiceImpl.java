@@ -42,4 +42,10 @@ public class PhotoServiceImpl implements PhotoService {
     public boolean deletePhoto(int photoId, int userId) throws Exception {
         return photoMapper.deletePhoto(photoId,userId);
     }
+
+    @Override
+    public List<Photo> photoList(int pagenum, int maxnum,int userId) throws Exception {
+        int index = (pagenum-1)*maxnum;
+        return photoMapper.photoList(index, maxnum, userId);
+    }
 }
