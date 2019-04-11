@@ -13,7 +13,6 @@ import org.yundaxue.workshop.acq.service.PhotoService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +33,8 @@ public class PhotoController {
 //        int userId = request.getSession().getAttribute("userId");
         int userId = 1;
         //按页数得到照片列表的字符串表示
-        List<String> list = getPhotoList(1,maxnum,userId);
+//        List<String> list = getPhotoList(1,maxnum,userId);
+        List<Photo> list = photoService.photoList(1, maxnum, userId);
 
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("initial",list);
@@ -57,23 +57,23 @@ public class PhotoController {
         resultMap.put("result",true);
 
         //按页数得到照片列表的字符串表示
-        List<String> list1 = getPhotoList(Integer.parseInt(pagenum),maxnum,userId);
-
-        resultMap.put("photoList",list1);
+//        List<String> list1 = getPhotoList(Integer.parseInt(pagenum),maxnum,userId);
+//        resultMap.put("photoList",list1);
+        resultMap.put("photoList",photoService.photoList(Integer.parseInt(pagenum), maxnum, userId));
         return resultMap;
     }
 
-    public List<String> getPhotoList(int pagenum,int maxnum,int userId)throws Exception{
-        List<String> result = new ArrayList<String>();
-        //得到照片列表
-        List<Photo> list2 = photoService.photoList(pagenum, maxnum, userId);
-        //改写成htm语句
-        for(Photo p:list2){
-            result.add(p.getThumbnailPath());
-        }
-
-        return result;
-    }
+//    public List<Photo> getPhotoList(int pagenum,int maxnum,int userId)throws Exception{
+//        List<String> result = new ArrayList<String>();
+//        //得到照片列表
+//        List<Photo> list2 = photoService.photoList(pagenum, maxnum, userId);
+//        //改写成htm语句
+//        for(Photo p:list2){
+//            result.add(p.getThumbnailPath());
+//        }
+//
+//        return result;
+//    }
 
     @RequestMapping(value = "/photo/photoDisplay" )
     public String photoDisplay(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
