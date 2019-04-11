@@ -69,12 +69,8 @@ public class PhotoController {
         List<Photo> list2 = photoService.photoList(pagenum, maxnum, userId);
         //改写成htm语句
         for(Photo p:list2){
-            result.add("<img src='"+ p.getThumbnailPath() +"' alt=''>");
+            result.add(p.getThumbnailPath());
         }
-
-//        for(String t:result){
-//            System.out.println(t);
-//        }
 
         return result;
     }
