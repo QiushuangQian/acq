@@ -13,24 +13,65 @@
     <script src="/js/jquery/jquery-3.3.1.js"></script>
 </head>
 <body>
+
+<div style="text-align: center">
+    <div>
+        <img src="/photo/4.png" >
+    </div>
+    <div style="text-align: center">
+        <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
+    </div>
+    <div>
+        <div style="margin-left: -830px">
+            <input id="upload" type="button" value="上传照片" style="background-color: aqua">
+            <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
+            <input id="back" type="button" value="返回" style="background-color: aqua">
+            <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
+        </div>
+    </div>
+    <div class="selectAlbum">
+        <select id="albumSelect" onchange="changeAlbum(this.value)">
+            <option value="0" selected="selected">请选择相册</option>
+            <c:forEach var="album1" items="${albumList}">
+                <option value="${album1.albumId}">${album1.albumName}</option>
+            </c:forEach>
+        </select>
+        <input type="button" id="delete" value="删除">
+        <input type="button" id="changeAlbumName" value="修改相册名" onClick="if(show){document.all('newName').style.visibility='visible';document.all('doChange').style.visibility='visible';show=false;}
+    else{document.all('newName').style.visibility='hidden';document.all('doChange').style.visibility='hidden';show=true;}">
+    </div>
+    <div class="setName">
+        <input type="text" id="newName" placeholder="给你的相册取个新名字" style="visibility: hidden">
+        <input type="button" id="doChange" value="修改" style="visibility: hidden">
+    </div>
+</div>
+<script  type="text/javascript">
+    $(function () {
+        $("#recycleBin").on("click",function () {
+            window.location.href="/recycleBin"
+        });
+
+        $("#back").on("click",function(){
+            window.location.href="/homepage"
+        });
+
+        //上传照片——峰
+        $("#upload").on("click",function () {
+            window.location.href="/homepage/upload"
+        });
+
+        //创建相册——峰
+        $("#createAlbum").on("click",function () {
+            window.location.href="/homepage/createAlbum"
+        })
+    });
+
+
+</script>
 <script language="JavaScript">
     var show= true;
 </script>
-<div class="selectAlbum">
-    <select id="albumSelect" onchange="changeAlbum(this.value)">
-        <option value="0" selected="selected">请选择相册</option>
-        <c:forEach var="album1" items="${albumList}">
-        <option value="${album1.albumId}">${album1.albumName}</option>
-        </c:forEach>
-        </select>
-    <input type="button" id="delete" value="删除">
-    <input type="button" id="changeAlbumName" value="修改相册名" onClick="if(show){document.all('newName').style.visibility='visible';document.all('doChange').style.visibility='visible';show=false;}
-    else{document.all('newName').style.visibility='hidden';document.all('doChange').style.visibility='hidden';show=true;}">
-</div>
-<div class="setName">
-    <input type="text" id="newName" placeholder="给你的相册取个新名字" style="visibility: hidden">
-    <input type="button" id="doChange" value="修改" style="visibility: hidden">
-</div>
+
 
 <script>
     //获取选中要删除的相册ID

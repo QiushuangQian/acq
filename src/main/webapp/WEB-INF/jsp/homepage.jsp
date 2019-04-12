@@ -17,6 +17,7 @@
          <div style="margin-left: -830px">
              <input id="upload" type="button" value="上传照片" style="background-color: aqua">
              <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
+             <input id="setAlbum" type="button" value="管理相册" style="background-color: aqua">
              <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
          </div>
     </div>
@@ -37,9 +38,12 @@
         //创建相册——峰
         $("#createAlbum").on("click",function () {
             window.location.href="/homepage/createAlbum"
-        })
-    });
+        });
 
+    $("#setAlbum").on("click",function () {
+        window.location.href="/album/setAlbum"
+    })
+    });
 
 </script>
 </body>

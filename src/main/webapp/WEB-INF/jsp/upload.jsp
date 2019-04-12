@@ -11,12 +11,27 @@
 <head>
     <title>上传</title>
     <link rel="stylesheet" type="text/css" href="/css/webuploader.css" >
-    <link rel="stylesheet" type="text/css" href="/css/bootstarp.css" >
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" >
     <script type="text/javascript" src="/js/jquery/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="/js/webuploader.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div style="text-align: center">
+    <div>
+        <img src="/photo/4.png" >
+    </div>
+    <div style="text-align: center">
+        <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
+    </div>
+    <div>
+        <div style="margin-left: -830px">
+            <input id="upload" type="button" value="上传照片" style="background-color: aqua">
+            <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
+            <input id="back" type="button" value="返回" style="background-color: aqua">
+            <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
+        </div>
+    </div>
     <div>
         <label>上传到</label>&nbsp;
         <select id="albumSelect" onchange="changeAlbum(this.value)">
@@ -33,6 +48,31 @@
         <div id="filePicker">选择图片</div>
         <button id="ctlBtn" class="btn btn-default">开始上传</button>
     </div>
+</div>
+<script  type="text/javascript">
+    $(function () {
+        $("#recycleBin").on("click",function () {
+            window.location.href="/recycleBin"
+        });
+
+        $("#back").on("click",function(){
+            window.location.href="/homepage"
+        });
+
+        //上传照片——峰
+        $("#upload").on("click",function () {
+            window.location.href="/homepage/upload"
+        });
+
+        //创建相册——峰
+        $("#createAlbum").on("click",function () {
+            window.location.href="/homepage/createAlbum"
+        })
+    });
+
+
+</script>
+
     <script type="text/javascript">
         var selectedId;
         function changeAlbum() {

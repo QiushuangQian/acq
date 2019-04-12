@@ -6,9 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.yundaxue.workshop.acq.model.Album;
+import org.yundaxue.workshop.acq.service.AlbumPhotoService;
 import org.yundaxue.workshop.acq.service.AlbumService;
+import org.yundaxue.workshop.acq.service.PhotoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +24,10 @@ import java.util.Map;
 public class AlbumController {
     @Autowired
     AlbumService albumService;
+    AlbumPhotoService albumPhotoService;
     @Autowired
     HttpSession session;
+    private int maxnum = 10;
 
     //用于打开createAlbum界面
     @RequestMapping(value = "/album/createAlbum")
@@ -76,5 +81,38 @@ public class AlbumController {
         //接收前端输入的新相册名
         String newName = request.getParameter("newAlbumName");
         return albumService.updateAlbum(newName,selectedId);
+    }
+
+    @RequestMapping(value = "/albumPhotoList")
+    @ResponseBody
+    public Map<String,Object> photoList(@RequestParam("pagenum") String pagenum , HttpServletRequest request) throws Exception{
+        //得到用户Id
+//        int userId = request.getSession().getAttribute("userId");
+        int userId = 1;
+        int albumId = 1;
+
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        if(pagenum == null){
+            resultMap.put("result", false);
+            return resultMap;
+        }
+        resultMap.put("result",true);
+
+        //按页数得到照片列表的字符串表示
+//        List<String> list1 = getPhotoList(Integer.parseInt(pagenum),maxnum,userId);
+//        resultMap.put("photoList",list1);
+        resultMap.put("photoList",albumPhotoService.getPhotoList(Integer.parseInt(pagenum), maxnum,albumId,userId));
+
+        return resultMap;
+    }
+
+    //显示该相册照片
+    @RequestMapping(value = "/album/albumPhotoShow")
+    public String albumPhotoShow(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int userId=1;
+        int albumId=1;
+        List<String> photoPath = albumPhotoService.showPhoto(albumId,userId);
+        model.addAttribute("pathList",photoPath);
+        return "albumPhotoShow";
     }
 }
