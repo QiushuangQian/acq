@@ -110,8 +110,8 @@ public class AlbumController {
     @RequestMapping(value = "/album/albumPhotoShow")
     public String albumPhotoShow(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         int userId=1;
-        int albumId=1;
-        List<String> photoPath = albumPhotoService.showPhoto(albumId,userId);
+        int selectedId = Integer.parseInt(request.getParameter("selected"));
+        List<String> photoPath = albumPhotoService.showPhoto(selectedId,userId);
         model.addAttribute("pathList",photoPath);
         return "albumPhotoShow";
     }
