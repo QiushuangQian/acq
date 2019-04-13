@@ -62,7 +62,7 @@ public class FrontController {
 	}
 	@RequestMapping(value = "/doRecycleBin")
 	@ResponseBody
-	public Map<String,String> doRecycleBin(@RequestParam("delPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
+	public Map<String,String> doRecycleBin(@RequestParam("selectPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
 
 		int userId=((User)request.getSession().getAttribute("USER")).getUserId();
 		Map<String,String> resultMap = new HashMap<String, String>();
@@ -96,16 +96,24 @@ public class FrontController {
  //恢复照片
 	@RequestMapping(value = "/restorePhoto")
 	@ResponseBody
-	public Map<String,String> doRecycleBins(@RequestParam("delPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
+	public Map<String,String> doRecycleBins(@RequestParam("selectPhotoList") String selectPhotoList , HttpServletRequest request) throws Exception {
 
 		int userId = ((User) request.getSession().getAttribute("USER")).getUserId();
 		Map<String, String> resultMap = new HashMap<String, String>();
 
-		//得到要删除照片id的列表
-		String[] arrayA = delPhotoList.split(",");
+		//得到要恢复照片id的列表
+		String[] arrayA = selectPhotoList.split(",");
 		for (int i = 0; i < arrayA.length; i++) {
-			int delPhotoId = Integer.parseInt(arrayA[i]);
+			int restorePhotoId = Integer.parseInt(arrayA[i]);
+			//修改照片状态
+			boolean restoreResult = photoService.restorePhoto(restorePhotoId,userId);
+			if(restoreResult){
+				resultMap.put("msg","success");
+			}else {
+				resultMap.put("msg","fail");
+			}
 		}
+		return resultMap;
 	}
 		//打开上传页面——峰
 	@RequestMapping(value = "/homepage/upload")

@@ -39,8 +39,8 @@ public interface PhotoMapper {
     @Delete("delete from photo where photo_id=#{photoId} and user_id=#{userId}")
     public boolean completeDeletePhoto(@Param("photoId") int photoId,@Param("userId") int userId);
     //恢复照片
-    @Update("update photo set ban_state=0 where photo_id=#{photoId} and user_id=#{userId}")
-    public int restorePhoto(@Param("photoId") int photoId,@Param("userId") int userId);
+    @Update("update photo set del_state=1 where photo_id=#{photoId} and user_id=#{userId}")
+    public boolean restorePhoto(@Param("photoId") int photoId,@Param("userId") int userId);
 
 
 
