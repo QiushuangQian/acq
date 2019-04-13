@@ -2,12 +2,12 @@ package org.yundaxue.workshop.acq.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.exception.CatException;
 import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.model.User;
@@ -16,11 +16,10 @@ import org.yundaxue.workshop.acq.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 
 /**
  * Created by 耿志强 on 2019/3/17.
@@ -63,16 +62,35 @@ public class FrontController {
 	public String doRecycleBin(@RequestParam("delPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
 
 		int userId=((User)request.getSession().getAttribute("USER")).getUserId();
+		Map<String,String> resultMap = new HashMap<String, String>();
 
 		//得到要删除照片id的列表
 		String[] arrayA = delPhotoList.split(",");
 		for (int i = 0; i < arrayA.length; i++) {
 			int delPhotoId=Integer.parseInt(arrayA[i]);
-			photoService.completeDeletePhoto(delPhotoId,userId);
-		}
-		return "success";
+			//删除服务器中的图片
+			//得到删除照片的路径
+			List<Photo> photo=photoService.getPhotoById(delPhotoId,userId);
+			if(photo.size()>0){
+				for (Photo p:photo) {
+					String photoPath=p.getPhotoPath();
 
-	}
+					String thumbnailPath=p.getThumbnailPath();
+					File photoFile=new File(ConfigClass.ImgsSavePath+photoPath);
+					File thumbnailFile=new File(ConfigClass.ImgsSavePath+thumbnailPath);
+					photoFile.delete();
+					thumbnailFile.delete();
+				}
+				//删除数据库中的记录
+				photoService.completeDeletePhoto(delPhotoId,userId);
+				resultMap.put("msg","success");
+			}else {
+				resultMap.put("msg","fail");
+			}
+		}
+		return resultMap;
+
+}
 
 		//打开上传页面——峰
 	@RequestMapping(value = "/homepage/upload")

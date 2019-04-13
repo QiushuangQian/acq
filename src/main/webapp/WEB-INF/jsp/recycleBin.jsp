@@ -53,7 +53,7 @@ $("#delete").on("click",function () {
             "delPhotoList":idstr
         },
         success:function (result) {
-            window.location.href="/recycleBin"
+            window.location.reload();
         }
     })
 })
