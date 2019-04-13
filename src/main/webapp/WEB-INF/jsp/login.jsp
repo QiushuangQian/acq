@@ -33,11 +33,11 @@
             <input type="button"  style= "height:50px;width:120px;background-color: aqua" value="登录" id="btnLogin">
         </div>
 
-        <%--<div align="center">-------------使用第三方账号注册-------------</div>--%>
-            <%--<div align="center"><img src="/photo/QQ.png">--%>
-                <%--<img src="/photo/WX.png">--%>
-            <%--</div>--%>
-        <%--</div>--%>
+        <div align="center">-------------使用第三方账号注册-------------</div>
+            <div align="center"><img src="/photo/QQ.png">
+                <img src="/photo/WX.png">
+            </div>
+        </div>
     </div>
     <script>
         $(function () {

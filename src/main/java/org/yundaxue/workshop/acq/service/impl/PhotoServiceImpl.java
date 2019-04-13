@@ -39,8 +39,13 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public boolean deletePhoto(int photoId, int userId) throws Exception {
+    public boolean deletePhoto(int photoId,int userId) throws Exception {
         return photoMapper.deletePhoto(photoId,userId);
+    }
+
+    @Override
+    public boolean completeDeletePhoto(int photoId, int userId) throws Exception {
+        return photoMapper.completeDeletePhoto(photoId,userId);
     }
 
     @Override

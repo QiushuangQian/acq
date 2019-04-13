@@ -24,8 +24,6 @@ public class PhotoController {
 
     @Autowired
     PhotoService photoService;
-    @Autowired
-    HttpSession session;
 
     @RequestMapping(value = "/photo")
     public String photo(Model model, HttpServletRequest request)throws Exception{

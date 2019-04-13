@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -5,28 +6,63 @@
     <script src="/js/jquery/jquery-3.3.1.js"></script>
 </head>
 <body>
-<div class="p-body j-album">
-    <div class="m-recycle-wrapper">
-        <div class="m-recycle-bin" id="J-photo_recycle_body">
-            <div class="m-title">
-                <h1>回收站</h1> <span class="count">(共<b id="J-recycle-photo-count">0</b>张)</span>　
-                <a href="/homepage">&lt;&lt; 返回</a>
-                <strong>注：只能恢复30天内删除的相片</strong>
+<div >
+    <h1>回收站</h1>
+    <a href="/homepage">&lt;&lt; 返回</a>
+    <strong>注：只能恢复30天内删除的相片</strong>
+</div>
+<div >
+    <input type="button" value="删除" id="delete">
+    <input type="button" value="恢复" id="recover">
+    <input type="button" value="清空回收站" id="clear">
+</div><br>
+<div id="list">
+    <div>
+
+
+        <c:forEach var="photo" items="${initial}">
+            <div style="background: url('${photo.thumbnailPath}');width: 300px;height: 200px;float:left" >
+                <input type="checkbox"  name="group" value="${photo.photoId}">
             </div>
-            <div class="m-panel clearfix">
-                <p class="select"><a href="javascript:;" id="J-select-all">全选</a> <span class="bar">|</span> <a href="javascript:;" id="J-select-inverse">反选</a></p>
-                <p class="restore"><a href="javascript:;" id="J-restore">恢复</a></p>
-                <p class="remove"><a href="javascript:;" id="J-remove">删除</a></p>
-                <p class="clear"><a href="javascript:;" id="J-clear">清空回收站</a></p>
-            </div>
-            <div id="J-recycle-hint" class="m-hint w-hint" style="display:none;">
-                <div class="w-hint-head"><span class="icn0 icn0-49"></span></div>
-                <div class="w-hint-body bdwa bds0 bdc23 bgc7 fc2"><b>:)  </b> <div class="msg">暂无可恢复的相片。</div></div>
-            </div>
-            <ul class="m-gallery" id="J-recycle-gallery"></ul>
-            <ul class="m-pager pager" id="J-recycle-pager"></ul>
-        </div>
+
+
+            <%--<label for="a"><img class="check-box"alt="选中" src="${photo.thumbnailPath}">--%>
+            <%--</label>--%>
+            <%--<input type="checkbox"  id="a" value="${photo.photo_id}">--%>
+
+        </c:forEach>
     </div>
 </div>
+
+<script>
+$("#delete").on("click",function () {
+    //选中照片id的列表
+    var id_array=new Array();
+    $('input[name="group"]:checked').each(function(){
+        id_array.push($(this).val());//向数组中添加元素  
+    });
+
+    var idstr=id_array.join(',');//将数组元素连接起来以构建一个字符串  
+    //alert(idstr);
+
+    $.ajax({
+        type:"POST",
+        url:"/doRecycleBin",
+        dataType:"json",
+        data:{
+            "delPhotoList":idstr
+        },
+        success:function (result) {
+            window.location.href="/recycleBin"
+        }
+    })
+})
+
+
+
+
+</script>
+
+
 </body>
 </html>

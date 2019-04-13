@@ -28,10 +28,12 @@ public interface PhotoMapper {
     @Options(useGeneratedKeys=true,keyProperty="photoId")
     public void insertPhoto(@Param("photo") Photo photo);
 
-    //删除照片
+    //照片列表删除照片，即修改照片删除状态
     @Update("update photo set del_state=0 where photo_id=#{photoId},user_id=#{userId}")
     public boolean deletePhoto(@Param("photoId") int photoId,@Param("userId") int userId);
-
+    //回收站完全删除照片
+    @Delete("delete from photo where photo_id=#{photoId},user_id=#{userId}")
+    public boolean completeDeletePhoto(@Param("photoId") int photoId,@Param("userId") int userId);
     //封禁照片
     @Update("update photo set ban_state=0 where photo_id=#{photoId},user_id=#{userId}")
     public int banPhoto(@Param("photoId") int photoId,@Param("userId") int userId);
