@@ -135,7 +135,6 @@
         <c:forEach var="photo" items="${initial}">
             <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}" style="margin: 2px">
         </c:forEach>
-
     </div>
     <script>
         $('[data-magnify]').magnify({
