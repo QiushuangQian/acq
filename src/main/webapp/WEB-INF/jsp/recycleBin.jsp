@@ -54,6 +54,7 @@ $("#delete").on("click",function () {
         },
         success:function (result) {
             window.location.reload();
+
         }
     })
 })

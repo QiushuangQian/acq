@@ -31,12 +31,12 @@ public interface UserService {
     User getUser(int userId)throws Exception;
 
     //激活用户
-    public Boolean activeUser(String IdCode);
+    Boolean activeUser(String IdCode);
 
     //将注册的用户信息保存在数据库，状态设为未激活
-    public Boolean register(User user);
+    Boolean register(User user);
     //将要修改密码的用户信息更新到数据库，状态设为未激活
-    public Boolean sendMailChangePsw(User user);
+    Boolean sendMailChangePsw(User user);
 
-    public User login(User user)  throws CatException;
+    User login(User user)  throws CatException;
 }
