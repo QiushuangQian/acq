@@ -84,6 +84,11 @@ public class FrontController {
 	public String createAlbum(HttpServletRequest request)throws Exception{
 		return "redirect:/album/createAlbum";
 	}
+	//打开默认照片列表页
+	@RequestMapping(value = "/homepage/photo")
+	public String photo()throws Exception{
+		return "redirect:/photo";
+	}
 
 
 
@@ -105,7 +110,7 @@ public class FrontController {
 			msg = "登录成功";
 
 			// 增加session存储
-			request.getSession().setAttribute("USER", user);
+			request.getSession().setAttribute("USER", loginedUser);
 		} else {
 			code = CatException.UNKOWN_ERROR;
 			msg = "未知错误";
