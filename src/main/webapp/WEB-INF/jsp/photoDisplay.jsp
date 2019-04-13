@@ -105,7 +105,7 @@
                                 //加载完成，开启加载标志
                                 setTimeout(openLoadFlag,1000);
                                 pagenum++;
-                                
+
                                 $('[data-magnify]').magnify({
                                     headToolbar: [
                                         'close'

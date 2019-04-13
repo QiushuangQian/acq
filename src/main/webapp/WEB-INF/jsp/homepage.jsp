@@ -10,7 +10,8 @@
     <img src="/photo/4.png" >
 </div>
     <div style="text-align: center">
-        <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
+        <input id="ablum" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="photo" type="button" value="照片">
        <div style="margin-right: -760px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"   placeholder="搜索照片"></div>
     </div>
     <div>
@@ -25,6 +26,14 @@
 </div>
 <script  type="text/javascript">
     $(function () {
+        $("#photo").on("click",function () {
+            window.location.href="/homepage/photo"
+        })
+
+        $("#ablum").on("click",function () {
+            window.location.href="/homepage/ablum"
+        })
+
         $("#recycleBin").on("click",function () {
             window.location.href="/recycleBin"
         });

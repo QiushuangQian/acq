@@ -13,6 +13,7 @@ import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.model.Album;
 import org.yundaxue.workshop.acq.model.AlbumPhoto;
 import org.yundaxue.workshop.acq.model.Photo;
+import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.AlbumPhotoService;
 import org.yundaxue.workshop.acq.service.AlbumService;
 import org.yundaxue.workshop.acq.service.PhotoService;
@@ -31,8 +32,8 @@ import java.util.List;
 @Controller
 public class UploaderController {
 
-    //        int uid = request.getSession().getAttribute("userId");
-    private int uid = 1;
+    private int uid;
+
     private static Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
@@ -45,6 +46,7 @@ public class UploaderController {
 
     @RequestMapping(value = "/upload")
     public String upload(Model model, HttpServletRequest request)throws Exception{
+        int uid = ((User) request.getSession().getAttribute("USER")).getUserId();
         //通过userId得到相册列表
         List<Album> AblumList = albumService.albumList(uid);
         //将指定用户的相册列表通过model传递给jsp页面
@@ -56,6 +58,8 @@ public class UploaderController {
     @RequestMapping(value = "/doUpload")
     @ResponseBody
     public String doUpload(@RequestParam("selectedAlbumId") String selectedAlbumId,@RequestParam("file") MultipartFile file, HttpServletRequest request)throws Exception {
+
+        uid = ((User) request.getSession().getAttribute("USER")).getUserId();
 
         //上传后得到的文件名，前0-13位为创建时间
         String photoFileName = FileUpload.writeUploadFile(file,"photo",uid);
