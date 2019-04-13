@@ -89,21 +89,7 @@ public class FrontController {
 			}
 		}
 		return resultMap;
-	}
- //恢复照片
-	@RequestMapping(value = "/restorePhoto")
-	@ResponseBody
-	public Map<String,String> doRecycleBins(@RequestParam("delPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
-
-		int userId = ((User) request.getSession().getAttribute("USER")).getUserId();
-		Map<String, String> resultMap = new HashMap<String, String>();
-
-		//得到要删除照片id的列表
-		String[] arrayA = delPhotoList.split(",");
-		for (int i = 0; i < arrayA.length; i++) {
-			int delPhotoId = Integer.parseInt(arrayA[i]);
-		}
-	}
+	} 
 		//打开上传页面——峰
 	@RequestMapping(value = "/homepage/upload")
 	public String upload(HttpServletRequest request)throws Exception{
