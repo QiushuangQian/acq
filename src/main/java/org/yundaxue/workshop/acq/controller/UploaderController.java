@@ -70,9 +70,9 @@ public class UploaderController {
 
 
         //原图上传到服务器的文件路径
-        String photoFilePath = ConfigClass.ImgsSavePath +"photo\\" +  photoFileName;
+        String photoFilePath = ConfigClass.ImgsSavePath +"images\\photo\\" +  photoFileName;
         //缩略图上传到服务器的文件路径
-        String thumbnailFilePath=ConfigClass.ImgsSavePath +"thumbnail\\"  +  thumbnailFileName + "." + exname;
+        String thumbnailFilePath=ConfigClass.ImgsSavePath +"images\\thumbnail\\"  +  thumbnailFileName + "." + exname;
 
         //新建缩略图文件路径
         File thumbnailFile=new File(thumbnailFilePath);

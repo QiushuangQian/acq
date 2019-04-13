@@ -16,6 +16,8 @@ public interface PhotoService {
 
     //根据相册Id得到照片列表
     public List<Photo> photoList(int albumId) throws Exception;
+    //根据照片id得到照片对象
+    public List<Photo> getPhotoById(int photoId,int userId) throws Exception;
 
     //删除照片
     public boolean deletePhoto(int photoId,int userId) throws Exception;
@@ -24,5 +26,6 @@ public interface PhotoService {
 
     //根据页号和每页显示的照片数得到一个照片列表——峰
     public List<Photo> photoList(int pagenum,int maxnum,int userId) throws Exception;
-
+    //恢复照片
+    public int restorePhoto(int photoId,int userId) throws Exception;
 }
