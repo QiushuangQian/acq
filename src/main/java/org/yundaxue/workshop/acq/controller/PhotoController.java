@@ -3,6 +3,7 @@ package org.yundaxue.workshop.acq.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +12,7 @@ import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.PhotoService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,26 +27,28 @@ public class PhotoController {
     @Autowired
     PhotoService photoService;
 
-    @RequestMapping(value = "/photoDisplay")
+    //获取照片列表
+    @RequestMapping(value = "/photo")
     public String photo(Model model, HttpServletRequest request)throws Exception{
-
         //得到用户Id
         userId = ((User) request.getSession().getAttribute("USER")).getUserId();
 
         //得到选中的相册Id
-        String ablumId = (String)request.getAttribute("albumId");
-        if(ablumId==null){ //传递的相册Id为空时
+        String albumId = (String)request.getAttribute("albumId");
+        if(albumId==null){ //传递的相册Id为空时
             //按页数得到照片列表的字符串表示
             list = photoService.photoList(1, maxnum, userId,1);
         }else {
-            list = photoService.ablumPhotoList(1,maxnum,userId,1,Integer.parseInt(ablumId));
+            list = photoService.ablumPhotoList(1,maxnum,userId,1,Integer.parseInt(albumId));
         }
+
+
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("initial",list);
         return "photoDisplay";
     }
 
-    @RequestMapping(value = "/photo/photoList")
+    @RequestMapping(value = "/photoList")
     @ResponseBody
     public Map<String,Object> photoList(@RequestParam("pagenum") String pagenum , HttpServletRequest request) throws Exception{
         //得到用户Id
@@ -69,18 +73,16 @@ public class PhotoController {
         return resultMap;
     }
 
-//
-//    @RequestMapping(value = "/photo/photoDisplay" )
-//    public String photoDisplay(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//        userId = ((User) request.getSession().getAttribute("USER")).getUserId();
-//
-//        List<String> paths = photoService.showPhoto(userId);
-//
-//        model.addAttribute("pathList",paths);
-//        return "photoDisplay";
-//    }
 
+    @RequestMapping(value = "/photo/photoDisplay" )
+    public String photoDisplay(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        userId = ((User) request.getSession().getAttribute("USER")).getUserId();
 
+        List<String> paths = photoService.showPhoto(userId);
+
+        model.addAttribute("pathList",paths);
+        return "photoDisplay";
+    }
 
 
 }

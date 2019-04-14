@@ -17,7 +17,7 @@
     <script src="/js/jquery/jquery-3.3.1.js"></script>
     <script src="/js/jquery.magnify.min.js"></script><%--图片展示插件js--%>
 
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         var pagenum=2;//页号
         var loadFlag = true; //加载标志
 
@@ -43,7 +43,7 @@
                         data:{
                             "pagenum":pagenum
                         },
-                        success: function(data){
+                        success: function load(data){
                             if(data.result){
                                 for(var i=0;i<data.getPhotoList.length;i++ ){
                                     if(data.photoList[i]!=null && data.getPhotoList[i].photoPath!=null && data.getPhotoList[i].thumbnailPath!=null){
@@ -84,7 +84,7 @@
             loadFlag=true;//启动加载标志
         }
 
-    </script>
+    </script>-->
 </head>
 <body>
 <div style="text-align: center">
@@ -110,13 +110,15 @@
             </c:forEach>
         </select>
         <input type="button" id="checkin" value="进入">
+    </div>
 </div>
+<!--
 <div id="photoArea">
     <c:forEach var="photo" items="${initial}">
         <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}" style="margin: 2px">
     </c:forEach>
 </div>
-</div>
+-->
 <script  type="text/javascript">
     $(function () {
         $("#recycleBin").on("click",function () {
@@ -148,32 +150,37 @@
         selected = $('#albumSelect option:selected').val();
     }
 
-    jQuery(document).ready(function () {
-        $("#checkin").on("click",function (){
-            if($("#checkin").hasClass("进入中...")){
-                return;
-            }
-            $("#checkin").addClass("进入中...");
-            $("#checkin").val("进入中...");
-
-            //传递参数到后端
-            var params = {"selected":selected};
-            $.ajax({
-                type:"post",
-                url:"/album/albumPhotoShow",
-                dataType:"json",
-                data:params,
-                success:function(){
-                    $("#checkin").removeClass("进入中...");
-                    $("#checkin").val("进入");
-                },
-                error:function() {
-                    $("#checkin").removeClass("进入中...");
-                    $("#checkin").val("进入");
-                }
-            })
-        })
+    $("#checkin").on("click",function (){
+        window.location.href="/album/doAlbumPhotoShow?selected="+selected;
     })
+
+    //
+    // jQuery(document).ready(function () {
+    //     $("#checkin").on("click",function (){
+    //         if($("#checkin").hasClass("进入中...")){
+    //             return;
+    //         }
+    //         $("#checkin").addClass("进入中...");
+    //         $("#checkin").val("进入中...");
+    //
+    //         //传递参数到后端
+    //         var params = {"selected":selected};
+    //         $.ajax({
+    //             type:"post",
+    //             url:"/album/doAlbumPhotoShow",
+    //             dataType:"json",
+    //             data:params,
+    //             success:function(){
+    //                 $("#checkin").removeClass("进入中...");
+    //                 $("#checkin").val("进入");
+    //             },
+    //             error:function() {
+    //                 $("#checkin").removeClass("进入中...");
+    //                 $("#checkin").val("进入失败");
+    //             }
+    //         })
+    //     })
+    // })
 
 </script>
 <script>
