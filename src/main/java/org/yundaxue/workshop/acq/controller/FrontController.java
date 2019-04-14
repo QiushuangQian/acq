@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * Created by 耿志强 on 2019/3/17.
  */
@@ -26,6 +27,7 @@ public class FrontController {
 	PhotoService photoService;
 	@Autowired
 	UserService userService;
+
 
 	//打开login页面
 	@RequestMapping(value = "/user/login")

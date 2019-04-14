@@ -1,8 +1,14 @@
 package org.yundaxue.workshop.acq;
 
+import java.io.File;
+
 /**
  * Created by lenovo on 2019/3/31.
  */
 public class ConfigClass {
-    public static final String ImgsSavePath = "F:\\JetBrains\\IntelliJ IDEA 2017.1.5\\IdeaProjects\\acq4\\target\\classes\\static\\";
+    public static final String ImgsSavePath = getPath();
+    public static String getPath(){
+        String classPath=ConfigClass.class.getResource("/").getPath();
+        return classPath+ File.separator+"static"+File.separator;
+    }
 }
