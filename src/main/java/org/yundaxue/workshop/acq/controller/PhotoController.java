@@ -21,6 +21,7 @@ import java.util.Map;
 public class PhotoController {
     //设置每页最多显示多少张照片
     private int maxnum = 10;
+    private List<Photo> list;
 
     private int userId;
 //    private int userId=1;
@@ -32,11 +33,20 @@ public class PhotoController {
     //获取照片列表
     @RequestMapping(value = "/photo")
     public String photo(Model model, HttpServletRequest request)throws Exception{
+
+
         //得到用户Id
         userId = ((User) request.getSession().getAttribute("USER")).getUserId();
 
-        //按页数得到照片列表的字符串表示
-        List<Photo> list = photoService.photoList(1, maxnum, userId,1);
+        //得到选中的相册Id
+        String albumId = (String)request.getAttribute("albumId");
+        if(albumId==null){ //传递的相册Id为空时
+            //按页数得到照片列表的字符串表示
+            list = photoService.photoList(1, maxnum, userId,1);
+        }else {
+            list = photoService.ablumPhotoList(1,maxnum,userId,1,Integer.parseInt(albumId));
+        }
+
 
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("initial",list);
@@ -56,7 +66,15 @@ public class PhotoController {
         }
         resultMap.put("result",true);
 
-        resultMap.put("photoList",photoService.photoList(Integer.parseInt(pagenum), maxnum, userId,1));
+        //得到选中的相册Id
+        String ablumId = (String)request.getAttribute("albumId");
+        if(ablumId==null){ //传递的相册Id为空时
+            //按页数得到照片列表的字符串表示
+            list = photoService.photoList(Integer.parseInt(pagenum), maxnum, userId,1);
+        }else {
+            list = photoService.ablumPhotoList(Integer.parseInt(pagenum),maxnum,userId,1,Integer.parseInt(ablumId));
+        }
+        resultMap.put("photoList",list);
         return resultMap;
     }
 

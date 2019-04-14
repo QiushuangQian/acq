@@ -150,32 +150,37 @@
         selected = $('#albumSelect option:selected').val();
     }
 
-    jQuery(document).ready(function () {
-        $("#checkin").on("click",function (){
-            if($("#checkin").hasClass("进入中...")){
-                return;
-            }
-            $("#checkin").addClass("进入中...");
-            $("#checkin").val("进入中...");
-
-            //传递参数到后端
-            var params = {"selected":selected};
-            $.ajax({
-                type:"post",
-                url:"/album/doAlbumPhotoShow",
-                dataType:"json",
-                data:params,
-                success:function(){
-                    $("#checkin").removeClass("进入中...");
-                    $("#checkin").val("进入");
-                },
-                error:function() {
-                    $("#checkin").removeClass("进入中...");
-                    $("#checkin").val("进入失败");
-                }
-            })
-        })
+    $("#checkin").on("click",function (){
+        window.location.href="/album/doAlbumPhotoShow?selected="+selected;
     })
+
+    //
+    // jQuery(document).ready(function () {
+    //     $("#checkin").on("click",function (){
+    //         if($("#checkin").hasClass("进入中...")){
+    //             return;
+    //         }
+    //         $("#checkin").addClass("进入中...");
+    //         $("#checkin").val("进入中...");
+    //
+    //         //传递参数到后端
+    //         var params = {"selected":selected};
+    //         $.ajax({
+    //             type:"post",
+    //             url:"/album/doAlbumPhotoShow",
+    //             dataType:"json",
+    //             data:params,
+    //             success:function(){
+    //                 $("#checkin").removeClass("进入中...");
+    //                 $("#checkin").val("进入");
+    //             },
+    //             error:function() {
+    //                 $("#checkin").removeClass("进入中...");
+    //                 $("#checkin").val("进入失败");
+    //             }
+    //         })
+    //     })
+    // })
 
 </script>
 <script>
