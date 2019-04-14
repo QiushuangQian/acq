@@ -2,27 +2,19 @@ package org.yundaxue.workshop.acq.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.exception.CatException;
-import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.PhotoService;
 import org.yundaxue.workshop.acq.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 
 /**
  * Created by 耿志强 on 2019/3/17.
@@ -35,7 +27,6 @@ public class FrontController {
 	@Autowired
 	UserService userService;
 
-
 	//打开login页面
 	@RequestMapping(value = "/user/login")
 	public String show(ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
@@ -47,73 +38,9 @@ public class FrontController {
 		return "/homepage";
 	}
 	//打开回收站页面
-	@RequestMapping(value = "/recycleBin")
-	public String recycleBins(ModelMap model,HttpServletRequest request,HttpServletResponse response)throws Exception{
-		//得到用户Id
-//        int userId = request.getSession().getAttribute("userId");
-		int userId = 1;
-		//按页数得到照片列表的字符串表示
-//        List<String> list = getPhotoList(1,maxnum,userId);
-		List<Photo> list = photoService.photoList(1, maxnum, userId);
-
-		//将指定用户的相册列表通过model传递给jsp页面
-		model.addAttribute("initial",list);
-		return "/recycleBin";
-	}
-	@RequestMapping(value = "/doRecycleBin")
-	@ResponseBody
-	public Map<String,String> doRecycleBin(@RequestParam("selectPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
-
-		int userId=((User)request.getSession().getAttribute("USER")).getUserId();
-		Map<String,String> resultMap = new HashMap<String, String>();
-
-		//得到要删除照片id的列表
-		String[] arrayA = delPhotoList.split(",");
-		for (int i = 0; i < arrayA.length; i++) {
-			int delPhotoId=Integer.parseInt(arrayA[i]);
-			//删除服务器中的图片
-			//得到删除照片的路径
-			List<Photo> photo=photoService.getPhotoById(delPhotoId,userId);
-			if(photo.size()>0){
-				for (Photo p:photo) {
-					String photoPath=p.getPhotoPath();
-
-					String thumbnailPath=p.getThumbnailPath();
-					File photoFile=new File(ConfigClass.ImgsSavePath+photoPath);
-					File thumbnailFile=new File(ConfigClass.ImgsSavePath+thumbnailPath);
-					photoFile.delete();
-					thumbnailFile.delete();
-				}
-				//删除数据库中的记录
-				photoService.completeDeletePhoto(delPhotoId,userId);
-				resultMap.put("msg","success");
-			}else {
-				resultMap.put("msg","fail");
-			}
-		}
-		return resultMap;
-	}
- //恢复照片
-	@RequestMapping(value = "/restorePhoto")
-	@ResponseBody
-	public Map<String,String> doRecycleBins(@RequestParam("selectPhotoList") String selectPhotoList , HttpServletRequest request) throws Exception {
-
-		int userId = ((User) request.getSession().getAttribute("USER")).getUserId();
-		Map<String, String> resultMap = new HashMap<String, String>();
-
-		//得到要恢复照片id的列表
-		String[] arrayA = selectPhotoList.split(",");
-		for (int i = 0; i < arrayA.length; i++) {
-			int restorePhotoId = Integer.parseInt(arrayA[i]);
-			//修改照片状态
-			boolean restoreResult = photoService.restorePhoto(restorePhotoId,userId);
-			if(restoreResult){
-				resultMap.put("msg","success");
-			}else {
-				resultMap.put("msg","fail");
-			}
-		}
-		return resultMap;
+	@RequestMapping(value = "/homepage/recycleBin")
+	public String recycleBins(HttpServletRequest request)throws Exception{
+		return "redirect:/recycleBin";
 	}
 		//打开上传页面——峰
 	@RequestMapping(value = "/homepage/upload")
