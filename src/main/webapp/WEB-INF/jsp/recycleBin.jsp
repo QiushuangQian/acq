@@ -9,7 +9,7 @@
 <div >
     <h1>回收站</h1>
     <a href="/homepage">&lt;&lt; 返回</a>
-    <strong>注：只能恢复30天内删除的相片</strong>
+    <%--<strong>注：只能恢复30天内删除的相片</strong>--%>
 </div>
 <div >
     <input type="button" value="删除" id="delete">
@@ -17,14 +17,18 @@
     <input type="button" value="全选" id="selectAll">
 </div><br>
 <div id="list">
-    <div>
-
-
+    <div id="photoArea" style="width: 100%">
         <c:forEach var="photo" items="${initial}">
             <div style="background: url('${photo.thumbnailPath}');width: 300px;height: 200px;float:left" >
                 <input type="checkbox"  name="group" value="${photo.photoId}">
             </div>
         </c:forEach>
+    </div><br>
+    <div style="width: 100%">
+        <input type="button" value="首页" id="first">
+        <input type="button" value="上一页" id="before">
+        <input type="button" value="下一页" id="after">
+        <input type="button" value="末页" id="last">
     </div>
 </div>
 

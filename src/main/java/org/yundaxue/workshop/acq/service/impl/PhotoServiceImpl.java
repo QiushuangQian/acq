@@ -54,9 +54,9 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public List<Photo> photoList(int pagenum, int maxnum,int userId) throws Exception {
+    public List<Photo> photoList(int pagenum, int maxnum,int userId,int isDel) throws Exception {
         int index = (pagenum-1)*maxnum;
-        return photoMapper.photoList(index, maxnum, userId);
+        return photoMapper.photoList(index, maxnum, userId,isDel);
     }
     @Override
     public boolean restorePhoto(int restorePhotoId,int userId) throws Exception{

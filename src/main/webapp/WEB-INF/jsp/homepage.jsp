@@ -3,25 +3,30 @@
 <head>
     <title>个人主页</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
+
+    <style type="text/css">
+        .widthSet{
+            width: 969px;
+        }
+    </style>
 </head>
-<body>
-<div style="text-align: center">
+<body style="text-align: center">
 <div>
-    <img src="/photo/4.png" >
-</div>
-    <div style="text-align: center">
+    <div class="widthSet">
+        <img src="/photo/4.png" >
+    </div>
+    <div class="widthSet" style="text-align: center">
         <input id="ablum" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input id="photo" type="button" value="照片">
-       <div style="margin-right: -760px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"   placeholder="搜索照片"></div>
+       <%--<div style="margin-right: -760px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"   placeholder="搜索照片"></div>--%>
     </div>
-    <div>
-         <div style="margin-left: -830px">
-             <input id="upload" type="button" value="上传照片" style="background-color: aqua">
-             <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
-             <input id="setAlbum" type="button" value="管理相册" style="background-color: aqua">
-             <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
-         </div>
-    </div>
+    <div class="widthSet">
+         <%--<div style="margin-left: -830px">--%>
+         <input id="upload" type="button" value="上传照片" style="background-color: aqua">
+         <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua;margin-left: 10px">
+         <input id="setAlbum" type="button" value="管理相册" style="background-color: aqua;margin-left: 10px">
+         <input type="button" id="recycleBin" value="回收站" style="background-color: white;float: right">
+    </div><br>
 
 </div>
 <script  type="text/javascript">

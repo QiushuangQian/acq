@@ -92,7 +92,6 @@
             <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}" style="margin: 2px">
             <input type="checkbox"  name="group" value="${photo.photoId}">
         </c:forEach>
-
     </div>
     <script>
         $('[data-magnify]').magnify({
