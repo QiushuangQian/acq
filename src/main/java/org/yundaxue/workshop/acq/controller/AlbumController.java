@@ -1,5 +1,7 @@
 package org.yundaxue.workshop.acq.controller;
 
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.tomcat.util.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,8 +110,13 @@ public class AlbumController {
     @RequestMapping(value = "/album/albumPhotoShow")
     public String albumPhotoShow(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         userId = ((User) request.getSession().getAttribute("USER")).getUserId();
-        int selectedId = Integer.parseInt(request.getParameter("selected"));
-        List<String> photoPath = albumPhotoService.showPhoto(selectedId,userId);
+        String selectedId=request.getParameter("selected");
+
+            //NumberUtils.parseNumber(request.getParameter("selected"), Integer.class);
+
+        //int selectedId = Integer.parseInt(request.getParameter("selected"));
+
+        List<String> photoPath = albumPhotoService.showPhoto(NumberUtils.toInt(selectedId,1),userId);
         model.addAttribute("pathList",photoPath);
         return "albumPhotoShow";
     }
