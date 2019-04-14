@@ -29,6 +29,7 @@ public class PhotoController {
     @Autowired
     PhotoService photoService;
 
+    //获取照片列表
     @RequestMapping(value = "/photo")
     public String photo(Model model, HttpServletRequest request)throws Exception{
         //得到用户Id

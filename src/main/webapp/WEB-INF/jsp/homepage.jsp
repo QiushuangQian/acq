@@ -16,7 +16,7 @@
         <img src="/photo/4.png" >
     </div>
     <div class="widthSet" style="text-align: center">
-        <input id="ablum" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input id="photo" type="button" value="照片">
        <%--<div style="margin-right: -760px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"   placeholder="搜索照片"></div>--%>
     </div>
@@ -35,8 +35,8 @@
             window.location.href="/homepage/photo"
         })
 
-        $("#ablum").on("click",function () {
-            window.location.href="/homepage/ablum"
+        $("#album").on("click",function () {
+            window.location.href="/album/albumPhotoShow"
         })
 
         $("#recycleBin").on("click",function () {
@@ -51,7 +51,7 @@
 
         //创建相册——峰
         $("#createAlbum").on("click",function () {
-            window.location.href="/homepage/createAlbum"
+            window.location.href="/album/createAlbum"
         });
 
     $("#setAlbum").on("click",function () {

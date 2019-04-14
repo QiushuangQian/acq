@@ -49,10 +49,10 @@ public class FrontController {
 	public String upload(HttpServletRequest request)throws Exception{
 		return "redirect:/upload";
 	}
-	//打开创建相册页面——峰
-	@RequestMapping(value = "/homepage/createAlbum")
+	//打开相册页面——峰
+	@RequestMapping(value = "/homepage/album/albumPhotoShow")
 	public String createAlbum(HttpServletRequest request)throws Exception{
-		return "redirect:/album/createAlbum";
+		return "redirect:/album/albumPhotoShow";
 	}
 	//打开默认照片列表页
 	@RequestMapping(value = "/homepage/photo")
