@@ -21,7 +21,7 @@ public class FileUpload {
      */
     public static String writeUploadFile(MultipartFile file, String module,int uid) {
         String filename = file.getOriginalFilename();
-        String realpath = ConfigClass.ImgsSavePath  +"images"+File.separator+  module +File.separator;
+        String realpath = ConfigClass.ImgsSavePath  +"images/"+  module +"/";
 
         //创建文件路径
         File fileDir = new File(realpath);

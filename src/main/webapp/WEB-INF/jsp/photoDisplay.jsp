@@ -81,7 +81,7 @@
                     //发送ajax请求获取数据
                     $.ajax({
                         type: "POST",
-                        url: "/photoList",
+                        url: "/photo/photoList",
                         data:{
                             "pagenum":pagenum
                         },

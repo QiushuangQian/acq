@@ -58,6 +58,12 @@ public class PhotoServiceImpl implements PhotoService {
         int index = (pagenum-1)*maxnum;
         return photoMapper.photoList(index, maxnum, userId,isDel);
     }
+
+    @Override
+    public List<Photo> ablumPhotoList(int pagenum, int maxnum, int userId, int isDel, int albumId) throws Exception {
+        return photoMapper.ablumPhotoList(pagenum,maxnum,userId,isDel,albumId);
+    }
+
     @Override
     public boolean restorePhoto(int restorePhotoId,int userId) throws Exception{
 
