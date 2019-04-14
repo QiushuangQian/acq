@@ -76,7 +76,7 @@ public class UploaderController {
 
         //新建缩略图文件路径
         File thumbnailFile=new File(thumbnailFilePath);
-        if(!thumbnailFile.exists()){
+        if(!thumbnailFile.getParentFile().exists()){
             //缩略图文件不存在就创建
             thumbnailFile.getParentFile().mkdirs();
         }
