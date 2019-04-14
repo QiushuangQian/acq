@@ -59,8 +59,8 @@ public class PhotoServiceImpl implements PhotoService {
         return photoMapper.photoList(index, maxnum, userId);
     }
     @Override
-    public int restorePhoto(int photoId,int userId) throws Exception{
+    public boolean restorePhoto(int restorePhotoId,int userId) throws Exception{
 
-        return  photoMapper.restorePhoto(photoId,userId);
+        return  photoMapper.restorePhoto(restorePhotoId,userId);
     }
 }

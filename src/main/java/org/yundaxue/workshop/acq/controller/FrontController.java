@@ -2,6 +2,7 @@ package org.yundaxue.workshop.acq.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 
 /**
  * Created by 耿志强 on 2019/3/17.
@@ -59,7 +62,7 @@ public class FrontController {
 	}
 	@RequestMapping(value = "/doRecycleBin")
 	@ResponseBody
-	public Map<String,String> doRecycleBin(@RequestParam("delPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
+	public Map<String,String> doRecycleBin(@RequestParam("selectPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
 
 		int userId=((User)request.getSession().getAttribute("USER")).getUserId();
 		Map<String,String> resultMap = new HashMap<String, String>();
@@ -89,7 +92,29 @@ public class FrontController {
 			}
 		}
 		return resultMap;
-	} 
+	}
+ //恢复照片
+	@RequestMapping(value = "/restorePhoto")
+	@ResponseBody
+	public Map<String,String> doRecycleBins(@RequestParam("selectPhotoList") String selectPhotoList , HttpServletRequest request) throws Exception {
+
+		int userId = ((User) request.getSession().getAttribute("USER")).getUserId();
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		//得到要恢复照片id的列表
+		String[] arrayA = selectPhotoList.split(",");
+		for (int i = 0; i < arrayA.length; i++) {
+			int restorePhotoId = Integer.parseInt(arrayA[i]);
+			//修改照片状态
+			boolean restoreResult = photoService.restorePhoto(restorePhotoId,userId);
+			if(restoreResult){
+				resultMap.put("msg","success");
+			}else {
+				resultMap.put("msg","fail");
+			}
+		}
+		return resultMap;
+	}
 		//打开上传页面——峰
 	@RequestMapping(value = "/homepage/upload")
 	public String upload(HttpServletRequest request)throws Exception{
