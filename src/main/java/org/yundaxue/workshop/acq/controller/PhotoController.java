@@ -7,14 +7,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.PhotoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,14 +34,14 @@ public class PhotoController {
         userId = ((User) request.getSession().getAttribute("USER")).getUserId();
 
         //得到选中的相册Id
-        String albumId = (String)request.getAttribute("albumId");
+        String albumId = request.getParameter("albumId");
         if(albumId==null){ //传递的相册Id为空时
             //按页数得到照片列表的字符串表示
             list = photoService.photoList(1, maxnum, userId,1);
         }else {
+            int id = Integer.parseInt(albumId);
             list = photoService.ablumPhotoList(1,maxnum,userId,1,Integer.parseInt(albumId));
         }
-
 
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("initial",list);

@@ -2,27 +2,19 @@ package org.yundaxue.workshop.acq.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.exception.CatException;
-import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.PhotoService;
 import org.yundaxue.workshop.acq.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
 
 /**
  * Created by 耿志强 on 2019/3/17.
@@ -64,7 +56,7 @@ public class FrontController {
 	//打开默认照片列表页
 	@RequestMapping(value = "/homepage/photo")
 	public String photo()throws Exception{
-		return "redirect:/photoDisplay";
+		return "redirect:/photo";
 	}
 
 	@RequestMapping(value = "/homepage/createAlbum")

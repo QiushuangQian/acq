@@ -44,7 +44,6 @@
             window.location.href="/recycleBin"
         });
 
-
         //上传照片——峰
         $("#upload").on("click",function () {
             window.location.href="/homepage/upload"
@@ -55,9 +54,9 @@
             window.location.href="/homepage/createAlbum"
         });
 
-    $("#setAlbum").on("click",function () {
-        window.location.href="/homepage/setAlbum"
-    })
+        $("#setAlbum").on("click",function () {
+            window.location.href="/homepage/setAlbum"
+        })
     });
 
 </script>

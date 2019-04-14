@@ -7,6 +7,7 @@ public class ConfigClass {
     public static final String ImgsSavePath = getPath();
     public static String getPath(){
         String classPath=ConfigClass.class.getResource("/").getPath();
-        return classPath+"static/";
+        String path = classPath.replaceAll("%20"," ");
+        return path+"static/";
     }
 }
