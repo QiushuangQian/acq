@@ -20,9 +20,10 @@
     <div id="photoArea" style="width: 100%">
         <c:forEach var="photo" items="${initial}">
             <div style="background: url('${photo.thumbnailPath}');width: 300px;height: 200px;float:left" >
-                <input type="checkbox"  name="group" value="${photo.photoId}">
+                <input type="checkbox"  name="group" value="${photo.photoId}"  >
             </div>
         </c:forEach>
+
     </div><br>
     <div style="width: 100%">
         <input type="button" value="首页" id="first">

@@ -7,12 +7,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.PhotoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +90,30 @@ public class PhotoController {
         model.addAttribute("pathList",paths);
         return "photoDisplay";
     }
+//删除照片，加入回收站
+    @RequestMapping(value = "/deletePhoto")
+    @ResponseBody
+    public Map<String,String> deletePhoto(@RequestParam("selectPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
+
+        int userId=((User)request.getSession().getAttribute("USER")).getUserId();
+        Map<String,String> resultMap = new HashMap<String, String>();
+
+        //得到要删除照片id的列表
+        String[] arrayA = delPhotoList.split(",");
+        for (int i = 0; i < arrayA.length; i++) {
+            int delPhotoId=Integer.parseInt(arrayA[i]);
 
 
+            List<Photo> photo=photoService.getPhotoById(delPhotoId,userId);
+            if(photo.size()>0){
+
+                //修改照片状态
+                photoService.deletePhoto(delPhotoId,userId);
+                resultMap.put("msg","success");
+            }else {
+                resultMap.put("msg","fail");
+            }
+        }
+        return resultMap;
+    }
 }

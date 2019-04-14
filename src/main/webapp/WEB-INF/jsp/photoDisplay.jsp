@@ -84,16 +84,22 @@
 </head>
 <body>
 <div>
+    <input type="button" id="select" value="选择" >
     <input type="button" id="delete" value="删除">
     <a href="/homepage">&lt;&lt; 返回</a>
-</div>
-    <div id="photoArea">
+    </div>
+        <div id="photoArea">
         <c:forEach var="photo" items="${initial}">
-            <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}" style="margin: 2px">
-            <input type="checkbox"  name="group" value="${photo.photoId}">
+            <div style="width: 301px;height: 215px;float: left">
+                <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}" style="margin: 2px"><br>
+                <input type="checkbox" name="group" value="${photo.photoId}" style="float: right;visibility: hidden;">
+            </div>
         </c:forEach>
     </div>
+
+
     <script>
+        var show = true;
         $('[data-magnify]').magnify({
             headToolbar: [
                 'close'
@@ -101,7 +107,11 @@
             initMaximized: true,    //初始最大化
             multiInstances:false    //禁用多实例
         });
-      $("#delete").on("click",function () {
+        $("#select").on("click",function () {
+                $('input[name="group"]').css("visibility",show?'visible':'hidden');
+                show=!show;
+        })
+        $("#delete").on("click",function () {
           var id_array=new Array();
           $('input[name="group"]:checked').each(function(){
               id_array.push($(this).val());//向数组中添加元素  
@@ -121,8 +131,9 @@
                   console.log(result.msg);
                   window.location.reload();
               }
-      })
-      })
+          })
+        })
+
     </script>
 </body>
 </html>

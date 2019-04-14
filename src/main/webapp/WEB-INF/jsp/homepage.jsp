@@ -33,6 +33,7 @@
     $(function () {
         $("#photo").on("click",function () {
             window.location.href="/homepage/photo"
+
         })
 
         $("#album").on("click",function () {
