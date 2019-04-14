@@ -85,7 +85,7 @@ public class UploaderController {
             //保存缩略图
             Thumbnails.of(photoFilePath)
                     //设置图片大小
-                    .size(300,200)
+                    .size(1000,150)
                     //输出到文件
                     .toFile(thumbnailFilePath);
 

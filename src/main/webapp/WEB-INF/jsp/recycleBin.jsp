@@ -19,8 +19,8 @@
 <div id="list">
     <div id="photoArea" style="width: 100%">
         <c:forEach var="photo" items="${initial}">
-            <div style="background: url('${photo.thumbnailPath}');width: 300px;height: 200px;float:left" >
-                <input type="checkbox"  name="group" value="${photo.photoId}"  >
+            <div style="background: url('${photo.thumbnailPath}');width: 300px;height: 150px;float:left" >
+                <input type="checkbox"  name="group" value="${photo.photoId}" style="float: right;bottom: auto;" >
             </div>
         </c:forEach>
 
