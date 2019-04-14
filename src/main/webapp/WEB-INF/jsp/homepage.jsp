@@ -36,7 +36,7 @@
         })
 
         $("#album").on("click",function () {
-            window.location.href="/album/albumPhotoShow"
+            window.location.href="/homepage/albumPhotoShow"
         })
 
         $("#recycleBin").on("click",function () {
@@ -51,11 +51,11 @@
 
         //创建相册——峰
         $("#createAlbum").on("click",function () {
-            window.location.href="/album/createAlbum"
+            window.location.href="/homepage/createAlbum"
         });
 
     $("#setAlbum").on("click",function () {
-        window.location.href="/album/setAlbum"
+        window.location.href="/homepage/setAlbum"
     })
     });
 
