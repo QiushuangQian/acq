@@ -37,7 +37,7 @@
         });
 
         var idstr=id_array.join(',');//将数组元素连接起来以构建一个字符串  
-        //alert(idstr);
+
 
         $.ajax({
             type:"POST",

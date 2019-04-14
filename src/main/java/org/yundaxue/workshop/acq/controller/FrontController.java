@@ -60,6 +60,27 @@ public class FrontController {
 		model.addAttribute("initial",list);
 		return "/recycleBin";
 	}
+	@RequestMapping(value = "/deletePhoto")
+	@ResponseBody
+	public Map<String,String> deletePhoto(@RequestParam("selectPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
+
+		int userId=((User)request.getSession().getAttribute("USER")).getUserId();
+		Map<String,String> resultMap = new HashMap<String, String>();
+
+		//得到要删除照片id的列表
+		String[] arrayA = delPhotoList.split(",");
+		for (int i = 0; i < arrayA.length; i++) {
+			int delPhotoId=Integer.parseInt(arrayA[i]);
+			List<Photo> photo=photoService.getPhotoById(delPhotoId,userId);
+			if(photo.size()>0){
+				photoService.deletePhoto(delPhotoId,userId);
+				resultMap.put("msg","success");
+			}else {
+				resultMap.put("msg","fail");
+			}
+				}
+			return resultMap;
+			}
 	@RequestMapping(value = "/doRecycleBin")
 	@ResponseBody
 	public Map<String,String> doRecycleBin(@RequestParam("selectPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
