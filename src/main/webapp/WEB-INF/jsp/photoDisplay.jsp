@@ -16,60 +16,13 @@
 
     <script src="/js/jquery/jquery-3.3.1.js"></script>
     <script src="/js/jquery.magnify.min.js"></script><%--图片展示插件js--%>
-
-    <%--
-    <style>
-        .magnify-modal {
-            box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .magnify-header .magnify-toolbar {
-            background-color: rgba(0, 0, 0, .5);
-        }
-
-        .magnify-stage {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            border-width: 0;
-        }
-
-        .magnify-footer {
-            bottom: 10px;
-        }
-
-        .magnify-footer .magnify-toolbar {
-            background-color: rgba(0, 0, 0, .5);
-            border-radius: 5px;
-        }
-
-        .magnify-loader {
-            background-color: transparent;
-        }
-
-        .magnify-header,
-        .magnify-footer {
-            pointer-events: none;
-        }
-
-        .magnify-button {
-            pointer-events: auto;
-        }
-    </style>
-    `--%>
-
     <script type="text/javascript">
         var pagenum=2;//页号
         var loadFlag = true; //加载标志
-
         var container;//照片区域容器
         window.onload=function () {
             container = document.getElementById("photoArea");//得到图片区域容器对象div，用于img标签的附加
         }
-
-
-
         $(window).scroll(function() {
             //当滚轮滚动到文档最末位，也就是拉到了最底下
             //$(window).scrollTop():为滚动条在Y轴上的滚动距离。
@@ -130,13 +83,23 @@
 
 </head>
 <body>
-
-    <div id="photoArea">
+<div>
+    <input type="button" id="select" value="选择" >
+    <input type="button" id="delete" value="删除">
+    <a href="/homepage">&lt;&lt; 返回</a>
+    </div>
+        <div id="photoArea">
         <c:forEach var="photo" items="${initial}">
-            <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}" style="margin: 2px">
+            <div style="width: 301px;height: 215px;float: left">
+                <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}" style="margin: 2px"><br>
+                <input type="checkbox" name="group" value="${photo.photoId}" style="float: right;visibility: hidden;">
+            </div>
         </c:forEach>
     </div>
+
+
     <script>
+        var show = true;
         $('[data-magnify]').magnify({
             headToolbar: [
                 'close'
@@ -144,6 +107,32 @@
             initMaximized: true,    //初始最大化
             multiInstances:false    //禁用多实例
         });
+        $("#select").on("click",function () {
+                $('input[name="group"]').css("visibility",show?'visible':'hidden');
+                show=!show;
+        })
+        $("#delete").on("click",function () {
+          var id_array=new Array();
+          $('input[name="group"]:checked').each(function(){
+              id_array.push($(this).val());//向数组中添加元素  
+          });
+
+          var idstr=id_array.join(',');//将数组元素连接起来以构建一个字符串  
+
+
+          $.ajax({
+              type:"POST",
+              url:"/deletePhoto",
+              dataType:"json",
+              data:{
+                  "selectPhotoList":idstr
+              },
+              success:function (result) {
+                  console.log(result.msg);
+                  window.location.reload();
+              }
+          })
+        })
 
     </script>
 </body>
