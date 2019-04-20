@@ -23,19 +23,19 @@
     <div id="photoArea">
         <c:forEach var="photo" items="${initial}">
             <div class="photo">
-                <div class="container" style="background-image: url('${photo.thumbnailPath}')">
-                    <input type="checkbox" name="group" value="${photo.photoId}" >
-                </div>
+                <div class="container" style="background-image: url('${photo.thumbnailPath}')"></div>
+                <input type="checkbox" name="group" value="${photo.photoId}" >
             </div>
         </c:forEach>
     </div><br>
 
-    <div class="fenye">
-        <input type="button" value="首页" id="first">
-        <input type="button" value="上一页" id="before">
-        <input type="button" value="下一页" id="after">
-        <input type="button" value="末页" id="last">
-    </div>
+
+</div>
+<div class="fenye">
+    <input type="button" value="首页" id="first">
+    <input type="button" value="上一页" id="before">
+    <input type="button" value="下一页" id="after">
+    <input type="button" value="末页" id="last">
 </div>
 
 <script>

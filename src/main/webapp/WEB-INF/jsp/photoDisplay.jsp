@@ -89,16 +89,16 @@
 <body>
 <div>
     <input type="button" id="select" value="选择">
-    <input type="button" value="全选" id="selectAll">
+    <input type="button" id="selectAll" value="全选">
     <input type="button" id="delete" value="删除">
 
     <a href="/homepage">&lt;&lt; 返回</a>
 </div>
 <div id="photoArea">
     <c:forEach var="photo" items="${initial}">
-        <div class="c1">
+        <div class="photo">
             <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}"><br>
-            <input class="c2" type="checkbox" name="group" value="${photo.photoId}">
+            <input type="checkbox" name="group" value="${photo.photoId}">
         </div>
     </c:forEach>
 </div>

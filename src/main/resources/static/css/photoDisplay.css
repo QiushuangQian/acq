@@ -1,14 +1,23 @@
-.c1 {
+.photo {
+    width: 18.8%;
     height: 150px;
     float: left;
     text-align: center;
-    margin: 2px;
+    margin: 4px;
+    border: 1px solid skyblue;
+    position: relative;
 }
 
-.c2 {
-    float: right;
-    visibility: hidden;
+.photo img{
     position: relative;
-    bottom: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.photo input{
+    top: 1px;
+    right: 1px;
+    visibility: hidden;
+    position: absolute;
     z-index: 1;
 }
