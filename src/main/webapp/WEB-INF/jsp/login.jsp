@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/css/login.css">
 </head>
 <body class="b" >
+<div align="center">
 <div class="c" >
     <div class="d">
         <img src="/photo/2.png" >
@@ -20,35 +21,32 @@
             <a href="http://localhost:8080/register"><span>注册</span></a>
         </div>
         <div align="center">
-            <input type="text" id="userName"  placeholder="请输入登录邮箱">
+            <input type="text" id="userName" placeholder="请输入登录邮箱" style="width: 200px;height: 30px">
         </div>
+        <br>
         <div align="center">
-            <input type="password" id="password"  placeholder="请输入密码">
+            <input type="password" id="password"  placeholder="请输入密码"style="width: 200px;height: 30px">
         </div>
+        <br>
         <div align="center">
-            <input type="checkbox" id="autoLogin">
-            自动登录
             <a href="http://localhost:8080/changePsw">忘记密码</a>
         </div>
         <div align="center">
             <input type="button"  style= "height:50px;width:120px;background-color: aqua" value="登录" id="btnLogin">
         </div>
 
-        <div align="center">-------------使用第三方账号注册-------------</div>
-            <div align="center"><img src="/photo/QQ.png">
-                <img src="/photo/WX.png">
             </div>
         </div>
     </div>
-
+</div>
     <script>
         $(function () {
           $("#btnLogin").on("click",function () {
-              if ($("#btnLogin").hasClass("Saving")){
+              if ($("#btnLogin").hasClass("正在登录...")){
                   return;
               }
-              $("#btnLogin").addClass("Saving");
-              $("#btnLogin").val("Saving");
+              $("#btnLogin").addClass("正在登录...");
+              $("#btnLogin").val("正在登录...");
               var userId=$("#userName").val();
               if(userId.trim()==""){
                   alert("User ID is empty!");
@@ -68,8 +66,8 @@
                       "password":password
                   },
                   success:function (result) {
-                      $("#btnLogin").removeClass("Saving");
-                      $("#btnLogin").val("Save");
+                      $("#btnLogin").removeClass("正在登录...");
+                      $("#btnLogin").val("登录成功！");
                       if(result.code==0){
                           window.location.href="/homepage"
                       }
@@ -78,8 +76,8 @@
                       }
                   },
                   error:function () {
-                      $("#btnLogin").removeClass("Saving");
-                      $("#btnLogin").val("Save");
+                      $("#btnLogin").removeClass("正在登录...");
+                      $("#btnLogin").val("登录成功！");
                   }
               })
           })

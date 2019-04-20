@@ -13,67 +13,55 @@
     <link type="text/css" rel="stylesheet" href="/css/changePsw.css">
 </head>
 <body>
-<div class="a" >
-    <!--<div>
-        <img src="/photo/4.png" >
+<div style="text-align: center">
+    <div class="a">
+        <div><img src="/images/loginLogo.png"></div>
+        <div>邮箱：<input type="email" id="email"></div>
+        <div>新密码：<input type="password" id="password">&nbsp;&nbsp;&nbsp;</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验证码：<input
+                type="text" id="idCode"><input type="button" id="sendMail" value="发送验证邮件"></div>
+        <div><input type="button" id="submit" value="确定"></div>
     </div>
-    <div style="text-align: center">
-        <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
-        <div style="margin-right: -760px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"   placeholder="搜索照片"></div>
-    </div>
-    <div>
-        <div style="margin-left: -830px">
-            <input id="upload" type="button" value="上传照片" style="background-color: aqua">
-            <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
-            <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
-        </div>
-    </div>-->
-    <div><img src="/images/loginLogo.png"></div>
-    <div>邮箱：<input type="email" id="email"></div>
-    <div>新密码：<input type="password" id="password"></div>
-    <div>验证码：<input type="text" id="idCode"><input type="button" id="sendMail" value="发送验证邮件"></div>
-    <div><input type="button" id="submit" value="确定"></div>
 </div>
-
 <script>
     $(function () {
         //发送验证邮件
-        $("#sendMail").on("click",function () {
+        $("#sendMail").on("click", function () {
             //等待验证邮件发送
-            if($("#sendMail").hasClass("Sending")){
+            if ($("#sendMail").hasClass("Sending")) {
                 return;
             }
             $("#sendMail").addClass("Sending");
             $("#sendMail").val("邮件发送中...");
 
             //密码
-            var password=$("#password").val();
-            if(password==null){
+            var password = $("#password").val();
+            if (password == null) {
                 alert("密码不能为空！");
             }
 
             //邮箱
-            var email=$("#email").val();
-            if(email==null){
+            var email = $("#email").val();
+            if (email == null) {
                 alert("邮箱不能为空！");
             }
 
             $.ajax({
-                type:"post",
-                url:"/changePsw/sendMailChangePsw",
-                dataType:"json",
-                data:{
-                    "email":email,
-                    "password":password
+                type: "post",
+                url: "/changePsw/sendMailChangePsw",
+                dataType: "json",
+                data: {
+                    "email": email,
+                    "password": password
                 },
-                success:function (result) {
+                success: function (result) {
                     $("#sendMail").removeClass("Sending");
                     $("#sendMail").val("邮件已发送");
-                    if(!result){
+                    if (!result) {
                         alert("邮箱未注册！");
                     }
                 },
-                error:function () {
+                error: function () {
                     $("#sendMail").removeClass("Sending");
                     $("#sendMail").val("发送验证邮件");
                 }
@@ -81,36 +69,36 @@
 
         })
         //确认验证码
-        $("#submit").on("click",function () {
+        $("#submit").on("click", function () {
 
             //等待注册返回
-            if($("#submit").hasClass("Submitting")){
+            if ($("#submit").hasClass("Submitting")) {
                 return;
             }
             $("#submit").addClass("Submitting");
             $("#submit").val("确认中...");
 
             //验证码
-            var idCode=$("#idCode").val();
+            var idCode = $("#idCode").val();
 
             $.ajax({
-                type:"post",
-                url:"/activation",
-                dataType:"json",
-                data:{
-                    "idCode":idCode
+                type: "post",
+                url: "/activation",
+                dataType: "json",
+                data: {
+                    "idCode": idCode
                 },
-                success:function (result) {
+                success: function (result) {
                     $("#submit").removeClass("Submitting");
                     $("#submit").val("确定");
-                    if(result.idCode==1){
-                        window.location.href="/user/login"
+                    if (result.idCode == 1) {
+                        window.location.href = "/user/login"
                     }
                     else {
                         alert(result.msg);
                     }
                 },
-                error:function () {
+                error: function () {
                     $("#submit").removeClass("Submitting");
                     $("#submit").val("确定");
                 }

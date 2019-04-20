@@ -24,6 +24,15 @@
     width: 100%;
     display: inline-block;
 }
+
 .fenye {
     width: 100%;
+}
+
+#photoArea {
+    width: 100%;
+    display: inline-block;
+}
+#list{
+    text-align: center;
 }

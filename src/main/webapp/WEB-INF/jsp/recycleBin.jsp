@@ -18,8 +18,8 @@
     <input type="button" value="恢复" id="recover">
     <input type="button" value="全选" id="selectAll">
 </div><br>
-<div id="list" style="text-align: center;">
-    <div id="photoArea" style="width: 100%;display: inline-block;">
+<div id="list">
+    <div id="photoArea">
         <c:forEach var="photo" items="${initial}">
             <div class="photo" >
                 <img src="${photo.thumbnailPath}"><br>
@@ -28,7 +28,7 @@
         </c:forEach>
     </div><br>
 
-    <div class="fenye" style="width: 100%">
+    <div class="fenye">
         <input type="button" value="首页" id="first">
         <input type="button" value="上一页" id="before">
         <input type="button" value="下一页" id="after">

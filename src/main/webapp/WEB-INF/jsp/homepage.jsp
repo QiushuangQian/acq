@@ -11,6 +11,7 @@
     </style>
 </head>
 <body class="d1">
+<div align="center">
 <div>
     <div class="widthSet">
         <img src="/photo/4.png" >
@@ -27,7 +28,7 @@
          <input id="setAlbum" type="button" value="管理相册">
          <input type="button" id="recycleBin" value="回收站">
     </div><br>
-
+</div>
 </div>
 <script  type="text/javascript">
     $(function () {

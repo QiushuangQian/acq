@@ -19,7 +19,8 @@
             <img src="/photo/4.png" >
         </div>
         <div class="e2">
-            <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
+            <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="photo" type="button" value="照片">
         </div>
         <div>
             <div class="e3">
@@ -48,6 +49,14 @@
     </script>
     <script>
         $(function(){
+            $("#photo").on("click",function () {
+                window.location.href="/homepage/photo"
+
+            })
+
+            $("#album").on("click",function () {
+                window.location.href="/homepage/albumPhotoShow"
+            })
             $("#submit").on("click",function () {
                 //等待创建返回
                 if($("#submit").hasClass("Creating")){
