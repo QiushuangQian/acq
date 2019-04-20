@@ -77,7 +77,7 @@
                 error:function() {
                     $("#submit").removeClass("Creating");
                     $("#submit").val("Create");
-                }
+                 }
                 })
             })
         })
