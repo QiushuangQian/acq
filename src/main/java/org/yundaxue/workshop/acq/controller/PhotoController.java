@@ -102,22 +102,27 @@ public class PhotoController {
         int userId=((User)request.getSession().getAttribute("USER")).getUserId();
         Map<String,String> resultMap = new HashMap<String, String>();
 
-        //得到要删除照片id的列表
-        String[] arrayA = delPhotoList.split(",");
-        for (int i = 0; i < arrayA.length; i++) {
-            int delPhotoId=Integer.parseInt(arrayA[i]);
+        try {
+            //得到要删除照片id的列表
+            String[] arrayA = delPhotoList.split(",");
+            for (int i = 0; i < arrayA.length; i++) {
+                int delPhotoId=Integer.parseInt(arrayA[i]);
 
 
-            List<Photo> photo=photoService.getPhotoById(delPhotoId,userId);
-            if(photo.size()>0){
+                List<Photo> photo=photoService.getPhotoById(delPhotoId,userId);
+                if(photo.size()>0){
 
-                //修改照片状态
-                photoService.deletePhoto(delPhotoId,userId);
-                resultMap.put("msg","success");
-            }else {
-                resultMap.put("msg","fail");
+                    //修改照片状态
+                    photoService.deletePhoto(delPhotoId,userId);
+                    resultMap.put("msg","success");
+                }else {
+                    resultMap.put("msg","fail");
+                }
             }
+        }catch (Exception e){
+            resultMap.put("error",e.toString());
         }
+
         return resultMap;
     }
 }

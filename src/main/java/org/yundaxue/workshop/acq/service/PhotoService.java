@@ -31,4 +31,8 @@ public interface PhotoService {
 
     //恢复照片
     public boolean restorePhoto(int restorePhotoId,int userId) throws Exception;
+
+    //得到最大分页数
+    public int getMaxPageNum(int maxnum,int userId,int isDel) throws Exception;
+
 }

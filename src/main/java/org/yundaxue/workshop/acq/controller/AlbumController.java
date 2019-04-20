@@ -1,8 +1,5 @@
 package org.yundaxue.workshop.acq.controller;
 
-import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.tomcat.util.codec.binary.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +23,10 @@ import java.util.Map;
 @Controller
 public class AlbumController {
     private int userId;
-    private int albumId;
     @Autowired
     AlbumService albumService;
     AlbumPhotoService albumPhotoService;
     PhotoService photoService;
-
-    private int maxnum = 10;
 
     //用于打开createAlbum界面
     @RequestMapping(value = "/album/createAlbum")
@@ -88,31 +82,6 @@ public class AlbumController {
         return albumService.updateAlbum(newName,selectedId);
     }
 
-//    @RequestMapping(value = "/albumPhotoList")
-//    @ResponseBody
-//    public Map<String,Object> photoList(@RequestParam("pagenum") String pagenum , HttpServletRequest request) throws Exception{
-//        //得到用户Id
-//        userId = ((User) request.getSession().getAttribute("USER")).getUserId();
-////        int userId = 1;
-////        int albumId = 1;
-//        //从前端获取albumId
-//        String selectedId=request.getParameter("selected");
-//        albumId = NumberUtils.toInt(selectedId,1);
-//
-//        Map<String,Object> resultMap = new HashMap<String, Object>();
-//        if(pagenum == null){
-//            resultMap.put("result", false);
-//            return resultMap;
-//        }
-//        resultMap.put("result",true);
-//
-//        //按页数得到照片列表的字符串表示
-//        resultMap.put("photoList",albumPhotoService.getPhotoList(Integer.parseInt(pagenum), maxnum,albumId,userId));
-//
-//        return resultMap;
-//    }
-
-
     @RequestMapping(value = "/album/albumPhotoShow")
     public String albumPhotoShow(Model model,HttpServletRequest request,HttpServletResponse response) throws Exception {
 
@@ -127,12 +96,8 @@ public class AlbumController {
     //显示该相册照片
     @RequestMapping(value = "/album/doAlbumPhotoShow")
     public String doAlbumPhotoShow(ModelMap model, HttpServletRequest request, HttpServletResponse response,RedirectAttributes attr) throws Exception {
-//        userId = ((User) request.getSession().getAttribute("USER")).getUserId();
+
         String selectedId=request.getParameter("selected");
-        //NumberUtils.parseNumber(request.getParameter("selected"), Integer.class);
-        //int selectedId = Integer.parseInt(request.getParameter("selected"));
-//        List<String> photoPath = albumPhotoService.showPhoto(NumberUtils.toInt(selectedId,1),userId);
-//        model.addAttribute("pathList",photoPath);
         request.getSession().setAttribute("albumId",selectedId);
         return "redirect:/photo";
     }

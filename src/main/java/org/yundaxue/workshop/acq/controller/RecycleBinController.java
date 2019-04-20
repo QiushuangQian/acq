@@ -32,12 +32,15 @@ public class RecycleBinController {
     public String recycleBins(ModelMap model, HttpServletRequest request, HttpServletResponse response)throws Exception{
         //得到用户Id
         userId=((User)request.getSession().getAttribute("USER")).getUserId();
+        //得到最大分页数
+        int maxPageNum = photoService.getMaxPageNum(ConfigClass.maxnum,userId,0);
 
         //按页数得到照片列表的字符串表示
         List<Photo> list = photoService.photoList(1, ConfigClass.maxnum, userId,0);
 
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("initial",list);
+        model.addAttribute("maxPageNum",maxPageNum);
         return "/recycleBin";
     }
     //通过页数得到状态为删除的照片

@@ -117,15 +117,15 @@
         $('input[name="group"]').css("visibility", show ? 'visible' : 'hidden');
         show = !show;
     })
+
+    //删除
     $("#delete").on("click", function () {
         var id_array = new Array();
         $('input[name="group"]:checked').each(function () {
             id_array.push($(this).val());//向数组中添加元素  
         });
 
-        var idstr = id_array.join(',');//将数组元素连接起来以构建一个字符串  
-
-
+        var idstr = id_array.join(',');//将数组元素连接起来以构建一个字符串 
         $.ajax({
             type: "POST",
             url: "/deletePhoto",
@@ -136,11 +136,15 @@
             success: function (result) {
                 console.log(result.msg);
                 window.location.reload();
+            },
+            error:function (errorMsg) {
+                console.log(errorMsg.error());
+
             }
         })
     })
-    //全选
 
+    //全选
     var change = true;//用于鼠标二次点击翻转全选
     $("#selectAll").on("click", function () {
         if (change) {

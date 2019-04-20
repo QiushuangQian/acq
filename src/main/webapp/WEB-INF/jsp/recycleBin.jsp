@@ -3,17 +3,18 @@
 <html>
 <head>
     <title>回收站</title>
-    <link type="text/css" rel="stylesheet" href="/css/photo.css">
+    <link type="text/css" rel="stylesheet" href="/css/recycleBin.css">
 
     <script src="/js/jquery/jquery-3.3.1.js"></script>
 </head>
 <body>
 <div >
     <h1>回收站</h1>
-    <a href="/homepage">&lt;&lt; 返回</a>
+
     <%--<strong>注：只能恢复30天内删除的相片</strong>--%>
 </div>
-<div >
+<div class="menu-button">
+    <a href="/homepage">&lt;&lt; 返回</a>
     <input type="button" value="删除" id="delete">
     <input type="button" value="恢复" id="recover">
     <input type="button" value="全选" id="selectAll">
@@ -21,9 +22,10 @@
 <div id="list" style="text-align: center;">
     <div id="photoArea" style="width: 100%;display: inline-block;">
         <c:forEach var="photo" items="${initial}">
-            <div class="photo" style="height: 150px;float: left;margin: 2px;">
-                <img src="${photo.thumbnailPath}"><br>
-                <input type="checkbox" name="group" value="${photo.photoId}" style="float: right;position: relative;bottom: 19px;z-index: 1;">
+            <div class="photo">
+                <div class="container" style="background-image: url('${photo.thumbnailPath}')">
+                    <input type="checkbox" name="group" value="${photo.photoId}" >
+                </div>
             </div>
         </c:forEach>
     </div><br>
@@ -37,9 +39,22 @@
 </div>
 
 <script>
-    var pagenum=0;//页号，第几页
-    var container;//照片区域容器
     $(function () {
+        var pagenum=1;//页号，第几页
+        var maxPageNum = (${maxPageNum}==0?1:${maxPageNum});//最大分页数
+        if(maxPageNum==1){//只有一页
+            $("#first").prop('disabled',true);//禁用首页
+            $("#before").prop('disabled',true);//禁用上一页
+            $("#after").prop('disabled',true);  //禁用下一页
+            $("#last").prop('disabled',true);   //禁用尾页
+        }else{//多于一页
+            $("#first").prop('disabled',true);//禁用首页
+            $("#before").prop('disabled',true);//禁用上一页
+            $("#after").removeAttr('disabled'); //启用下一页
+            $("#last").removeAttr('disabled');//启用尾页
+        }
+        var container;//照片区域容器
+
         //彻底删除照片
         $("#delete").on("click",function () {
             //选中照片id的列表
@@ -101,10 +116,57 @@
 
         //首页
         $("#first").on("click",function () {
+            pagenum=1;
+            changeDisabled(pagenum);
             //返回第一页
-            loadPhoto(1);
+            loadPhoto(pagenum);
+        })
+        //上一页
+        $("#before").on("click",function () {
+            pagenum--;
+            changeDisabled(pagenum);
+            loadPhoto(pagenum);
+        })
+        //下一页
+        $("#after").on("click",function () {
+            pagenum++;
+            changeDisabled(pagenum);
+            loadPhoto(pagenum);
+        })
+        //尾页
+        $("#last").on("click",function () {
+            pagenum=maxPageNum;
+            changeDisabled(pagenum);
+            loadPhoto(pagenum);
         })
 
+        //根据pagenum确定翻页键的禁用与启动
+        function changeDisabled(pagenum) {
+            if(maxPageNum==1){//只有一页
+                $("#first").prop('disabled',true);//禁用首页
+                $("#before").prop('disabled',true);//禁用上一页
+                $("#after").prop('disabled',true);  //禁用下一页
+                $("#last").prop('disabled',true);   //禁用尾页
+            }else{//多于一页
+                if(pagenum==1){//首页
+                    $("#first").prop('disabled',true);//禁用首页
+                    $("#before").prop('disabled',true);//禁用上一页
+                    $("#after").removeAttr('disabled'); //启用下一页
+                    $("#last").removeAttr('disabled');//启用尾页
+                }else if(pagenum==maxPageNum){//尾页
+                    $("#first").removeAttr('disabled'); //启用首页
+                    $("#before").removeAttr('disabled');//启用上一页
+                    $("#after").prop('disabled',true);  //禁用下一页
+                    $("#last").prop('disabled',true);   //禁用尾页
+                }else {//在中间页
+                    $("#first").removeAttr('disabled'); //启用首页
+                    $("#before").removeAttr('disabled');//启用上一页
+                    $("#after").removeAttr('disabled'); //启用下一页
+                    $("#last").removeAttr('disabled');//启用尾页
+                }
+            }
+        }
+        //加载照片函数
         function loadPhoto(pagenum) {
 
             //移除photoArea区域中的照片div

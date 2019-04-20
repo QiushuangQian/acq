@@ -46,6 +46,8 @@ public interface PhotoMapper {
     @Update("update photo set del_state=1 where photo_id=#{photoId} and user_id=#{userId}")
     public boolean restorePhoto(@Param("photoId") int photoId,@Param("userId") int userId);
 
-
+    //得到照片数
+    @Select("select count(photo_id) from photo where user_id=#{userId} and del_state=#{isDel}")
+    public int getCount(@Param("userId") int userId,@Param("isDel") int isDel);
 
 }

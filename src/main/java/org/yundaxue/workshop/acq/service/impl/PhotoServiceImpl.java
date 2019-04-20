@@ -69,4 +69,12 @@ public class PhotoServiceImpl implements PhotoService {
 
         return  photoMapper.restorePhoto(restorePhotoId,userId);
     }
+
+    @Override
+    public int getMaxPageNum(int maxnum, int userId, int isDel) throws Exception {
+        int count = photoMapper.getCount(userId, isDel);
+        double result = ((double)count)/((double)maxnum);
+        int maxPageNum = (int)Math.ceil(result);//向上取整
+        return maxPageNum;
+    }
 }
