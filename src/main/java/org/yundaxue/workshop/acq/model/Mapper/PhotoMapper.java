@@ -23,7 +23,7 @@ public interface PhotoMapper {
     @Select("select * from photo where user_id=#{userId} and del_state=#{isDel} limit #{index},#{maxnum}")
     public List<Photo> photoList(@Param("index") int index, @Param("maxnum") int maxnum,@Param("userId") int userId,@Param("isDel") int isDel);
     //相册页得到照片
-    @Select("select * from photo where photo_id=(select photo_id from album_photo where album_id=#{albumId}) and user_id=#{userId} limit #{index},#{maxnum}")
+    @Select("select * from photo inner join album_photo on photo.photo_id = album_photo.photo_id where album_id=#{albumId} and user_id=#{userId} limit #{index},#{maxnum}")
     public List<Photo> ablumPhotoList(@Param("index") int index, @Param("maxnum") int maxnum,@Param("userId") int userId,@Param("isDel") int isDel,@Param("albumId") int albumId);
 
     //显示照片

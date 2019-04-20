@@ -41,6 +41,7 @@ public class DataController {
             , HttpServletRequest request, HttpServletResponse response) throws Exception {
         AlbumPhoto albumPhotoDao = albumPhotoService.getAlbumPhoto(albumPhotoId,photoId,albumId);
         return 0;//albumPhotoDao.getAlbumPhotoId();
+
     }
 
 }

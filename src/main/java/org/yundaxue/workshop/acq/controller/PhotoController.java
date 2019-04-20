@@ -41,7 +41,8 @@ public class PhotoController {
         userId = ((User) request.getSession().getAttribute("USER")).getUserId();
 
         //得到选中的相册Id
-        String albumId = (String)request.getAttribute("albumId");
+        String albumId = (String) request.getSession().getAttribute("albumId");
+//        String albumId = (String)request.getAttribute("albumId");
         if(albumId==null){ //传递的相册Id为空时
             //按页数得到照片列表的字符串表示
             list = photoService.photoList(1, maxnum, userId,1);
@@ -49,7 +50,7 @@ public class PhotoController {
             list = photoService.ablumPhotoList(1,maxnum,userId,1,Integer.parseInt(albumId));
         }
 
-
+        request.getSession().setAttribute("albumId","");
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("initial",list);
         return "photoDisplay";

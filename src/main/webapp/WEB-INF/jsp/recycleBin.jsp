@@ -86,6 +86,7 @@
     })
 
     //全选
+
     var change=true;//用于鼠标二次点击翻转全选
     $("#selectAll").on("click",function () {
         if(change){
@@ -97,7 +98,6 @@
         }
 
     })
-
 
 
 

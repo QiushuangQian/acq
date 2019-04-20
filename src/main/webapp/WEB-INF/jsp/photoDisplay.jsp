@@ -85,7 +85,9 @@
 <body>
 <div>
     <input type="button" id="select" value="选择" >
+    <input type="button" value="全选" id="selectAll">
     <input type="button" id="delete" value="删除">
+
     <a href="/homepage">&lt;&lt; 返回</a>
     </div>
         <div id="photoArea">
@@ -133,7 +135,19 @@
               }
           })
         })
+        //全选
 
+        var change=true;//用于鼠标二次点击翻转全选
+        $("#selectAll").on("click",function () {
+            if(change){
+                $("[name='group']").prop("checked",true);
+                change=false;
+            }else {
+                $("[name='group']").prop("checked",false);
+                change=true;
+            }
+
+        })
     </script>
 </body>
 </html>

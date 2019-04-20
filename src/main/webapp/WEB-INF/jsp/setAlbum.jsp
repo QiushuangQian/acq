@@ -6,14 +6,14 @@
   Time: 10:35
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8" language="java" %>
 <html>
 <head>
     <title>SetAlbum</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
 </head>
 <body>
-
+<% request.setCharacterEncoding("UTF-8");%>
 <div style="text-align: center">
     <div>
         <img src="/photo/4.png" >
@@ -81,6 +81,7 @@
     }
 
     jQuery(document).ready(function () {
+
         $("#delete").on("click",function (){
             if($("#delete").hasClass("Deleting")){
                 return;
@@ -94,7 +95,7 @@
                 type:"post",
                 url:"/album/doDeleteAlbum",
                 dataType:"json",
-                data:params,
+                data: params,
                 success:function(){
                     $("#delete").removeClass("Deleting");
                     $("#delete").val("Deleted");
@@ -125,10 +126,12 @@
             $.ajax({
                 type:"post",
                 url:"/album/changeAlbumName",
+
                 dataType:"json",
                 data:{
                     "selected":selected,
-                    "newAlbumName":newAlbumName
+                    "newAlbumName":newAlbumName,
+
                 },
                 success:function(){
                     $("#doChange").removeClass("Changing");
