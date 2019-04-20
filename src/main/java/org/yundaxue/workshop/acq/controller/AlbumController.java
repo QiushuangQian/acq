@@ -130,7 +130,7 @@ public class AlbumController {
         //int selectedId = Integer.parseInt(request.getParameter("selected"));
 //        List<String> photoPath = albumPhotoService.showPhoto(NumberUtils.toInt(selectedId,1),userId);
 //        model.addAttribute("pathList",photoPath);
-        attr.addAttribute("albumId",selectedId);
+        request.getSession().setAttribute("albumId",selectedId);
         return "redirect:/photo";
     }
 

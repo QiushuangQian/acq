@@ -16,15 +16,16 @@
     <input type="button" value="恢复" id="recover">
     <input type="button" value="全选" id="selectAll">
 </div><br>
-<div id="list">
-    <div id="photoArea" style="width: 100%">
+<div id="list" style="text-align: center;">
+    <div id="photoArea" style="width: 100%;display: inline-block;">
         <c:forEach var="photo" items="${initial}">
-            <div style="background: url('${photo.thumbnailPath}');width: 300px;height: 150px;float:left" >
-                <input type="checkbox"  name="group" value="${photo.photoId}" style="float: right;bottom: auto;" >
+            <div class="photo" style="height: 150px;float: left;margin: 2px;">
+                <img src="${photo.thumbnailPath}"><br>
+                <input type="checkbox" name="group" value="${photo.photoId}" style="float: right;position: relative;bottom: 19px;z-index: 1;">
             </div>
         </c:forEach>
-
     </div><br>
+
     <div style="width: 100%">
         <input type="button" value="首页" id="first">
         <input type="button" value="上一页" id="before">
@@ -33,7 +34,16 @@
     </div>
 </div>
 
+
 <script>
+    var pagenum=0;//页号，第几页
+    var container;//照片区域容器
+    //页面加载时，得到照片区域的对象
+    window.onload=function () {
+        container = document.getElementById("photoArea");//得到图片区域容器对象div，用于img标签的附加
+    }
+
+    //彻底删除照片
     $("#delete").on("click",function () {
         //选中照片id的列表
         var id_array=new Array();
@@ -42,7 +52,6 @@
         });
 
         var idstr=id_array.join(',');//将数组元素连接起来以构建一个字符串  
-
 
         $.ajax({
             type:"POST",
@@ -88,17 +97,64 @@
     //全选
     var change=true;//用于鼠标二次点击翻转全选
     $("#selectAll").on("click",function () {
-        if(change){
-            $("[name='group']").prop("checked",true);
-            change=false;
-        }else {
-            $("[name='group']").prop("checked",false);
-            change=true;
-        }
-
+        $("[name='group']").prop("checked",change);
+        change = !change;
     })
 
 
+
+    //首页
+    $("#first").on("click",function () {
+        //返回第一页
+        $loadPhoto(1);
+    })
+
+    <%--function loadPhoto(pagenum) {--%>
+
+        <%--//移除photoArea区域中的照片div--%>
+        <%--$("#photoArea .photo").remove();--%>
+        <%--//加载新的照片div--%>
+        <%--$.ajax({--%>
+            <%--type: "POST",--%>
+            <%--url: "/delPhotoList",--%>
+            <%--data:{--%>
+                <%--"pagenum":pagenum--%>
+            <%--},--%>
+            <%--success: function(data){--%>
+                <%--if(data.result){--%>
+                    <%--for(var i=0;i<data.delPhotoList.length;i++ ){--%>
+                        <%--if(data.delPhotoList[i]!=null && data.delPhotoList[i].photoPath!=null && data.delPhotoList[i].thumbnailPath!=null){--%>
+                            <%--//创建照片div--%>
+                            <%--var div = document.createElement("div");--%>
+                            <%--div.class="photo";--%>
+                            <%--div.style="height: 150px;float: left;margin: 2px;";--%>
+
+                            <%--//创建img标签对象--%>
+                            <%--var img = document.createElement("img");--%>
+                            <%--img.src=data.delPhotoList[i].thumbnailPath;--%>
+                            <%--//创建复选框对象--%>
+                            <%--var input = document.createElement("input");--%>
+                            <%--input.type="checkbox";--%>
+                            <%--input.name="group";--%>
+                            <%--input.value=${data.delPhotoList[i].photoId};--%>
+                            <%--input.style="float:right;position: relative;bottom: 19px;z-index: 1;";--%>
+                            <%--//向照片div中添加照片和复选框--%>
+                            <%--div.appendChild(img);--%>
+                            <%--div.appendChild(input);--%>
+
+                            <%--//向图片容器内添加图片--%>
+                            <%--container.appendChild(div);--%>
+
+                        <%--}--%>
+                    <%--}--%>
+                <%--}else{--%>
+                    <%--alert("pagenum为空！");--%>
+                <%--}--%>
+            <%--},--%>
+            <%--error:function () {--%>
+            <%--}--%>
+        <%--});--%>
+    <%--}--%>
 
 
 </script>

@@ -21,7 +21,6 @@ import java.util.Map;
  */
 @Controller
 public class FrontController {
-	private int maxnum = 10;
 	@Autowired
 	PhotoService photoService;
 	@Autowired

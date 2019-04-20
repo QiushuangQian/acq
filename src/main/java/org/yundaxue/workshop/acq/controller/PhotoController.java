@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.PhotoService;
@@ -19,7 +20,6 @@ import java.util.Map;
 
 @Controller
 public class PhotoController {
-    private int maxnum = 10; //设置每页最多显示多少张照片
     private List<Photo> list;//照片列表
     private int userId;//用户Id
 
@@ -34,13 +34,17 @@ public class PhotoController {
         userId = ((User) request.getSession().getAttribute("USER")).getUserId();
 
         //得到选中的相册Id
-        String albumId = request.getParameter("albumId");
+        String albumId = (String) request.getSession().getAttribute("albumId");
         if(albumId==null){ //传递的相册Id为空时
             //按页数得到照片列表的字符串表示
-            list = photoService.photoList(1, maxnum, userId,1);
+            list = photoService.photoList(1, ConfigClass.maxnum, userId,1);
         }else {
             int id = Integer.parseInt(albumId);
-            list = photoService.ablumPhotoList(1,maxnum,userId,1,Integer.parseInt(albumId));
+            if(id==0){
+                list = photoService.photoList(1, ConfigClass.maxnum, userId,1);
+            }else {
+                list = photoService.ablumPhotoList(1,ConfigClass.maxnum,userId,1,id);
+            }
         }
 
         //将指定用户的相册列表通过model传递给jsp页面
@@ -62,12 +66,17 @@ public class PhotoController {
         resultMap.put("result",true);
 
         //得到选中的相册Id
-        String ablumId = (String)request.getAttribute("albumId");
-        if(ablumId==null){ //传递的相册Id为空时
+        String albumId = (String) request.getSession().getAttribute("albumId");
+        if(albumId==null){ //传递的相册Id为空时
             //按页数得到照片列表的字符串表示
-            list = photoService.photoList(Integer.parseInt(pagenum), maxnum, userId,1);
+            list = photoService.photoList(Integer.parseInt(pagenum), ConfigClass.maxnum, userId,1);
         }else {
-            list = photoService.ablumPhotoList(Integer.parseInt(pagenum),maxnum,userId,1,Integer.parseInt(ablumId));
+            int id = Integer.parseInt(albumId);
+            if(id==0){
+                list = photoService.photoList(Integer.parseInt(pagenum), ConfigClass.maxnum, userId,1);
+            }else {
+                list = photoService.ablumPhotoList(Integer.parseInt(pagenum),ConfigClass.maxnum,userId,1,id);
+            }
         }
         resultMap.put("photoList",list);
         return resultMap;

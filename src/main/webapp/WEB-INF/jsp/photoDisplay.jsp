@@ -90,7 +90,6 @@
     </div>
         <div id="photoArea">
         <c:forEach var="photo" items="${initial}">
-            <%--width: 301px;height: 215px;--%>
             <div style="height: 150px;float: left;text-align: center;margin: 2px;">
                 <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}"><br>
                 <input type="checkbox" name="group" value="${photo.photoId}" style="float: right;visibility: hidden;position: relative;bottom: 14px;z-index: 1;">

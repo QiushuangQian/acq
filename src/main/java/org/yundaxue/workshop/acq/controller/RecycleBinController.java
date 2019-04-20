@@ -23,7 +23,6 @@ import java.util.Map;
  */
 @Controller
 public class RecycleBinController {
-    private int maxnum = 10;//分页显示最大数
     private int userId;
     @Autowired
     PhotoService photoService;
@@ -35,7 +34,7 @@ public class RecycleBinController {
         userId=((User)request.getSession().getAttribute("USER")).getUserId();
 
         //按页数得到照片列表的字符串表示
-        List<Photo> list = photoService.photoList(1, maxnum, userId,0);
+        List<Photo> list = photoService.photoList(1, ConfigClass.maxnum, userId,0);
 
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("initial",list);
@@ -55,7 +54,7 @@ public class RecycleBinController {
         }
         resultMap.put("result",true);
         //得到状态为删除的照片列表
-        resultMap.put("delPhotoList",photoService.photoList(Integer.parseInt(pagenum), maxnum, userId,0));
+        resultMap.put("delPhotoList",photoService.photoList(Integer.parseInt(pagenum), ConfigClass.maxnum, userId,0));
         return resultMap;
     }
 
