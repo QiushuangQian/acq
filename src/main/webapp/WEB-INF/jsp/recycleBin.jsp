@@ -73,7 +73,7 @@
                 id_array.push($(this).val());//向数组中添加元素  
             });
 
-            var idstr=id_array.join(',');//将数组元素连接起来以构建一个字符串  
+            var  idstr=id_array.join(',');//将数组元素连接起来以构建一个字符串  
             //alert(idstr);
 
             $.ajax({
