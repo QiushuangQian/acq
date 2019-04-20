@@ -10,9 +10,10 @@
 <head>
     <title>修改密码</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/changePsw.css">
 </head>
 <body>
-<div style="text-align: center">
+<div class="a" >
     <!--<div>
         <img src="/photo/4.png" >
     </div>

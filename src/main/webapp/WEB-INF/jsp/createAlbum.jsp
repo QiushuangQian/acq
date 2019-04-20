@@ -10,20 +10,21 @@
 <head>
     <title>CreateAlbum</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/createAlbum.css">
 </head>
 <body>
 <div class = "body">
-    <div style="text-align: center">
+    <div class="e1">
         <div>
             <img src="/photo/4.png" >
         </div>
-        <div style="text-align: center">
+        <div class="e2">
             <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
         </div>
         <div>
-            <div style="margin-left: -830px">
-                <input id="upload" type="button" value="上传照片" style="background-color: aqua">
-                <input id="back" type="button" value="返回" style="background-color: aqua">
+            <div class="e3">
+                <input id="upload" type="button" value="上传照片">
+                <input id="back" type="button" value="返回">
             </div>
         </div>
 

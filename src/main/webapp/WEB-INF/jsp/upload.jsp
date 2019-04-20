@@ -15,17 +15,18 @@
     <script type="text/javascript" src="/js/jquery/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="/js/webuploader.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/upload.css">
 </head>
 <body>
-<div style="text-align: center">
+<div class="a1">
     <div>
         <img src="/photo/4.png" >
     </div>
-    <div style="text-align: center">
+    <div class="a2">
         <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
     </div>
     <div>
-        <div style="margin-left: -830px">
+        <div class="a3">
             <input id="upload" type="button" value="上传照片" style="background-color: aqua">
             <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
             <input id="back" type="button" value="返回" style="background-color: aqua">
@@ -41,7 +42,7 @@
             </c:forEach>
         </select>
     </div><br>
-    <div id="uploader-demo" style="overflow: auto; width: 800px;height: 300px;">
+    <div id="uploader-demo">
         <div id="fileList" class="uploader-list"></div>
     </div><br>
     <div>

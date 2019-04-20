@@ -4,17 +4,18 @@
 <head>
     <title>登录</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/login.css">
 </head>
-<body style="text-align: center;align-content: center">
-<div style="width: 530px;height: 570px;text-align: center;background-color: #E5E5E5">
-    <div align="center" style=" text-align: center;margin-left: 35px;margin-right: 35px">
+<body class="b" >
+<div class="c" >
+    <div class="d">
         <img src="/photo/2.png" >
     </div>
     <div>
         <img src="/photo/3.png">
     </div>
-    <div style="background-color: white; height: 380px;text-align: center;margin-left: 74px;margin-right: 74px">
-        <div align="center" style="margin-top:1px;">
+    <div class="f">
+        <div class="e">
             <span >登录</span>
             <a href="http://localhost:8080/register"><span>注册</span></a>
         </div>

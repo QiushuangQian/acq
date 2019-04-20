@@ -1,0 +1,36 @@
+.b1 {
+    text-align: center;
+}
+
+.b2 {
+    text-align: center;
+}
+
+.b3 {
+    margin-left: -830px;
+}
+
+#upload {
+    background-color: aqua;
+}
+
+#createAlbum {
+    background-color: aqua;
+}
+
+#back {
+    background-color: aqua;
+}
+
+.b4 {
+    margin-left: 1750px;
+}
+#recycleBin{
+    background-color: white;
+}
+#newName{
+    visibility: hidden;
+}
+#doChange{
+    visibility: hidden;
+}

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>回收站</title>
-    <link type="text/css" rel="stylesheet" href="/css/photo.css">
+    <link type="text/css" rel="stylesheet" href="/css/recycleBin.css">
 
     <script src="/js/jquery/jquery-3.3.1.js"></script>
 </head>
@@ -21,14 +21,14 @@
 <div id="list" style="text-align: center;">
     <div id="photoArea" style="width: 100%;display: inline-block;">
         <c:forEach var="photo" items="${initial}">
-            <div class="photo" style="height: 150px;float: left;margin: 2px;">
+            <div class="photo" >
                 <img src="${photo.thumbnailPath}"><br>
-                <input type="checkbox" name="group" value="${photo.photoId}" style="float: right;position: relative;bottom: 19px;z-index: 1;">
+                <input type="checkbox" name="group" value="${photo.photoId}" >
             </div>
         </c:forEach>
     </div><br>
 
-    <div style="width: 100%">
+    <div class="fenye" style="width: 100%">
         <input type="button" value="首页" id="first">
         <input type="button" value="上一页" id="before">
         <input type="button" value="下一页" id="after">

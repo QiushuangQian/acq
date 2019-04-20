@@ -1,5 +1,4 @@
 
-
 .photo {
     height: 150px;
     float: left;
@@ -19,4 +18,12 @@
     position: relative;
     bottom: 19px;
     z-index: 1;
+}
+
+#photoArea {
+    width: 100%;
+    display: inline-block;
+}
+.fenye {
+    width: 100%;
 }
