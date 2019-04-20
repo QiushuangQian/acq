@@ -34,7 +34,7 @@
                     //发送ajax请求获取数据
                     $.ajax({
                         type: "POST",
-                        url: "/photoList",
+                        url: "/photo/photoList",
                         data:{
                             "pagenum":pagenum
                         },
@@ -92,9 +92,9 @@
     </div>
         <div id="photoArea">
         <c:forEach var="photo" items="${initial}">
-            <div style="width: 301px;height: 215px;float: left">
-                <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}" style="margin: 2px"><br>
-                <input type="checkbox" name="group" value="${photo.photoId}" style="float: right;visibility: hidden;">
+            <div style="height: 150px;float: left;text-align: center;margin: 2px;">
+                <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}"><br>
+                <input type="checkbox" name="group" value="${photo.photoId}" style="float: right;visibility: hidden;position: relative;bottom: 14px;z-index: 1;">
             </div>
         </c:forEach>
     </div>

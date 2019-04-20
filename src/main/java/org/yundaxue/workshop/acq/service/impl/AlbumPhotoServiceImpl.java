@@ -30,12 +30,6 @@ public class AlbumPhotoServiceImpl implements AlbumPhotoService {
 		return null;
 	}
 
-	//获取用户相册照片列表
-	@Override
-	public List<Photo> getPhotoList(int pagenum, int maxnum, int albumId,int userId) throws Exception {
-		int index = (pagenum-1)*maxnum;
-		return albumPhotoMapper.getPhotoList(index, maxnum, albumId,userId);
-	}
 
 	@Override
 	public List<String> showPhoto(int albumId, int userId) throws Exception {
