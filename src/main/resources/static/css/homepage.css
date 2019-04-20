@@ -1,0 +1,26 @@
+.d1 {
+    text-align: center;
+}
+
+.widthSet {
+    text-align: center;
+}
+
+#upload {
+    background-color: aqua;
+}
+
+#createAlbum {
+    background-color: aqua;
+    margin-left: 10px;
+}
+
+#setAlbum {
+    background-color: aqua;
+    margin-left: 10px;
+}
+
+#recycleBin {
+    background-color: white;
+    float: right;
+}

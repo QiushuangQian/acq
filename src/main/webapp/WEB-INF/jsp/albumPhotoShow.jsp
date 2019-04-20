@@ -16,18 +16,19 @@
 
     <script src="/js/jquery/jquery-3.3.1.js"></script>
     <script src="/js/jquery.magnify.min.js"></script><%--图片展示插件js--%>
-
+    <link type="text/css" rel="stylesheet" href="/css/albumPhotoShow.css">
 </head>
 <body>
-<div style="text-align: center">
+<div class="first" >
     <div>
         <img src="/photo/4.png" >
     </div>
-    <div style="text-align: center">
-        <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
+    <div class="second">
+        <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="photo" type="button" value="照片">
     </div>
     <div>
-        <div style="margin-left: -830px">
+        <div class="third" >
             <input id="upload" type="button" value="上传照片" style="background-color: aqua">
             <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
             <input id="back" type="button" value="返回" style="background-color: aqua">
@@ -53,6 +54,14 @@
 -->
 <script  type="text/javascript">
     $(function () {
+        $("#photo").on("click",function () {
+            window.location.href="/homepage/photo"
+
+        })
+
+        $("#album").on("click",function () {
+            window.location.href="/homepage/albumPhotoShow"
+        })
         $("#recycleBin").on("click",function () {
             window.location.href="/recycleBin"
         });

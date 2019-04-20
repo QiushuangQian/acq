@@ -1,0 +1,30 @@
+.b {
+    text-align: center;
+    align-content: center;
+}
+
+.c {
+    width: 530px;
+    height: 570px;
+    text-align: center;
+    background-color: #E5E5E5;
+}
+
+.d {
+    text-align: center;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.f {
+    background-color: white;
+    height: 380px;
+    text-align: center;
+    margin-left: 74px;
+    margin-right: 74px;
+}
+
+.e {
+    text-align: center;
+    margin-top: 1px;
+}

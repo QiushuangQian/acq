@@ -1,0 +1,14 @@
+.c1 {
+    height: 150px;
+    float: left;
+    text-align: center;
+    margin: 2px;
+}
+
+.c2 {
+    float: right;
+    visibility: hidden;
+    position: relative;
+    bottom: 14px;
+    z-index: 1;
+}

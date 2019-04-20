@@ -6,27 +6,31 @@
   Time: 10:35
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <html>
 <head>
     <title>SetAlbum</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/setAlbum.css">
 </head>
 <body>
 <% request.setCharacterEncoding("UTF-8");%>
-<div style="text-align: center">
+<div class="b1">
     <div>
-        <img src="/photo/4.png" >
+        <img src="/photo/4.png">
     </div>
-    <div style="text-align: center">
-        <span >相册</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片</span>
+    <div class="b2">
+        <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="photo" type="button" value="照片">
     </div>
     <div>
-        <div style="margin-left: -830px">
-            <input id="upload" type="button" value="上传照片" style="background-color: aqua">
-            <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
-            <input id="back" type="button" value="返回" style="background-color: aqua">
-            <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
+        <div class="b3">
+            <input id="upload" type="button" value="上传照片">
+            <input id="createAlbum" type="button" value="创建相册">
+            <input id="back" type="button" value="返回">
+            <div class="b4">
+                <input type="button" id="recycleBin" value="回收站">
+            </div>
         </div>
     </div>
     <div class="selectAlbum">
@@ -41,35 +45,43 @@
     else{document.all('newName').style.visibility='hidden';document.all('doChange').style.visibility='hidden';show=true;}">
     </div>
     <div class="setName">
-        <input type="text" id="newName" placeholder="给你的相册取个新名字" style="visibility: hidden">
-        <input type="button" id="doChange" value="修改" style="visibility: hidden">
+        <input type="text" id="newName" placeholder="给你的相册取个新名字">
+        <input type="button" id="doChange" value="修改">
     </div>
 </div>
-<script  type="text/javascript">
+<script type="text/javascript">
     $(function () {
-        $("#recycleBin").on("click",function () {
-            window.location.href="/recycleBin"
+        $("#photo").on("click", function () {
+            window.location.href = "/homepage/photo"
+
+        })
+
+        $("#album").on("click", function () {
+            window.location.href = "/homepage/albumPhotoShow"
+        })
+        $("#recycleBin").on("click", function () {
+            window.location.href = "/recycleBin"
         });
 
-        $("#back").on("click",function(){
-            window.location.href="/homepage"
+        $("#back").on("click", function () {
+            window.location.href = "/homepage"
         });
 
         //上传照片——峰
-        $("#upload").on("click",function () {
-            window.location.href="/homepage/upload"
+        $("#upload").on("click", function () {
+            window.location.href = "/homepage/upload"
         });
 
         //创建相册——峰
-        $("#createAlbum").on("click",function () {
-            window.location.href="/homepage/createAlbum"
+        $("#createAlbum").on("click", function () {
+            window.location.href = "/homepage/createAlbum"
         })
     });
 
 
 </script>
 <script language="JavaScript">
-    var show= true;
+    var show = true;
 </script>
 
 
@@ -82,25 +94,25 @@
 
     jQuery(document).ready(function () {
 
-        $("#delete").on("click",function (){
-            if($("#delete").hasClass("Deleting")){
+        $("#delete").on("click", function () {
+            if ($("#delete").hasClass("Deleting")) {
                 return;
             }
             $("#delete").addClass("Deleting");
             $("#delete").val("相册删除中...");
 
             //传递参数到后端
-            var params = {"selected":selected};
+            var params = {"selected": selected};
             $.ajax({
-                type:"post",
-                url:"/album/doDeleteAlbum",
-                dataType:"json",
+                type: "post",
+                url: "/album/doDeleteAlbum",
+                dataType: "json",
                 data: params,
-                success:function(){
+                success: function () {
                     $("#delete").removeClass("Deleting");
                     $("#delete").val("Deleted");
                 },
-                error:function() {
+                error: function () {
                     $("#delete").removeClass("Deleting");
                     $("#delete").val("Delete");
                 }
@@ -111,8 +123,8 @@
 
 <script>
     jQuery(document).ready(function () {
-        $("#doChange").on("click",function () {
-            if($("#doChange").hasClass("Changing")){
+        $("#doChange").on("click", function () {
+            if ($("#doChange").hasClass("Changing")) {
                 return;
             }
             $("#doChange").addClass("Changing");
@@ -124,20 +136,20 @@
 
             //传递参数到后端
             $.ajax({
-                type:"post",
-                url:"/album/changeAlbumName",
+                type: "post",
+                url: "/album/changeAlbumName",
 
-                dataType:"json",
-                data:{
-                    "selected":selected,
-                    "newAlbumName":newAlbumName,
+                dataType: "json",
+                data: {
+                    "selected": selected,
+                    "newAlbumName": newAlbumName,
 
                 },
-                success:function(){
+                success: function () {
                     $("#doChange").removeClass("Changing");
                     $("#doChange").val("Changed");
                 },
-                error:function() {
+                error: function () {
                     $("#doChange").removeClass("Changing");
                     $("#doChange").val("Change");
                 }

@@ -1,0 +1,18 @@
+.a1 {
+    text-align: center;
+}
+
+.a2 {
+    text-align: center;
+}
+
+.a3 {
+    text-align: center;
+
+}
+
+#uploader-demo {
+    overflow: auto;
+    width: 800px;
+    height: 300px;
+}

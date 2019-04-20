@@ -18,6 +18,7 @@
 
     <script src="/js/jquery/jquery-3.3.1.js"></script>
     <script src="/js/jquery.magnify.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/photoDisplay.css">
     <%--图片展示插件js--%>
     <script type="text/javascript">
         var pagenum = 2;//页号
@@ -95,10 +96,9 @@
 </div>
 <div id="photoArea">
     <c:forEach var="photo" items="${initial}">
-        <div style="height: 150px;float: left;text-align: center;margin: 2px;">
+        <div class="c1">
             <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}"><br>
-            <input type="checkbox" name="group" value="${photo.photoId}"
-                   style="float: right;visibility: hidden;position: relative;bottom: 14px;z-index: 1;">
+            <input class="c2" type="checkbox" name="group" value="${photo.photoId}">
         </div>
     </c:forEach>
 </div>

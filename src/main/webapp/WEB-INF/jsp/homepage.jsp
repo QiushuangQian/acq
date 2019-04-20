@@ -3,31 +3,32 @@
 <head>
     <title>个人主页</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
-
+    <link type="text/css" rel="stylesheet" href="/css/homepage.css">
     <style type="text/css">
         .widthSet{
             width: 969px;
         }
     </style>
 </head>
-<body style="text-align: center">
+<body class="d1">
+<div align="center">
 <div>
     <div class="widthSet">
         <img src="/photo/4.png" >
     </div>
-    <div class="widthSet" style="text-align: center">
+    <div class="widthSet">
         <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input id="photo" type="button" value="照片">
        <%--<div style="margin-right: -760px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"   placeholder="搜索照片"></div>--%>
     </div>
     <div class="widthSet">
          <%--<div style="margin-left: -830px">--%>
-         <input id="upload" type="button" value="上传照片" style="background-color: aqua">
-         <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua;margin-left: 10px">
-         <input id="setAlbum" type="button" value="管理相册" style="background-color: aqua;margin-left: 10px">
-         <input type="button" id="recycleBin" value="回收站" style="background-color: white;float: right">
+         <input id="upload" type="button" value="上传照片">
+         <input id="createAlbum" type="button" value="创建相册">
+         <input id="setAlbum" type="button" value="管理相册">
+         <input type="button" id="recycleBin" value="回收站">
     </div><br>
-
+</div>
 </div>
 <script  type="text/javascript">
     $(function () {
