@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yundaxue.workshop.acq.model.Album;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.UserService;
 
@@ -36,14 +35,19 @@ public class UserController {
     //注册时发送验证码，进行数据插入
     @RequestMapping(value = "/register/sendMail")
     @ResponseBody
-    public boolean sendMail(User user, ModelMap model, HttpServletRequest request, HttpServletResponse response)throws Exception{
-        return userService.register(user);
+    public Map<String,Object> sendMail(User user, ModelMap model, HttpServletRequest request, HttpServletResponse response)throws Exception{
+
+        Map<String,Object> result = new HashMap<>();
+        result.put("sendResult",userService.register(user));
+        return result;
     }
     //修改密码时发送验证码，进行数据的更新
     @RequestMapping(value = "/changePsw/sendMailChangePsw")
     @ResponseBody
-    public boolean sendMailChangePsw(User user, ModelMap model, HttpServletRequest request, HttpServletResponse response)throws Exception{
-        return userService.sendMailChangePsw(user);
+    public Map<String,Object> sendMailChangePsw(User user, ModelMap model, HttpServletRequest request, HttpServletResponse response)throws Exception{
+        Map<String,Object> result = new HashMap<>();
+        result.put("sendResult",userService.sendMailChangePsw(user));
+        return result;
     }
     //注册时，激活用户，检验验证码
     @RequestMapping(value = "/activation")
@@ -55,7 +59,7 @@ public class UserController {
             result.put("idCode",1);
         }else {
             result.put("idCode",0);
-            result.put("msg","激活失败");
+            result.put("msg","验证码错误！");
         }
         return result;
     }

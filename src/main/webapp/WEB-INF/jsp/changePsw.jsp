@@ -31,20 +31,25 @@
             if ($("#sendMail").hasClass("Sending")) {
                 return;
             }
-            $("#sendMail").addClass("Sending");
-            $("#sendMail").val("邮件发送中...");
-
-            //密码
-            var password = $("#password").val();
-            if (password == null) {
-                alert("密码不能为空！");
-            }
-
             //邮箱
             var email = $("#email").val();
-            if (email == null) {
+            var isEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            if (email == null||email=="") {
                 alert("邮箱不能为空！");
+                return;
+            }else if(isEmail.test(email)==false){
+                alert("邮箱格式不正确！");
+                return false;
             }
+            //密码
+            var password = $("#password").val();
+            if (password == ""||password==null) {
+                alert("密码不能为空！");
+                return;
+            }
+
+            $("#sendMail").addClass("Sending");
+            $("#sendMail").val("邮件发送中...");
 
             $.ajax({
                 type: "post",
@@ -55,10 +60,12 @@
                     "password": password
                 },
                 success: function (result) {
-                    $("#sendMail").removeClass("Sending");
-                    $("#sendMail").val("邮件已发送");
-                    if (!result) {
+                    if (!result.sendResult) {
                         alert("邮箱未注册！");
+                        $("#sendMail").removeClass("Sending");
+                        $("#sendMail").val("发送验证邮件");
+                    }else {
+                        $("#sendMail").val("邮件已发送");
                     }
                 },
                 error: function () {
@@ -77,9 +84,28 @@
             }
             $("#submit").addClass("Submitting");
             $("#submit").val("确认中...");
-
+            //邮箱
+            var email = $("#email").val();
+            var isEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            if (email == null||email=="") {
+                alert("邮箱不能为空！");
+                return;
+            }else if(isEmail.test(email)==false){
+                alert("邮箱格式不正确！");
+                return false;
+            }
+            //密码
+            var password = $("#password").val();
+            if (password == ""||password==null) {
+                alert("密码不能为空！");
+                return;
+            }
             //验证码
             var idCode = $("#idCode").val();
+            if(idCode==""||idCode==null){
+                alert("验证码不能为空！");
+                return;
+            }
 
             $.ajax({
                 type: "post",
@@ -89,13 +115,12 @@
                     "idCode": idCode
                 },
                 success: function (result) {
-                    $("#submit").removeClass("Submitting");
-                    $("#submit").val("确定");
                     if (result.idCode == 1) {
                         window.location.href = "/user/login"
-                    }
-                    else {
+                    }else {
                         alert(result.msg);
+                        $("#submit").removeClass("Submitting");
+                        $("#submit").val("确定");
                     }
                 },
                 error: function () {

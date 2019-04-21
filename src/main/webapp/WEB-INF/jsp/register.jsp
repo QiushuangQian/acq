@@ -11,58 +11,78 @@
 <head>
     <title>注册</title>
     <script src="/js/jquery/jquery-3.3.1.js"></script>
+    <style type="text/css">
+        div{
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 <div align="center">
     <div><img src="/images/loginLogo.png"></div>
-    <div>昵称：<input type="text" id="nickName"></div>
+    <div>邮箱：<input type="text" id="email"></div>
     <div>密码：<input type="password" id="password"></div>
-    <div>邮箱：<input type="email" id="email"></div>
     <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验证码：<input type="text" id="idCode"><input type="button" id="sendMail" value="发送验证邮件"></div>
     <%--<div><input type="checkbox" value="已阅读并接受" id="agree"><a href="#" id="agreement">猫爪相册注册协议</a> </div>--%>
     <div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="register" value="注册"></div>
 </div>
-<%--<div>----------------使用第三方注册-----------------</div>--%>
-<%--<div><img src="/images/qqLogo.png" id="qq"><img src="/images/wechatLogo.png" id="wechat"></div>--%>
 <script>
     $(function () {
+        //验证邮箱和密码是否正确
+        function checkInput() {
+            //验证邮箱格式的js正则表达式
+//            var mail = $("#email").val();
+            var mailTmp =  $.trim($('#email').val());
+            var isEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            if(mailTmp.length<=0){
+                alert("邮箱不能为空！");
+                return false;
+            }else if(isEmail.test(mailTmp)==false){
+                alert("邮箱格式不正确！");
+                return false;
+            }
+            //密码
+            var psw = $("#password").val();
+            if (psw.length<=0) {
+                alert("密码不能为空！");
+                return false;
+            }
+            return true;
+        }
+
         //发送验证邮件
         $("#sendMail").on("click", function () {
             //等待验证邮件发送
             if ($("#sendMail").hasClass("Sending")) {
                 return;
             }
+
+            if(!checkInput()){
+                return;
+            }
+            var email = $("#email").val();
+            var password = $("#password").val();
+
+            //使无法再次触发发送右键操作
             $("#sendMail").addClass("Sending");
             $("#sendMail").val("邮件发送中...");
-
-            //昵称
-            var nickname = $("#nickName").val();
-            //密码
-            var password = $("#password").val();
-            if (password == null) {
-                alert("密码不能为空！");
-            }
-
-            //邮箱
-            var email = $("#email").val();
-            if (email == null) {
-                alert("邮箱不能为空！");
-            }
 
             $.ajax({
                 type: "post",
                 url: "/register/sendMail",
                 dataType: "json",
                 data: {
-                    "nickName": nickname,
                     "email": email,
                     "password": password
                 },
                 success: function (result) {
-                    $("#sendMail").removeClass("Sending");
-                    $("#sendMail").val("邮件已发送");
-                    if (!result) {
+
+                    if (!result.sendResult) {
                         alert("邮箱已注册！");
+                        $("#sendMail").removeClass("Sending");//失败，可以再次发送邮件
+                        $("#sendMail").val("发送验证邮件");
+                    }else { //成功，无法再次触发发送邮件
+                        $("#sendMail").val("邮件已发送");
                     }
                 },
                 error: function () {
@@ -79,27 +99,35 @@
             if ($("#register").hasClass("Registering")) {
                 return;
             }
+            if(!checkInput()){
+                return;
+            }
+            //验证码
+            var code=$("#idCode").val();
+            if(code.length<=0){
+                alert("验证码为空！");
+                return;
+            }
+            //使无法再次触发注册操作
             $("#register").addClass("Registering");
             $("#register").val("注册中...");
-
-            //验证码
-            var idCode = $("#idCode").val();
-            //alert(idCode)
 
             $.ajax({
                 type: "post",
                 url: "/activation",
                 dataType: "json",
                 data: {
-                    "idCode": idCode
+                    "idCode": code
                 },
                 success: function (result) {
-                    $("#register").removeClass("Registering");
-                    $("#register").val("注册");
+
                     if (result.idCode == 1) {
+                        $("#register").val("注册成功！");
                         window.location.href = "/user/login"
                     }
                     else {
+                        $("#register").removeClass("Registering");
+                        $("#register").val("注册");
                         alert(result.msg);
                     }
                 },
