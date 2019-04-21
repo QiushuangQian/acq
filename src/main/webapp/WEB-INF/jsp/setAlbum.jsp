@@ -111,6 +111,7 @@
                 success: function () {
                     $("#delete").removeClass("Deleting");
                     $("#delete").val("Deleted");
+
                 },
                 error: function () {
                     $("#delete").removeClass("Deleting");
