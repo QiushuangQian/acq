@@ -14,6 +14,7 @@ import org.yundaxue.workshop.acq.service.PhotoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,26 +32,33 @@ public class PhotoController {
     @RequestMapping(value = "/photo")
     public String photo(Model model, HttpServletRequest request)throws Exception{
 
-
         //得到用户Id
         userId = ((User) request.getSession().getAttribute("USER")).getUserId();
+        int maxPageNum=1;//最大页数
 
         //得到选中的相册Id
         String albumId = (String) request.getSession().getAttribute("albumId");
         if(albumId==null){ //传递的相册Id为空时
+            //得到最大分页数
+            maxPageNum= photoService.getMaxPageNum(ConfigClass.maxnum,userId,1);
             //按页数得到照片列表的字符串表示
             list = photoService.photoList(1, ConfigClass.maxnum, userId,1);
         }else {
             int id = Integer.parseInt(albumId);
             if(id==0){
+                maxPageNum= photoService.getMaxPageNum(ConfigClass.maxnum,userId,1);
                 list = photoService.photoList(1, ConfigClass.maxnum, userId,1);
             }else {
+                maxPageNum= photoService.getMaxPageNum(ConfigClass.maxnum,userId,1,id);
                 list = photoService.ablumPhotoList(1,ConfigClass.maxnum,userId,1,id);
             }
         }
-
         //将指定用户的相册列表通过model传递给jsp页面
         model.addAttribute("initial",list);
+        if(maxPageNum==0){
+            maxPageNum=1;
+        }
+        model.addAttribute("maxPageNum",maxPageNum);
         return "photoDisplay";
     }
 
@@ -94,7 +102,8 @@ public class PhotoController {
         model.addAttribute("pathList",paths);
         return "photoDisplay";
     }
-//删除照片，加入回收站
+
+    //删除照片，加入回收站
     @RequestMapping(value = "/deletePhoto")
     @ResponseBody
     public Map<String,String> deletePhoto(@RequestParam("selectPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
@@ -108,13 +117,18 @@ public class PhotoController {
             for (int i = 0; i < arrayA.length; i++) {
                 int delPhotoId=Integer.parseInt(arrayA[i]);
 
-
                 List<Photo> photo=photoService.getPhotoById(delPhotoId,userId);
                 if(photo.size()>0){
-
+                    Date delTime = new Date();
                     //修改照片状态
-                    photoService.deletePhoto(delPhotoId,userId);
+                    photoService.deletePhoto(delPhotoId,userId,delTime);
+                    //得到最大分页数
+                    int maxPageNum = photoService.getMaxPageNum(ConfigClass.maxnum,userId,1);
+                    if(maxPageNum==0){
+                        maxPageNum=1;
+                    }
                     resultMap.put("msg","success");
+                    resultMap.put("maxPageNum",maxPageNum+"");
                 }else {
                     resultMap.put("msg","fail");
                 }

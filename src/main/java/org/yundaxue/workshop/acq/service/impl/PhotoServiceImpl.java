@@ -6,6 +6,7 @@ import org.yundaxue.workshop.acq.model.Mapper.PhotoMapper;
 import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.service.PhotoService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,8 +45,8 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public boolean deletePhoto(int photoId,int userId) throws Exception {
-        return photoMapper.deletePhoto(photoId,userId);
+    public boolean deletePhoto(int photoId,int userId,Date delTime) throws Exception {
+        return photoMapper.deletePhoto(photoId,userId,delTime);
     }
 
     @Override
@@ -73,6 +74,14 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public int getMaxPageNum(int maxnum, int userId, int isDel) throws Exception {
         int count = photoMapper.getCount(userId, isDel);
+        double result = ((double)count)/((double)maxnum);
+        int maxPageNum = (int)Math.ceil(result);//向上取整
+        return maxPageNum;
+    }
+
+    @Override
+    public int getMaxPageNum(int maxnum, int userId, int isDel, int albumId) throws Exception {
+        int count = photoMapper.getAlbumCount(userId, isDel,albumId);
         double result = ((double)count)/((double)maxnum);
         int maxPageNum = (int)Math.ceil(result);//向上取整
         return maxPageNum;

@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>PhotoList</title>
+    <link type="text/css" rel="stylesheet" href="/css/photoDisplay.css">
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/jquery.magnify.min.css" rel="stylesheet">
     <%--图片展示插件css--%>
@@ -18,143 +19,200 @@
 
     <script src="/js/jquery/jquery-3.3.1.js"></script>
     <script src="/js/jquery.magnify.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="/css/photoDisplay.css">
-    <%--图片展示插件js--%>
-    <script type="text/javascript">
-        var pagenum = 2;//页号
-        var loadFlag = true; //加载标志
-        var container;//照片区域容器
-        window.onload = function () {
-            container = document.getElementById("photoArea");//得到图片区域容器对象div，用于img标签的附加
-        }
-        $(window).scroll(function () {
-            //当滚轮滚动到文档最末位，也就是拉到了最底下
-            //$(window).scrollTop():为滚动条在Y轴上的滚动距离。
-            //$(window).height():为内容可视区域的高度。
-            //$(document).height():当前页面的总高度  为内容可视区域的高度加上溢出（滚动）的距离。
-            if (loadFlag && ($(window).scrollTop() + $(window).height() >= $(document).height() - 5)) {
-                if (loadFlag) {
-                    loadFlag = false;
-                    //发送ajax请求获取数据
-                    $.ajax({
-                        type: "POST",
-                        url: "/photo/photoList",
-                        data: {
-                            "pagenum": pagenum
-                        },
-                        success: function (data) {
-                            if (data.result) {
-                                for (var i = 0; i < data.photoList.length; i++) {
-                                    if (data.photoList[i] != null && data.photoList[i].photoPath != null && data.photoList[i].thumbnailPath != null) {
-                                        //创建img标签对象
-                                        var img = document.createElement("img");
-                                        img.src = data.photoList[i].thumbnailPath;
-                                        img.style = "margin: 2px";
-                                        img.setAttribute("data-magnify", "gallery");
-                                        img.setAttribute("data-src", data.photoList[i].photoPath);
-
-                                        //向图片容器内添加图片
-                                        container.appendChild(img);
-                                    }
-
-                                }
-
-                                //加载完成，开启加载标志
-                                setTimeout(openLoadFlag, 1000);
-                                pagenum++;
-
-                                $('[data-magnify]').magnify({
-                                    headToolbar: [
-                                        'close'
-                                    ],
-                                    initMaximized: true,    //初始最大化
-                                    multiInstances: false    //禁用多实例
-                                });
-
-                            } else {
-                            }
-                        }
-                    });
-                }
-
-            }
-        });
-        function openLoadFlag() {
-            loadFlag = true;//启动加载标志
-        }
-
-    </script>
-
 </head>
 <body>
-<div>
-    <input type="button" id="select" value="选择">
-    <input type="button" id="selectAll" value="全选">
-    <input type="button" id="delete" value="删除">
-
+<div class="menu-button">
     <a href="/homepage">&lt;&lt; 返回</a>
+
+    <input type="button" id="select" value="选择">
+    <input type="button" id="selectAll" value="全选" disabled="disabled">
+    <input type="button" id="delete" value="删除" disabled="disabled">
 </div>
 <div id="photoArea">
     <c:forEach var="photo" items="${initial}">
         <div class="photo">
-            <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}"><br>
-            <input type="checkbox" name="group" value="${photo.photoId}">
+            <img data-magnify="gallery" data-src="${photo.photoPath}" src="${photo.thumbnailPath}">
+            <input type="checkbox" name="group" value="${photo.photoId}" >
         </div>
     </c:forEach>
+</div><br>
+<div class="fenye">
+    <input type="button" value="首页" id="first">
+    <input type="button" value="上一页" id="before">
+    <input type="button" value="下一页" id="after">
+    <input type="button" value="末页" id="last">
 </div>
 
-
 <script>
-    var show = true;
-    $('[data-magnify]').magnify({
-        headToolbar: [
-            'close'
-        ],
-        initMaximized: true,    //初始最大化
-        multiInstances: false    //禁用多实例
-    });
-    $("#select").on("click", function () {
-        $('input[name="group"]').css("visibility", show ? 'visible' : 'hidden');
-        show = !show;
-    })
+    var show = false;//是否显示复选框
+    $(function () {
+        var change = true;//用于鼠标二次点击翻转全选
+        var pagenum=1;//页号，第几页
+        var maxPageNum = ${maxPageNum};//最大分页数
+        if(maxPageNum==1){//只有一页
+            $("#first").prop('disabled',true);//禁用首页
+            $("#before").prop('disabled',true);//禁用上一页
+            $("#after").prop('disabled',true);  //禁用下一页
+            $("#last").prop('disabled',true);   //禁用尾页
+        }else{//多于一页
+            $("#first").prop('disabled',true);//禁用首页
+            $("#before").prop('disabled',true);//禁用上一页
+            $("#after").removeAttr('disabled'); //启用下一页
+            $("#last").removeAttr('disabled');//启用尾页
+        }
+        var container;//照片区域容器
 
-    //删除
-    $("#delete").on("click", function () {
-        var id_array = new Array();
-        $('input[name="group"]:checked').each(function () {
-            id_array.push($(this).val());//向数组中添加元素  
+        //照片浏览插件
+        $('[data-magnify]').magnify({
+            headToolbar: [
+                'close'
+            ],
+            initMaximized: true,    //初始最大化
+            multiInstances: false    //禁用多实例
         });
 
-        var idstr = id_array.join(',');//将数组元素连接起来以构建一个字符串 
-        $.ajax({
-            type: "POST",
-            url: "/deletePhoto",
-            dataType: "json",
-            data: {
-                "selectPhotoList": idstr
-            },
-            success: function (result) {
-                console.log(result.msg);
-                window.location.reload();
-            },
-            error:function (errorMsg) {
-                console.log(errorMsg.error());
-
+        //选择
+        $("#select").on("click", function () {
+            show = !show;
+            $('input[name="group"]').css("visibility", show ? 'visible' : 'hidden');
+            //删除和全选按钮是否可用
+            if(!show){//禁用
+                $("#delete").prop('disabled',true);
+                $("#selectAll").prop('disabled',true);
+            }else {//启用
+                $("#delete").removeAttr('disabled');
+                $("#selectAll").removeAttr('disabled');
             }
         })
-    })
 
-    //全选
-    var change = true;//用于鼠标二次点击翻转全选
-    $("#selectAll").on("click", function () {
-        if (change) {
-            $("[name='group']").prop("checked", true);
-            change = false;
-        } else {
-            $("[name='group']").prop("checked", false);
-            change = true;
+        //删除
+        $("#delete").on("click", function () {
+            show=false;
+
+            var id_array = new Array();
+            $('input[name="group"]:checked').each(function () {
+                id_array.push($(this).val());//向数组中添加元素  
+            });
+
+            var idstr = id_array.join(',');//将数组元素连接起来以构建一个字符串 
+            $.ajax({
+                type: "POST",
+                url: "/deletePhoto",
+                dataType: "json",
+                data: {
+                    "selectPhotoList": idstr
+                },
+                success: function (result) {
+                    console.log(result.msg);
+                    change=!change;
+                    show=true;//删除照片之后继续显示复选框
+                    maxPageNum=result.maxPageNum;
+                    if(pagenum>result.maxPageNum){
+                        pagenum--;
+                    }
+                    changeDisabled(pagenum);//改变翻页键的可用性
+                    loadPhoto(pagenum); //重新加载这一页的照片
+                },
+                error:function (errorMsg) {
+                    console.log(errorMsg.error());
+                    change=!change;
+                    show=true;
+                    changeDisabled(pagenum);
+                    loadPhoto(pagenum);
+                }
+            })
+        })
+        //全选
+        $("#selectAll").on("click", function () {
+            $("[name='group']").prop("checked",change);
+            change = !change;
+        })
+
+        //首页
+        $("#first").on("click",function () {
+            pagenum=1;
+            changeDisabled(pagenum);
+            //返回第一页
+            loadPhoto(pagenum);
+        })
+        //上一页
+        $("#before").on("click",function () {
+            pagenum--;
+            changeDisabled(pagenum);
+            loadPhoto(pagenum);
+        })
+        //下一页
+        $("#after").on("click",function () {
+            pagenum++;
+            changeDisabled(pagenum);
+            loadPhoto(pagenum);
+        })
+        //尾页
+        $("#last").on("click",function () {
+            pagenum=maxPageNum;
+            changeDisabled(pagenum);
+            loadPhoto(pagenum);
+        })
+
+        //根据pagenum确定翻页键的禁用与启动
+        function changeDisabled(pagenum) {
+            if(maxPageNum==1){//只有一页
+                $("#first").prop('disabled',true);//禁用首页
+                $("#before").prop('disabled',true);//禁用上一页
+                $("#after").prop('disabled',true);  //禁用下一页
+                $("#last").prop('disabled',true);   //禁用尾页
+            }else{//多于一页
+                if(pagenum==1){//首页
+                    $("#first").prop('disabled',true);//禁用首页
+                    $("#before").prop('disabled',true);//禁用上一页
+                    $("#after").removeAttr('disabled'); //启用下一页
+                    $("#last").removeAttr('disabled');//启用尾页
+                }else if(pagenum==maxPageNum){//尾页
+                    $("#first").removeAttr('disabled'); //启用首页
+                    $("#before").removeAttr('disabled');//启用上一页
+                    $("#after").prop('disabled',true);  //禁用下一页
+                    $("#last").prop('disabled',true);   //禁用尾页
+                }else {//在中间页
+                    $("#first").removeAttr('disabled'); //启用首页
+                    $("#before").removeAttr('disabled');//启用上一页
+                    $("#after").removeAttr('disabled'); //启用下一页
+                    $("#last").removeAttr('disabled');//启用尾页
+                }
+            }
         }
+        //加载照片函数
+        function loadPhoto(pagenum) {
 
+            //移除photoArea区域中的照片div
+            $("#photoArea .photo").remove();
+            //加载新的照片div
+            $.ajax({
+                type: "POST",
+                url: "/photoList",
+                data:{
+                    "pagenum":pagenum
+                },
+                success: function(data){
+                    if(data.result){
+                        for(var i=0;i<data.photoList.length;i++ ){
+                            if(data.photoList[i]!=null && data.photoList[i].photoPath!=null && data.photoList[i].thumbnailPath!=null){
+                                //创建照片div
+                                var html='<div class="photo">'
+                                    +'<img data-magnify="gallery" data-src="'+data.photoList[i].photoPath+'" src="'+data.photoList[i].thumbnailPath+'">'
+                                    +'<input type="checkbox" name="group" value="'+data.photoList[i].photoId+'" style="visibility:'+(show ? "visible" : "hidden")+';" >'
+                                    +'</div>';
+
+                                $("#photoArea").append(html);
+                            }
+                        }
+                    }else{
+                        alert("pagenum为空！");
+                    }
+                },
+                error:function () {
+                }
+            });
+        }
     })
 </script>
 </body>

@@ -24,6 +24,7 @@ import java.util.Map;
 @Controller
 public class RecycleBinController {
     private int userId;
+    private int maxPageNum;
     @Autowired
     PhotoService photoService;
 
@@ -33,7 +34,10 @@ public class RecycleBinController {
         //得到用户Id
         userId=((User)request.getSession().getAttribute("USER")).getUserId();
         //得到最大分页数
-        int maxPageNum = photoService.getMaxPageNum(ConfigClass.maxnum,userId,0);
+        maxPageNum = photoService.getMaxPageNum(ConfigClass.maxnum,userId,0);
+        if(maxPageNum==0){
+            maxPageNum=1;
+        }
 
         //按页数得到照片列表的字符串表示
         List<Photo> list = photoService.photoList(1, ConfigClass.maxnum, userId,0);
@@ -67,6 +71,8 @@ public class RecycleBinController {
     public Map<String,String> doRecycleBin(@RequestParam("selectPhotoList") String delPhotoList , HttpServletRequest request) throws Exception {
 
         int userId=((User)request.getSession().getAttribute("USER")).getUserId();
+
+
         Map<String,String> resultMap = new HashMap<String, String>();
 
         //得到要删除照片id的列表
@@ -87,7 +93,13 @@ public class RecycleBinController {
                 }
                 //删除数据库中的记录
                 photoService.completeDeletePhoto(delPhotoId,userId);
+                //得到最大分页数
+                maxPageNum = photoService.getMaxPageNum(ConfigClass.maxnum,userId,0);
+                if(maxPageNum==0){
+                    maxPageNum=1;
+                }
                 resultMap.put("msg","success");
+                resultMap.put("maxPageNum",maxPageNum+"");
             }else {
                 resultMap.put("msg","fail");
             }
@@ -100,6 +112,8 @@ public class RecycleBinController {
     public Map<String,String> doRecycleBins(@RequestParam("selectPhotoList") String selectPhotoList , HttpServletRequest request) throws Exception {
 
         int userId = ((User) request.getSession().getAttribute("USER")).getUserId();
+
+
         Map<String, String> resultMap = new HashMap<String, String>();
 
         //得到要恢复照片id的列表
@@ -109,7 +123,10 @@ public class RecycleBinController {
             //修改照片状态
             boolean restoreResult = photoService.restorePhoto(restorePhotoId,userId);
             if(restoreResult){
+                //得到最大分页数
+                maxPageNum = photoService.getMaxPageNum(ConfigClass.maxnum,userId,0);
                 resultMap.put("msg","success");
+                resultMap.put("maxPageNum",maxPageNum+"");
             }else {
                 resultMap.put("msg","fail");
             }

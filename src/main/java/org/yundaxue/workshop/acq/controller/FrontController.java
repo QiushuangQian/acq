@@ -54,7 +54,8 @@ public class FrontController {
 	}
 	//打开默认照片列表页
 	@RequestMapping(value = "/homepage/photo")
-	public String photo()throws Exception{
+	public String photo(HttpServletRequest request)throws Exception{
+		request.getSession().setAttribute("albumId",null);
 		return "redirect:/photo";
 	}
 

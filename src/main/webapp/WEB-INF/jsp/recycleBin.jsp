@@ -19,18 +19,14 @@
     <input type="button" value="恢复" id="recover">
     <input type="button" value="全选" id="selectAll">
 </div><br>
-<div id="list">
-    <div id="photoArea">
-        <c:forEach var="photo" items="${initial}">
-            <div class="photo">
-                <div class="container" style="background-image: url('${photo.thumbnailPath}')"></div>
-                <input type="checkbox" name="group" value="${photo.photoId}" >
-            </div>
-        </c:forEach>
-    </div><br>
-
-
-</div>
+<div id="photoArea">
+    <c:forEach var="photo" items="${initial}">
+        <div class="photo">
+            <div class="container" style="background-image: url('${photo.thumbnailPath}')"></div>
+            <input type="checkbox" name="group" value="${photo.photoId}" >
+        </div>
+    </c:forEach>
+</div><br>
 <div class="fenye">
     <input type="button" value="首页" id="first">
     <input type="button" value="上一页" id="before">
@@ -39,9 +35,12 @@
 </div>
 
 <script>
+    var maxPageNum;
     $(function () {
+        var change=true;//用于鼠标二次点击翻转全选
         var pagenum=1;//页号，第几页
-        var maxPageNum = (${maxPageNum}==0?1:${maxPageNum});//最大分页数
+        maxPageNum = (${maxPageNum}==0?1:${maxPageNum});//最大分页数
+//        changeDisabled(maxPageNum);//根据最大页数改变翻页按钮状态
         if(maxPageNum==1){//只有一页
             $("#first").prop('disabled',true);//禁用首页
             $("#before").prop('disabled',true);//禁用上一页
@@ -53,6 +52,7 @@
             $("#after").removeAttr('disabled'); //启用下一页
             $("#last").removeAttr('disabled');//启用尾页
         }
+
         var container;//照片区域容器
 
         //彻底删除照片
@@ -74,12 +74,16 @@
                 },
                 success:function (result) {
                     console.log(result.msg);
-                    window.location.reload();
-
+                    change=!change;
+                    maxPageNum=result.maxPageNum;
+                    if(pagenum>result.maxPageNum){
+                        pagenum--;
+                    }
+                    changeDisabled(pagenum);//改变翻页键的可用性
+                    loadPhoto(pagenum); //重新加载这一页的照片
                 }
             })
         })
-
         //恢复
         $("#recover").on("click",function () {
             //选中照片id的列表
@@ -100,14 +104,17 @@
                 },
                 success:function (result) {
                     console.log(result.msg);
-                    window.location.reload();
-
+                    change=!change;
+                    maxPageNum=result.maxPageNum;
+                    if(pagenum>result.maxPageNum){
+                        pagenum--;
+                    }
+                    changeDisabled(pagenum);//改变翻页键的可用性
+                    loadPhoto(pagenum); //重新加载这一页的照片
                 }
             })
         })
-
         //全选
-        var change=true;//用于鼠标二次点击翻转全选
         $("#selectAll").on("click",function () {
             $("[name='group']").prop("checked",change);
             change = !change;
@@ -199,6 +206,7 @@
                 }
             });
         }
+
     })
 
 

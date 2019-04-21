@@ -2,6 +2,7 @@ package org.yundaxue.workshop.acq.service;
 
 import org.yundaxue.workshop.acq.model.Photo;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PhotoService {
@@ -20,7 +21,7 @@ public interface PhotoService {
     public List<Photo> getPhotoById(int photoId,int userId) throws Exception;
 
     //删除照片
-    public boolean deletePhoto(int photoId,int userId) throws Exception;
+    public boolean deletePhoto(int photoId, int userId, Date delTime) throws Exception;
     //完全删除照片
     public  boolean completeDeletePhoto(int photoId,int userId) throws Exception;
 
@@ -34,5 +35,6 @@ public interface PhotoService {
 
     //得到最大分页数
     public int getMaxPageNum(int maxnum,int userId,int isDel) throws Exception;
+    public int getMaxPageNum(int maxnum,int userId,int isDel,int albumId) throws Exception;
 
 }
