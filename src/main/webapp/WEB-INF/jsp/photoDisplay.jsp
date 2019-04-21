@@ -182,7 +182,9 @@
         }
         //加载照片函数
         function loadPhoto(pagenum) {
-
+            if(pagenum==0){
+                pagenum=1;
+            }
             //移除photoArea区域中的照片div
             $("#photoArea .photo").remove();
             //加载新的照片div
