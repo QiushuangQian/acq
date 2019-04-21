@@ -39,50 +39,57 @@
         </div>
     </div>
 </div>
-    <script>
-        $(function () {
-          $("#btnLogin").on("click",function () {
-              if ($("#btnLogin").hasClass("正在登录...")){
-                  return;
-              }
-              $("#btnLogin").addClass("正在登录...");
-              $("#btnLogin").val("正在登录...");
-              var userId=$("#userName").val();
-              if(userId.trim()==""){
-                  alert("User ID is empty!");
-                  return;
-              }
-              var password=$("#password").val();
-              if(password.trim()==""){
-                  alert("Password is empty!");
-                  return;
-              }
-              $.ajax({
-                  type:"POST",
-                  url:"/user/doLogin",
-                  dataType:"json",
-                  data:{
-                      "email":userId,
-                      "password":password
-                  },
-                  success:function (result) {
-                      $("#btnLogin").removeClass("正在登录...");
+<script>
+    $(function () {
+        $("#btnLogin").on("click",function () {
+            if ($("#btnLogin").hasClass("正在登录...")){
+                return;
+            }
+
+            var userId=$("#userName").val();
+            if(userId.trim()==""){
+                alert("User ID is empty!");
+                return;
+            }
+            var password=$("#password").val();
+            if(password.trim()==""){
+                alert("Password is empty!");
+                return;
+            }
+            $("#btnLogin").addClass("正在登录...");
+            $("#btnLogin").val("正在登录...");
+            $.ajax({
+                type:"POST",
+                url:"/user/doLogin",
+                dataType:"json",
+                data:{
+                  "email":userId,
+                  "password":password
+                },
+                success:function (result) {
+                  $("#btnLogin").removeClass("正在登录...");
+
+                  if(result.code==0){
                       $("#btnLogin").val("登录成功！");
-                      if(result.code==0){
-                          window.location.href="/homepage"
-                      }
-                      else{
-                          alert(result.msg);
-                      }
-                  },
-                  error:function () {
-                      $("#btnLogin").removeClass("正在登录...");
-                      $("#btnLogin").val("登录成功！");
+                      window.location.href="/homepage"
                   }
-              })
-          })
+                  else{
+                      changeButton();
+                      alert(result.msg);
+                  }
+                },
+                error:function () {
+                  changeButton();
+                }
+            })
         })
-    </script>
+
+        function changeButton() {
+            $("#btnLogin").removeClass("正在登录...");
+            $("#btnLogin").val("登录");
+        }
+    })
+</script>
 </div>
 </body>
 </html>
