@@ -21,11 +21,11 @@
             <a href="http://localhost:8080/register"><span>注册</span></a>
         </div>
         <div align="center">
-            <input type="text" id="userName" placeholder="请输入登录邮箱" style="width: 200px;height: 30px">
+            邮箱：<input type="text" id="userName" placeholder="请输入登录邮箱" style="width: 200px;height: 30px">
         </div>
         <br>
         <div align="center">
-            <input type="password" id="password"  placeholder="请输入密码"style="width: 200px;height: 30px">
+            密码：<input type="password" id="password"  placeholder="请输入密码"style="width: 200px;height: 30px">
         </div>
         <br>
         <div align="center">
