@@ -22,7 +22,7 @@ public class WebConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/user/login", "/register","/css/**","/js/**","/user/doLogin"
-        ,"/register/sendMail","/activation");
+        ,"/register/sendMail","/activation","/changePsw/sendMailChangePsw","/changePsw");
         super.addInterceptors(registry);
     }
 }
