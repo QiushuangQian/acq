@@ -66,6 +66,14 @@
             window.location.href="/recycleBin"
         });
 
+        $("#photo").on("click",function () {
+            window.location.href="/homepage/photo"
+
+        });
+
+        $("#album").on("click",function () {
+            window.location.href="/homepage/albumPhotoShow"
+        });
 
         //上传照片——峰
         $("#upload").on("click",function () {

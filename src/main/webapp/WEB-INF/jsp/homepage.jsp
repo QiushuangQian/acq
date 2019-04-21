@@ -35,11 +35,11 @@
         $("#photo").on("click",function () {
             window.location.href="/homepage/photo"
 
-        })
+        });
 
         $("#album").on("click",function () {
             window.location.href="/homepage/albumPhotoShow"
-        })
+        });
 
         $("#recycleBin").on("click",function () {
             window.location.href="/recycleBin"

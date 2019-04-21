@@ -1,6 +1,7 @@
 package org.yundaxue.workshop.acq.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +11,13 @@ import org.yundaxue.workshop.acq.ConfigClass;
 import org.yundaxue.workshop.acq.model.Photo;
 import org.yundaxue.workshop.acq.model.User;
 import org.yundaxue.workshop.acq.service.PhotoService;
+import org.yundaxue.workshop.acq.service.RecycleBinService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +31,7 @@ public class RecycleBinController {
     private int maxPageNum;
     @Autowired
     PhotoService photoService;
+    RecycleBinService recycleBinService;
 
     //打开回收站页面
     @RequestMapping(value = "/recycleBin")
@@ -47,6 +52,7 @@ public class RecycleBinController {
         model.addAttribute("maxPageNum",maxPageNum);
         return "/recycleBin";
     }
+
     //通过页数得到状态为删除的照片
     @RequestMapping(value = "/delPhotoList")
     @ResponseBody
@@ -60,6 +66,7 @@ public class RecycleBinController {
             return resultMap;
         }
         resultMap.put("result",true);
+        String tmp = pagenum;
         //得到状态为删除的照片列表
         resultMap.put("delPhotoList",photoService.photoList(Integer.parseInt(pagenum), ConfigClass.maxnum, userId,0));
         return resultMap;
@@ -133,4 +140,33 @@ public class RecycleBinController {
         }
         return resultMap;
     }
+
+//    @Scheduled(cron = "0 * 15 * * ?")
+//    public void autoDelete() throws Exception {
+//        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");//如2016-08-10 20:40
+//        //获取当前时间
+//        Date now = new Date();
+//        //获取照片删除时间
+//
+//        for(Photo p : recycleBinService.getDel()) {
+//
+//            String fromDate = simpleFormat.format(p.getDelTime());
+//            String toDate = simpleFormat.format(now);
+//
+//            long from = simpleFormat.parse(fromDate).getTime();
+//            long to = simpleFormat.parse(toDate).getTime();
+//
+//            //计算时间差
+//            int hours = (int) ((to - from) / (1000 * 60 * 60));
+//
+//
+//            int minutes = (int) ((to - from) / (1000 * 60));
+//
+//            //执行彻底删除操作
+//            if (minutes >= 5) {
+//                photoService.completeDeletePhoto(p.getPhotoId(),p.getUserId());
+//            }
+//        }
+//    }
+
 }
