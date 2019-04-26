@@ -23,7 +23,7 @@ public class AutoDel {
     RecycleBinService recycleBinService;
 
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 0/1 * * ?")
     public void autoDelPhoto() throws Exception{
         SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");//如2016-08-10 20:40
         //获取当前时间

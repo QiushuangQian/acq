@@ -63,7 +63,7 @@
                     return;
                 }
                 $("#submit").addClass("Creating");
-                $("#submit").val("相册创建中...");
+                $("#submit").val("Create");
 
                 var albumName = $("#albumName").val();
                 if(albumName==''){
@@ -79,8 +79,6 @@
                         "albumName":albumName
                     },
                 success:function(){
-                    $("#submit").removeClass("Creating");
-                    $("#submit").val("Created");
                     window.location.href="/album/albumPhotoShow"
                 },
                 error:function() {
