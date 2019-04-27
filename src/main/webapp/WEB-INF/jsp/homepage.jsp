@@ -11,24 +11,22 @@
     </style>
 </head>
 <body class="d1">
-<div align="center">
 <div>
-    <div class="widthSet">
-        <img src="/photo/4.png" >
+    <div class="header">
+        <span>猫爪相册</span>
     </div>
-    <div class="widthSet">
+    <div class="btn1">
         <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input id="photo" type="button" value="照片">
        <%--<div style="margin-right: -760px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"   placeholder="搜索照片"></div>--%>
     </div>
-    <div class="widthSet">
+    <div class="btn2">
          <%--<div style="margin-left: -830px">--%>
          <input id="upload" type="button" value="上传照片">
          <input id="createAlbum" type="button" value="创建相册">
          <input id="setAlbum" type="button" value="管理相册">
          <input type="button" id="recycleBin" value="回收站">
-    </div><br>
-</div>
+    </div>
 </div>
 <script  type="text/javascript">
     $(function () {

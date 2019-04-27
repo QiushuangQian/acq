@@ -1,19 +1,52 @@
 .b1 {
     text-align: center;
 }
+.header{
+    text-align: center;
+    width: 800px;
+    height: 100px;
+    margin: 0 auto;
+    background-image: url("/images/header.jpg");
+    position: relative;
+}
+.header span{
+    position: absolute;
+    width:100px;
+    height: 50px;
+    top:50%;
+    left:50%;
+    margin-left:-50px;
+    margin-top:-25px;
+    text-align: center;
+    color: aqua;
+    font-size: x-large;
+}
 
 .b2 {
     text-align: center;
 }
 
 .b3 {
-    margin-left: -830px;
+    width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+.b3 .left-button{
+    float: left;
+}
+.b3 .right-button{
+    float: right;
 }
 
 #upload {
     background-color: aqua;
 }
 
+.selectAlbum{
+    margin: 0 auto;
+    width: 800px;
+    text-align: center;
+}
 #createAlbum {
     background-color: aqua;
 }

@@ -15,21 +15,17 @@
 <body>
 <div class = "body">
     <div class="e1">
-        <div>
-            <img src="/photo/4.png" >
+        <div class="header">
+            <span>猫爪相册</span>
         </div>
         <div class="e2">
             <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="photo" type="button" value="照片">
         </div>
-        <div>
-            <div class="e3">
-                <input id="upload" type="button" value="上传照片">
-                <input id="back" type="button" value="返回">
-            </div>
-        </div>
-
-
+        <div class="e3">
+            <input id="upload" type="button" value="上传照片">
+            <input id="back" type="button" value="返回">
+        </div><br>
         <div class="name">
             输入相册名：<input type="text" id="albumName" placeholder="相册名">
         </div>

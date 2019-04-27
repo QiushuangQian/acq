@@ -16,23 +16,24 @@
 <body>
 <% request.setCharacterEncoding("UTF-8");%>
 <div class="b1">
-    <div>
-        <img src="/photo/4.png">
+    <div class="header">
+        <span>猫爪相册</span>
     </div>
     <div class="b2">
         <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input id="photo" type="button" value="照片">
     </div>
-    <div>
-        <div class="b3">
+    <div class="b3">
+        <div class="left-button">
             <input id="upload" type="button" value="上传照片">
             <input id="createAlbum" type="button" value="创建相册">
             <input id="back" type="button" value="返回">
-            <div class="b4">
-                <input type="button" id="recycleBin" value="回收站">
-            </div>
+        </div>
+        <div class="right-button">
+            <input type="button" id="recycleBin" value="回收站" >
         </div>
     </div>
+    <br>
     <div class="selectAlbum">
         <select id="albumSelect" onchange="changeAlbum(this.value)">
             <option value="0" selected="selected">请选择相册</option>

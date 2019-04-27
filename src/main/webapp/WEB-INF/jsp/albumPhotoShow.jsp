@@ -20,21 +20,24 @@
 </head>
 <body>
 <div class="first" >
-    <div>
-        <img src="/photo/4.png" >
+    <div class="header">
+        <span>猫爪相册</span>
     </div>
     <div class="second">
         <input id="album" type="button" value="相册">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input id="photo" type="button" value="照片">
     </div>
-    <div>
-        <div class="third" >
-            <input id="upload" type="button" value="上传照片" style="background-color: aqua">
-            <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
-            <input id="back" type="button" value="返回" style="background-color: aqua">
-            <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站" style="background-color: white"></div>
+
+    <div class="third" >
+        <div class="left-button">
+            <input id="upload" type="button" value="上传照片">
+            <input id="createAlbum" type="button" value="创建相册">
+            <input id="back" type="button" value="返回">
         </div>
-    </div>
+        <div class="right-button">
+            <input type="button" id="recycleBin" value="回收站" >
+        </div>
+    </div><br>
     <div class="selectAlbum">
         <select id="albumSelect" onchange="changeAlbum(this.value)">
             <option value="0" selected="selected">请选择相册</option>

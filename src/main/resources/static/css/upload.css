@@ -8,11 +8,35 @@
 
 .a3 {
     text-align: center;
+    height: 32px;
+    margin-top: 3px;
+}
 
+.header{
+    text-align: center;
+    width: 800px;
+    height: 100px;
+    margin: 0 auto;
+    background-image: url("/images/header.jpg");
+    position: relative;
+}
+.header span{
+    position: absolute;
+    width:100px;
+    height: 50px;
+    top:50%;
+    left:50%;
+    margin-left:-50px;
+    margin-top:-25px;
+    text-align: center;
+    color: aqua;
+    font-size: x-large;
 }
 
 #uploader-demo {
     overflow: auto;
     width: 800px;
-    height: 300px;
+    height: 200px;
+    margin: 0 auto;
+
 }
