@@ -18,7 +18,7 @@
     <div class="f">
         <div class="e">
             <span >登录</span>
-            <a href="http://localhost:8080/register"><span>注册</span></a>
+            <span id="register">注册</span>
         </div>
         <div align="center">
             邮箱：<input type="text" id="userName" placeholder="请输入登录邮箱" style="width: 200px;height: 30px">
@@ -29,7 +29,7 @@
         </div>
         <br>
         <div align="center">
-            <a href="http://localhost:8080/changePsw">忘记密码</a>
+            <span id="changePwd">忘记密码</span>
         </div>
         <div align="center">
             <input type="button"  style= "height:50px;width:120px;background-color: aqua" value="登录" id="btnLogin">
@@ -41,6 +41,12 @@
 </div>
 <script>
     $(function () {
+        $("#register").on("click",function () {
+            window.location.href="/register";
+        })
+        $("#changePwd").on("click",function () {
+            window.location.href="/changePsw";
+        })
         $("#btnLogin").on("click",function () {
             if ($("#btnLogin").hasClass("正在登录...")){
                 return;
