@@ -31,8 +31,7 @@
             <input id="upload" type="button" value="上传照片" style="background-color: aqua">
             <input id="createAlbum" type="button" value="创建相册" style="background-color: aqua">
             <input id="back" type="button" value="返回" style="background-color: aqua">
-            <div style="margin-left:1750px"><input type="button" id="recycleBin" value="回收站"
-                                                   style="background-color: white"></div>
+            <input type="button" id="recycleBin" value="回收站" style="background-color: white">
         </div><br>
         <div>
             <label>上传到</label>&nbsp;
@@ -155,11 +154,10 @@
                     $img.replaceWith('<span>不能预览</span>');
                     return;
                 }
-
                 $img.attr('src', src);
             }, thumbnailWidth, thumbnailHeight);
 
-            uploader.refresh(); // 重新实例化
+//            uploader.refresh(); // 重新实例化
 
         });
 
@@ -186,9 +184,7 @@
         // 文件上传成功，给item添加成功class, 用样式标记上传成功。
         uploader.on('uploadSuccess', function (file) {
             $('#' + file.id).addClass('upload-state-done');
-
         });
-
 
         // 文件上传失败，现实上传出错。    file:文件对象 ， code：出错代码
         uploader.on('uploadError', function (file, code) {

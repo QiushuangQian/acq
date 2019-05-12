@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.UUID;
+import java.util.Random;
 
 
 /**
@@ -24,9 +24,16 @@ public class Util {
     }
 
     //生成随机字符串
-
     public static String getUUID(){
-        return UUID.randomUUID().toString().replace("-","");
+        Random random = new Random();
+        String result="";
+        for (int i=0;i<6;i++)
+        {
+            result+=random.nextInt(10);
+        }
+        return result;
+
+//        return UUID.randomUUID().toString().replace("-","");
     }
 
     //获取当前date  sql
